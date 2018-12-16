@@ -10,6 +10,14 @@
 		D25B30C721C5D8AD009DA868 /* SwiftyRedux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B30BD21C5D8AD009DA868 /* SwiftyRedux.framework */; };
 		D25B30CC21C5D8AD009DA868 /* SwiftyReduxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30CB21C5D8AD009DA868 /* SwiftyReduxTests.swift */; };
 		D25B30CE21C5D8AD009DA868 /* SwiftyRedux.h in Headers */ = {isa = PBXBuildFile; fileRef = D25B30C021C5D8AD009DA868 /* SwiftyRedux.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D25B30EF21C5D99F009DA868 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30E821C5D99F009DA868 /* Observer.swift */; };
+		D25B30F021C5D99F009DA868 /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30E921C5D99F009DA868 /* Reducer.swift */; };
+		D25B30F121C5D99F009DA868 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30EA21C5D99F009DA868 /* Disposable.swift */; };
+		D25B30F221C5D99F009DA868 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30EB21C5D99F009DA868 /* Middleware.swift */; };
+		D25B30F321C5D99F009DA868 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30EC21C5D99F009DA868 /* Store.swift */; };
+		D25B30F421C5D99F009DA868 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30ED21C5D99F009DA868 /* Observable.swift */; };
+		D25B30F521C5D99F009DA868 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30EE21C5D99F009DA868 /* Action.swift */; };
+		D25B30F721C5DA45009DA868 /* ReadWriteQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +37,14 @@
 		D25B30C621C5D8AD009DA868 /* SwiftyReduxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyReduxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B30CB21C5D8AD009DA868 /* SwiftyReduxTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyReduxTests.swift; sourceTree = "<group>"; };
 		D25B30CD21C5D8AD009DA868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D25B30E821C5D99F009DA868 /* Observer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
+		D25B30E921C5D99F009DA868 /* Reducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		D25B30EA21C5D99F009DA868 /* Disposable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		D25B30EB21C5D99F009DA868 /* Middleware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Middleware.swift; sourceTree = "<group>"; };
+		D25B30EC21C5D99F009DA868 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		D25B30ED21C5D99F009DA868 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		D25B30EE21C5D99F009DA868 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +87,7 @@
 		D25B30BF21C5D8AD009DA868 /* SwiftyRedux */ = {
 			isa = PBXGroup;
 			children = (
+				D25B30E721C5D99F009DA868 /* Sources */,
 				D25B30C021C5D8AD009DA868 /* SwiftyRedux.h */,
 				D25B30C121C5D8AD009DA868 /* Info.plist */,
 			);
@@ -84,6 +101,21 @@
 				D25B30CD21C5D8AD009DA868 /* Info.plist */,
 			);
 			path = SwiftyReduxTests;
+			sourceTree = "<group>";
+		};
+		D25B30E721C5D99F009DA868 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D25B30EE21C5D99F009DA868 /* Action.swift */,
+				D25B30E921C5D99F009DA868 /* Reducer.swift */,
+				D25B30EB21C5D99F009DA868 /* Middleware.swift */,
+				D25B30EC21C5D99F009DA868 /* Store.swift */,
+				D25B30ED21C5D99F009DA868 /* Observable.swift */,
+				D25B30E821C5D99F009DA868 /* Observer.swift */,
+				D25B30EA21C5D99F009DA868 /* Disposable.swift */,
+				D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */,
+			);
+			path = Sources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +180,7 @@
 				TargetAttributes = {
 					D25B30BC21C5D8AD009DA868 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 					D25B30C521C5D8AD009DA868 = {
 						CreatedOnToolsVersion = 10.1;
@@ -194,6 +227,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D25B30F421C5D99F009DA868 /* Observable.swift in Sources */,
+				D25B30EF21C5D99F009DA868 /* Observer.swift in Sources */,
+				D25B30F221C5D99F009DA868 /* Middleware.swift in Sources */,
+				D25B30F721C5DA45009DA868 /* ReadWriteQueue.swift in Sources */,
+				D25B30F321C5D99F009DA868 /* Store.swift in Sources */,
+				D25B30F021C5D99F009DA868 /* Reducer.swift in Sources */,
+				D25B30F121C5D99F009DA868 /* Disposable.swift in Sources */,
+				D25B30F521C5D99F009DA868 /* Action.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +382,7 @@
 		D25B30D221C5D8AD009DA868 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -358,6 +400,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.alex.voronov.SwiftyRedux;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -366,6 +409,7 @@
 		D25B30D321C5D8AD009DA868 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -391,6 +435,7 @@
 		D25B30D521C5D8AD009DA868 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46VP6B8Y3F;
 				INFOPLIST_FILE = SwiftyReduxTests/Info.plist;
@@ -409,6 +454,7 @@
 		D25B30D621C5D8AD009DA868 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 46VP6B8Y3F;
 				INFOPLIST_FILE = SwiftyReduxTests/Info.plist;
