@@ -6,27 +6,32 @@
 //  Copyright © 2018 Alex Voronov. All rights reserved.
 //
 
+/// Used to dispose from any resources when needed.
+/// Initialize it with action to execute once disposal is needed.
+/// Additionaly you can see whether action was already executed or not. And it won't be executed if it was already
+/// Default implementation has its own queue to serially execute action and toggle `isDisposed` flag.
+
 public protocol Disposable {
     var isDisposed: Bool { get }
 
     func dispose()
 }
 
-final class DisposableAction: Disposable {
+public final class DisposableAction: Disposable {
     private let queue: ReadWriteQueue
     private let action: () -> Void
 
     private var _isDisposed: Bool = false
-    var isDisposed: Bool {
+    public var isDisposed: Bool {
         return queue.read { _isDisposed }
     }
 
-    init(id: String = "redux.disposable", action: @escaping () -> Void) {
+    public init(id: String = "redux.disposable", action: @escaping () -> Void) {
         self.queue = ReadWriteQueue(label: "\(id).queue")
         self.action = action
     }
 
-    func dispose() {
+    public func dispose() {
         queue.write {
             guard !self._isDisposed else { return }
             self.action()
@@ -35,8 +40,8 @@ final class DisposableAction: Disposable {
     }
 }
 
-final class NopDisposable: Disposable {
-    let isDisposed: Bool = true
-    init() {}
-    func dispose() {}
+public final class NopDisposable: Disposable {
+    public let isDisposed: Bool = true
+    public init() {}
+    public func dispose() {}
 }

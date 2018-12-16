@@ -8,6 +8,9 @@
 
 import Dispatch
 
+/// Simple observer implementation.
+/// Initialize it with update function and optional queue if you want to receive updates on it.
+
 final class Observer<Value> {
     let update: (Value) -> Void
 

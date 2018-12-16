@@ -8,6 +8,16 @@
 
 import Dispatch
 
+/// Just an implementation of Observable.
+/// You can initialize it with another observable as an instance of this class or as an anonymous function.
+/// It has its own queue to manage observers list modifications and sending updates in a serial way.
+/// You can apply any of available transforming or filtering functions to only receive updates you're interested in.
+/// Once you're ready, call `subscribe` method to pass observer - you'll be returned `Disposable` to stop listening for updates.
+///
+/// There's also handy function `pipe` that gives you both:
+/// - `observable` to listen to updates
+/// - `observer` to send updates to, so that observable would get them and propagate to its observers.
+
 public final class Observable<Value> {
     public static var defaultId: String {
         return "redux.observable"
@@ -201,6 +211,11 @@ extension Observable {
                 disposable?.dispose()
             }
         }
-        return(observable, observer)
+        return (observable, observer)
+    }
+
+    public static func pipe<V>(id: String = defaultId, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, (V) -> Void) {
+        let (observable, observer): (Observable<V>, Observer<V>) = Observable<V>.pipe(id: id, queue: queue, disposable: disposable)
+        return (observable, observer.update)
     }
 }
