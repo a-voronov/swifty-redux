@@ -19,6 +19,6 @@ DerivedData
 *.hmap
 *.ipa
 
-# Vim
+# Vim/Sublime
 vim-markdown-preview.html
-
+README.html
