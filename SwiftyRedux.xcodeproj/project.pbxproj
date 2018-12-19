@@ -18,7 +18,7 @@
 		D25B30F521C5D99F009DA868 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30EE21C5D99F009DA868 /* Action.swift */; };
 		D25B30F721C5DA45009DA868 /* ReadWriteQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */; };
 		D25B310821C72017009DA868 /* ReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B310321C72017009DA868 /* ReducerTests.swift */; };
-		D25B310D21C7245D009DA868 /* SwiftyReduxTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B310C21C7245D009DA868 /* SwiftyReduxTests.swift */; };
+		D25B310F21C7266D009DA868 /* MiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B310E21C7266D009DA868 /* MiddlewareTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +46,7 @@
 		D25B30EE21C5D99F009DA868 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteQueue.swift; sourceTree = "<group>"; };
 		D25B310321C72017009DA868 /* ReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReducerTests.swift; sourceTree = "<group>"; };
-		D25B310C21C7245D009DA868 /* SwiftyReduxTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyReduxTests.swift; sourceTree = "<group>"; };
+		D25B310E21C7266D009DA868 /* MiddlewareTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddlewareTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				D25B310321C72017009DA868 /* ReducerTests.swift */,
-				D25B310C21C7245D009DA868 /* SwiftyReduxTests.swift */,
+				D25B310E21C7266D009DA868 /* MiddlewareTests.swift */,
 				D25B30CD21C5D8AD009DA868 /* Info.plist */,
 			);
 			path = SwiftyReduxTests;
@@ -245,7 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D25B310D21C7245D009DA868 /* SwiftyReduxTests.swift in Sources */,
+				D25B310F21C7266D009DA868 /* MiddlewareTests.swift in Sources */,
 				D25B310821C72017009DA868 /* ReducerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
