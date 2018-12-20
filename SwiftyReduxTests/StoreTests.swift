@@ -136,12 +136,51 @@ class StoreTests: XCTestCase {
     }
 
     func testReceiveStateUpdatesOnSelectedQueue() {
-        // store.subscribe(on: queue) - queue
+        let id = "testReceiveStateUpdatesOnSelectedQueue"
+        let queueId = DispatchSpecificKey<String>()
+        let queue = DispatchQueue(label: id)
+        queue.setSpecific(key: queueId, value: id)
+        let store = Store<State>(state: initialState, reducer: nopReducer)
+
+        var result: String!
+        let queueExpectation = expectation(description: id)
+        store.subscribe(on: queue) { state in
+            result = DispatchQueue.getSpecific(key: queueId)
+            queueExpectation.fulfill()
+        }
+        store.dispatch(nopAction)
+
+        waitForExpectations(timeout: 0.1) { e in
+            queue.setSpecific(key: queueId, value: nil)
+
+            XCTAssertEqual(result, id)
+        }
     }
 
     func testReceiveStateUpdatesOnDefaultQueueEvenIfSelectedQueuePreviously() {
-        // store.subscribe(on: queue)
-        // store.subscribe() - default
+        let id = "testReceiveStateUpdatesOnSelectedQueue"
+        let queueId = DispatchSpecificKey<String>()
+        let queue = DispatchQueue(label: id)
+        queue.setSpecific(key: queueId, value: id)
+        let store = Store<State>(state: initialState, reducer: nopReducer)
+
+        var result: String!
+        let onQueueExpectation = expectation(description: "\(id) on queue")
+        let defaultQueueExpectation = expectation(description: "\(id) default queue")
+        store.subscribe(on: queue) { state in
+            onQueueExpectation.fulfill()
+        }
+        store.subscribe { state in
+            defaultQueueExpectation.fulfill()
+            result = DispatchQueue.getSpecific(key: queueId)
+        }
+        store.dispatch(nopAction)
+
+        waitForExpectations(timeout: 0.1) { e in
+            queue.setSpecific(key: queueId, value: nil)
+
+            XCTAssertNotEqual(result, id)
+        }
     }
 
     func testStopReceivingStateUpdatesWhenUnsubscribing() {
@@ -169,10 +208,48 @@ class StoreTests: XCTestCase {
     }
 
     func testStartReceivingStateUpdatesWhenSubscribingToObserver() {
+        let reducer: Reducer<State> = { action, state in
+            switch action {
+            case let action as StringAction where action == "mul": return state * 2
+            case let action as StringAction where action == "inc": return state + 3
+            default: return state
+            }
+        }
+        let store = Store<State>(state: 3, reducer: reducer)
 
+        var result: [State] = []
+        store.observe().subscribe { state in
+            result.append(state)
+        }
+        store.dispatch("mul")
+        store.dispatch("inc")
+        // reading state to wait on a calling thread until writing tasks complete
+        _ = store.state
+
+        XCTAssertEqual(result, [6, 9])
     }
 
     func testStopReceivingStateUpdatesWhenUnsubscribingFromObserver() {
+        let reducer: Reducer<State> = { action, state in
+            return Int(action as! StringAction)!
+        }
+        let store = Store<State>(state: initialState, reducer: reducer)
 
+        var result: [State] = []
+        let disposable = store.observe().subscribe { state in
+            result.append(state)
+        }
+        store.dispatch("1")
+        store.dispatch("2")
+        store.dispatch("3")
+        // reading state to wait on a calling thread until writing tasks complete
+        _ = store.state
+        disposable.dispose()
+        store.dispatch("4")
+        store.dispatch("5")
+        // reading state to wait on a calling thread until writing tasks complete
+        _ = store.state
+
+        XCTAssertEqual(result, [1, 2, 3])
     }
 }

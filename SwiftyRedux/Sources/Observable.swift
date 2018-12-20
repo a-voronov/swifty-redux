@@ -42,6 +42,7 @@ public final class Observable<Value> {
         self.init(id: id, observable: { observable.subscribe(observer: $0) })
     }
 
+    @discardableResult
     public func subscribe(on observingQueue: DispatchQueue? = nil, observer: @escaping (Value) -> Void) -> Disposable {
         let observer = Observer(queue: observingQueue, update: observer)
         _ = queue.sync {
