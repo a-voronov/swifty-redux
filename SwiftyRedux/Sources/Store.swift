@@ -40,7 +40,9 @@ public final class Store<State> {
         self.reducer = reducer
         self.middleware = applyMiddleware(middleware)
 
-        (observable, observer) = Observable<State>.pipe(id: "\(id).observable")
+        // creating observable with internal rw-queue to manage observers on it (notifying will also happen on it by default)
+        // this approach gives ability to execute synchronous events on the same queue, which is more likely expected behaviour
+        (observable, observer) = Observable<State>.pipe(id: "\(id).observable", observableQueue: queue)
     }
 
     public func dispatch(_ action: Action) {
