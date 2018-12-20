@@ -18,21 +18,21 @@ public protocol Disposable {
 }
 
 public final class DisposableAction: Disposable {
-    private let queue: ReadWriteQueue
+    private let queue: DispatchQueue
     private let action: () -> Void
 
     private var _isDisposed: Bool = false
     public var isDisposed: Bool {
-        return queue.read { _isDisposed }
+        return queue.sync { _isDisposed }
     }
 
     public init(id: String = "redux.disposable", action: @escaping () -> Void) {
-        self.queue = ReadWriteQueue(label: "\(id).queue")
+        self.queue = DispatchQueue(label: "\(id).queue", attributes: .concurrent)
         self.action = action
     }
 
     public func dispose() {
-        queue.write {
+        queue.sync(flags: .barrier) {
             guard !self._isDisposed else { return }
             self.action()
             self._isDisposed = true

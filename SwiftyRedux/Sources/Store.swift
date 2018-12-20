@@ -26,23 +26,21 @@ import Dispatch
 public final class Store<State> {
     private let reducer: Reducer<State>
     private let middleware: Middleware<State>
-    private let queue: ReadWriteQueue
+    private let queue: DispatchQueue
     private let (observable, observer): (Observable<State>, Observer<State>)
 
     private var currentState: State
     public var state: State {
-        return queue.read { currentState }
+        return queue.sync { currentState }
     }
 
     public init(id: String = "redux.store", state: State, reducer: @escaping Reducer<State>, middleware: [Middleware<State>] = []) {
-        self.queue = ReadWriteQueue(label: "\(id).queue")
+        self.queue = DispatchQueue(label: "\(id).queue", attributes: .concurrent)
         self.currentState = state
         self.reducer = reducer
         self.middleware = applyMiddleware(middleware)
 
-        // creating observable with internal rw-queue to manage observers on it (notifying will also happen on it by default)
-        // this approach gives ability to execute synchronous events on the same queue, which is more likely expected behaviour
-        (observable, observer) = Observable<State>.pipe(id: "\(id).observable", observableQueue: queue)
+        (observable, observer) = Observable<State>.pipe(id: "\(id).observable")
     }
 
     public func dispatch(_ action: Action) {
@@ -55,7 +53,7 @@ public final class Store<State> {
     }
 
     private func defaultDispatch(from action: Action) {
-        queue.write {
+        queue.async(flags: .barrier) {
             self.currentState = self.reducer(action, self.currentState)
             self.observer.update(self.currentState)
         }

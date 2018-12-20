@@ -16,7 +16,6 @@
 		D25B30F321C5D99F009DA868 /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30EC21C5D99F009DA868 /* Store.swift */; };
 		D25B30F421C5D99F009DA868 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30ED21C5D99F009DA868 /* Observable.swift */; };
 		D25B30F521C5D99F009DA868 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30EE21C5D99F009DA868 /* Action.swift */; };
-		D25B30F721C5DA45009DA868 /* ReadWriteQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */; };
 		D25B310821C72017009DA868 /* ReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B310321C72017009DA868 /* ReducerTests.swift */; };
 		D25B310F21C7266D009DA868 /* MiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B310E21C7266D009DA868 /* MiddlewareTests.swift */; };
 		D25B311121C9D158009DA868 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B311021C9D158009DA868 /* StoreTests.swift */; };
@@ -46,7 +45,6 @@
 		D25B30EC21C5D99F009DA868 /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		D25B30ED21C5D99F009DA868 /* Observable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		D25B30EE21C5D99F009DA868 /* Action.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
-		D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWriteQueue.swift; sourceTree = "<group>"; };
 		D25B310321C72017009DA868 /* ReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReducerTests.swift; sourceTree = "<group>"; };
 		D25B310E21C7266D009DA868 /* MiddlewareTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MiddlewareTests.swift; sourceTree = "<group>"; };
 		D25B311021C9D158009DA868 /* StoreTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
@@ -122,7 +120,6 @@
 				D25B30ED21C5D99F009DA868 /* Observable.swift */,
 				D25B30E821C5D99F009DA868 /* Observer.swift */,
 				D25B30EA21C5D99F009DA868 /* Disposable.swift */,
-				D25B30F621C5DA45009DA868 /* ReadWriteQueue.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -239,7 +236,6 @@
 				D25B30F421C5D99F009DA868 /* Observable.swift in Sources */,
 				D25B30EF21C5D99F009DA868 /* Observer.swift in Sources */,
 				D25B30F221C5D99F009DA868 /* Middleware.swift in Sources */,
-				D25B30F721C5DA45009DA868 /* ReadWriteQueue.swift in Sources */,
 				D25B30F321C5D99F009DA868 /* Store.swift in Sources */,
 				D25B30F021C5D99F009DA868 /* Reducer.swift in Sources */,
 				D25B30F121C5D99F009DA868 /* Disposable.swift in Sources */,

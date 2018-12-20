@@ -27,7 +27,7 @@ class PerformanceTests: XCTestCase {
         self.measure {
             self.store.dispatch("action")
             // reading state to wait on a calling thread until writing tasks complete to measure correct time
-            let _ = self.store.state
+            _ = self.store.state
         }
     }
 
