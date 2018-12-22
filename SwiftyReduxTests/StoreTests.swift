@@ -27,7 +27,7 @@ class StoreTests: XCTestCase {
         nopMiddleware = createMiddleware(sideEffect: { getState, dispatch, action in })
     }
 
-    func testDeinitAfterSubscribeAndDispatchFlow() {
+    func testStoreDeinitsAndAllDisposablesDisposeAfterSubscribeAndDispatchFlow() {
         weak var store: Store<State>?
         var disposable: Disposable!
 
@@ -39,12 +39,8 @@ class StoreTests: XCTestCase {
             _ = deinitStore.state 
         }
 
-        XCTAssertNotNil(disposable)
+        XCTAssertTrue(disposable.isDisposed)
         XCTAssertNil(store)
-    }
-
-    func testDisposablesShouldBeDisposedAfterStoreDies() {
-        // 🤔
     }
 
     func testMiddlewareIsExecutedSequentiallyEvenIfRunOnDifferentQueues() {

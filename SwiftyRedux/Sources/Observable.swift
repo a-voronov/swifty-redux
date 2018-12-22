@@ -19,26 +19,22 @@ import Dispatch
 /// - `observer` to send updates to, so that observable would get them and propagate to its observers.
 
 public final class Observable<Value> {
-    public static var defaultId: String {
-        return "redux.observable"
-    }
-
     private let id: String
     private let queue: DispatchQueue
-    private var disposable: Disposable!
+    private let disposeBag = DisposeBag()
     private var observers: Set<Observer<Value>> = []
 
-    public init(id: String = defaultId, observable: @escaping (@escaping (Value) -> Void) -> Disposable) {
-        self.id = id
-        self.queue = DispatchQueue(label: "\(id).queue")
-        self.disposable = observable { value in
+    public init(id: String? = nil, observable: @escaping (@escaping (Value) -> Void) -> Disposable) {
+        self.id = id ?? "redux.observable"
+        self.queue = DispatchQueue(label: "\(self.id).queue")
+        self.disposeBag += observable { value in
             self.queue.sync {
                 self.observers.forEach { observer in observer.update(value) }
             }
         }
     }
 
-    public convenience init(id: String = defaultId, observable: Observable<Value>) {
+    public convenience init(id: String? = nil, observable: Observable<Value>) {
         self.init(id: id, observable: { observable.subscribe(observer: $0) })
     }
 
@@ -48,17 +44,15 @@ public final class Observable<Value> {
         _ = queue.sync {
             self.observers.insert(observer)
         }
-        #warning("🤔: add all disposables to dispose bag, so that all of them are disposed after bag is disposed")
-        return DisposableAction(id: "\(id).disposable") { [weak self, weak observer] in
+        return disposeBag += ActionDisposable(id: "\(id).disposable") { [weak self, weak observer] in
             guard let strongSelf = self, let observer = observer else { return }
-            _ = strongSelf.queue.async {
+            _ = strongSelf.queue.sync {
                 strongSelf.observers.remove(observer)
             }
         }
     }
 
     deinit {
-        disposable?.dispose()
         observers.removeAll()
     }
 }
@@ -208,18 +202,18 @@ extension Observable where Value: Equatable {
 }
 
 extension Observable {
-    internal static func pipe<V>(id: String = defaultId, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, Observer<V>) {
+    internal static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, Observer<V>) {
         var observer: Observer<V>!
         let observable = Observable<V>(id: id) { action -> Disposable in
             observer = Observer(queue: queue, update: action)
-            return DisposableAction(id: "\(id).disposable") {
+            return ActionDisposable(id: id.map { "\($0).disposable" }) {
                 disposable?.dispose()
             }
         }
         return (observable, observer)
     }
 
-    public static func pipe<V>(id: String = defaultId, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, (V) -> Void) {
+    public static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, (V) -> Void) {
         let (observable, observer): (Observable<V>, Observer<V>) = Observable<V>.pipe(
             id: id,
             queue: queue,

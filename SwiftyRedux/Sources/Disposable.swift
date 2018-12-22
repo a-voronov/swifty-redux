@@ -17,25 +17,29 @@ public protocol Disposable {
     func dispose()
 }
 
-public final class DisposableAction: Disposable {
+public final class ActionDisposable: Disposable {
     private let queue: DispatchQueue
-    private let action: () -> Void
+    private var action: (() -> Void)?
 
     private var _isDisposed: Bool = false
     public var isDisposed: Bool {
         return queue.sync { _isDisposed }
     }
 
-    public init(id: String = "redux.disposable", action: @escaping () -> Void) {
-        self.queue = DispatchQueue(label: "\(id).queue", attributes: .concurrent)
+    public init(id: String? = nil, action: @escaping () -> Void) {
+        self.queue = DispatchQueue(label: (id ?? "redux.disposable") + ".queue", attributes: .concurrent)
         self.action = action
     }
 
     public func dispose() {
-        queue.sync(flags: .barrier) {
-            guard !self._isDisposed else { return }
-            self.action()
+        let shouldRunAction: Bool = queue.sync(flags: .barrier) {
+            guard !self._isDisposed else { return false }
             self._isDisposed = true
+            return true
+        }
+        if shouldRunAction {
+            action?()
+            action = nil
         }
     }
 }
@@ -44,4 +48,67 @@ public final class NopDisposable: Disposable {
     public let isDisposed: Bool = true
     public init() {}
     public func dispose() {}
+}
+
+public final class DisposeBag {
+    private let queue = DispatchQueue(label: "redux.dispose-bag.queue")
+    private var isDisposed = false
+    private var disposables: [Disposable] = []
+
+    public init() {}
+
+    public init(disposing disposables: Disposable...) {
+        self.disposables += disposables
+    }
+
+    public init(disposing disposables: [Disposable]) {
+        self.disposables += disposables
+    }
+
+    public func add(_ disposable: Disposable) {
+        queue.sync {
+            guard !isDisposed else {
+                return disposable.dispose()
+            }
+            disposables.append(disposable)
+        }
+    }
+
+    public func add(_ disposables: [Disposable]) {
+        queue.sync {
+            guard !self.isDisposed else {
+                return disposables.forEach { $0.dispose() }
+            }
+            self.disposables += disposables
+        }
+    }
+
+    private func dispose() {
+        let oldDisposables: [Disposable] = queue.sync {
+            let oldDisposables = disposables
+            disposables.removeAll(keepingCapacity: false)
+            isDisposed = true
+            return oldDisposables
+        }
+        oldDisposables.forEach { $0.dispose() }
+    }
+
+    deinit {
+        dispose()
+    }
+}
+
+extension DisposeBag {
+    @discardableResult
+    public static func += (lhs: DisposeBag, rhs: Disposable) -> Disposable {
+        lhs.add(rhs)
+        return rhs
+    }
+
+    @discardableResult
+    public static func += (lhs: DisposeBag, rhs: @escaping () -> Void) -> Disposable {
+        let disposable = ActionDisposable(action: rhs)
+        lhs.add(disposable)
+        return disposable
+    }
 }
