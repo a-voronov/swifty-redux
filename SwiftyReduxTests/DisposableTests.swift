@@ -11,12 +11,12 @@ import XCTest
 
 class DisposableTests: XCTestCase {
     func testNopDisposableIsAlreadyDisposed() {
-        XCTAssertTrue(NopDisposable().isDisposed)
+        XCTAssertTrue(Disposable.nop().isDisposed)
     }
 
     func testActionDisposableIsDisposedOnce() {
         var result = 0
-        let disposable = ActionDisposable { result += 1 }
+        let disposable = Disposable { result += 1 }
 
         let exp1 = expectation(description: "first")
         let exp2 = expectation(description: "second")
@@ -31,7 +31,7 @@ class DisposableTests: XCTestCase {
     }
 
     func testDisposedFlagIsSetNotWaitingForDisposeToFinish() {
-        let disposable = ActionDisposable {
+        let disposable = Disposable {
             DispatchQueue.global(qos: .background).async { Thread.sleep(forTimeInterval: 0.001) }
         }
         disposable.dispose()
@@ -40,32 +40,34 @@ class DisposableTests: XCTestCase {
 
     func testActionDisposableIsMarkedAsDisposed() {
         var result = false
-        let disposable = ActionDisposable { result = true }
+        let disposable = Disposable { result = true }
 
         disposable.dispose()
 
         XCTAssertEqual(result, disposable.isDisposed)
     }
 
-    func testDisposeBagDisposesEveryoneWhenDies() {
+    func testCompositeDisposableDisposesEveryone() {
         var result = 0
-        let disposable1 = ActionDisposable { result += 1 }
-        let disposable2 = ActionDisposable { result += 1 }
-        let disposable3 = ActionDisposable { result += 1 }
+        let disposable1 = Disposable { result += 1 }
+        let disposable2 = Disposable { result += 1 }
+        let disposable3 = Disposable { result += 1 }
+        let disposable = CompositeDisposable(disposing: disposable1, disposable2, disposable3)
 
-        _ = DisposeBag(disposing: disposable1, disposable2, disposable3)
+        disposable.dispose()
 
         XCTAssertEqual(result, 3)
+        XCTAssertTrue(disposable.isDisposed)
     }
 
-    func testDisposeBagAddsAlreadyDisposedActions() {
-        let disposeBag = DisposeBag()
-        weak var nopDisposable: NopDisposable!
+    func testCompositeDisposableAddsAlreadyDisposedActions() {
+        let disposable = CompositeDisposable()
+        weak var nopDisposable: Disposable!
 
         autoreleasepool {
-            let deinitNopDisposable = NopDisposable()
+            let deinitNopDisposable = Disposable.nop()
             nopDisposable = deinitNopDisposable
-            disposeBag.add(nopDisposable)
+            disposable.add(nopDisposable)
         }
 
         XCTAssertNotNil(nopDisposable)

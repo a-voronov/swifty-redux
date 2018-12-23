@@ -21,16 +21,16 @@ import Dispatch
 public final class Observable<Value> {
     private let id: String
     private let queue: DispatchQueue
-    private let disposeBag = DisposeBag()
-    private var observers: Set<Observer<Value>> = []
+    private let disposable: CompositeDisposable
+    private var observers = Set<Observer<Value>>()
 
     public init(id: String? = nil, observable: @escaping (@escaping (Value) -> Void) -> Disposable) {
         self.id = id ?? "redux.observable"
         self.queue = DispatchQueue(label: "\(self.id).queue")
-        self.disposeBag += observable { value in
-            self.queue.sync {
-                self.observers.forEach { observer in observer.update(value) }
-            }
+        self.disposable = CompositeDisposable(id: "\(self.id).composite-disposable")
+        self.disposable += observable { value in
+            let currentObservers = self.queue.sync { self.observers }
+            currentObservers.forEach { observer in observer.update(value) }
         }
     }
 
@@ -44,15 +44,19 @@ public final class Observable<Value> {
         _ = queue.sync {
             self.observers.insert(observer)
         }
-        return disposeBag += ActionDisposable(id: "\(id).disposable") { [weak self, weak observer] in
+        var observerDisposable: Disposable!
+        observerDisposable = Disposable(id: "\(id).disposable") { [weak self, weak observer, weak observerDisposable] in
             guard let strongSelf = self, let observer = observer else { return }
             _ = strongSelf.queue.sync {
                 strongSelf.observers.remove(observer)
             }
+            observerDisposable.map(strongSelf.disposable.remove)
         }
+        return disposable += observerDisposable
     }
 
     deinit {
+        disposable.dispose()
         observers.removeAll()
     }
 }
@@ -60,7 +64,7 @@ public final class Observable<Value> {
 extension Observable {
     public func map<T>(_ transform: @escaping (Value) -> T) -> Observable<T> {
         return Observable<T>(id: "\(id)-map") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             return strongSelf.subscribe { value in
                 action(transform(value))
@@ -74,7 +78,7 @@ extension Observable {
 
     public func filter(_ predicate: @escaping (Value) -> Bool) -> Observable<Value> {
         return Observable(id: "\(id)-filter") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             return strongSelf.subscribe { value in
                 if predicate(value) {
@@ -90,7 +94,7 @@ extension Observable {
 
     public func filterMap<T>(_ transform: @escaping (Value) -> T?) -> Observable<T> {
         return Observable<T>(id: "\(id)-filterMap") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             return strongSelf.subscribe { value in
                 transform(value).map(action)
@@ -100,7 +104,7 @@ extension Observable {
 
     public func skipRepeats(_ isEquivalent: @escaping (Value, Value) -> Bool) -> Observable<Value> {
         return Observable(id: "\(id)-skipRepeats") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             var previous: Value?
             return strongSelf.subscribe { value in
@@ -117,7 +121,7 @@ extension Observable {
         precondition(count > 0)
 
         return Observable(id: "\(id)-skipFirst") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             var skipped = 0
             return strongSelf.subscribe { value in
@@ -132,7 +136,7 @@ extension Observable {
 
     public func skip(while predicate: @escaping (Value) -> Bool) -> Observable<Value> {
         return Observable(id: "\(id)-skipWhile") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             var isSkipping = true
             return strongSelf.subscribe { value in
@@ -148,7 +152,7 @@ extension Observable {
         precondition(count > 0)
 
         return Observable(id: "\(id)-takeFirst") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             var taken = 0
             var disposable: Disposable!
@@ -166,7 +170,7 @@ extension Observable {
 
     public func take(while predicate: @escaping (Value) -> Bool) -> Observable<Value> {
         return Observable(id: "\(id)-takeWhile") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             var disposable: Disposable!
             disposable = strongSelf.subscribe { value in
@@ -182,7 +186,7 @@ extension Observable {
 
     public func combinePrevious(initial: Value? = nil) -> Observable<(Value, Value)> {
         return Observable<(Value, Value)>(id: "\(id)-combinePrevious") { [weak self] action in
-            guard let strongSelf = self else { return NopDisposable() }
+            guard let strongSelf = self else { return .nop() }
 
             var previous = initial
             return strongSelf.subscribe { value in
@@ -206,9 +210,7 @@ extension Observable {
         var observer: Observer<V>!
         let observable = Observable<V>(id: id) { action -> Disposable in
             observer = Observer(queue: queue, update: action)
-            return ActionDisposable(id: id.map { "\($0).disposable" }) {
-                disposable?.dispose()
-            }
+            return disposable ?? .nop()
         }
         return (observable, observer)
     }

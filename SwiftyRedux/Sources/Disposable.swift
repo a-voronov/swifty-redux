@@ -9,15 +9,9 @@
 /// Used to dispose from any resources when needed.
 /// Initialize it with action to execute once disposal is needed.
 /// Additionaly you can see whether action was already executed or not. And it won't be executed if it was already
-/// Default implementation has its own queue to serially execute action and toggle `isDisposed` flag.
+/// Will serially execute action and toggle `isDisposed` flag.
 
-public protocol Disposable {
-    var isDisposed: Bool { get }
-
-    func dispose()
-}
-
-public final class ActionDisposable: Disposable {
+public final class Disposable {
     private let queue: DispatchQueue
     private var action: (() -> Void)?
 
@@ -42,72 +36,103 @@ public final class ActionDisposable: Disposable {
             action = nil
         }
     }
+
+    public static func nop() -> Disposable {
+        let nop = Disposable(action: {})
+        nop._isDisposed = true
+        return nop
+    }
 }
 
-public final class NopDisposable: Disposable {
-    public let isDisposed: Bool = true
-    public init() {}
-    public func dispose() {}
-}
-
-public final class DisposeBag {
-    private let queue = DispatchQueue(label: "redux.dispose-bag.queue")
-    private var isDisposed = false
-    private var disposables: [Disposable] = []
-
-    public init() {}
-
-    public init(disposing disposables: Disposable...) {
-        self.disposables += disposables
+extension Disposable: Hashable {
+    public var hashValue: Int {
+        return ObjectIdentifier(self).hashValue
     }
 
-    public init(disposing disposables: [Disposable]) {
-        self.disposables += disposables
+    public static func == (left: Disposable, right: Disposable) -> Bool {
+        return left === right
+    }
+}
+
+public final class CompositeDisposable {
+    private let queue: DispatchQueue
+    private var disposables: Set<Disposable>
+
+    private var _isDisposed: Bool = false
+    public var isDisposed: Bool {
+        return queue.sync { _isDisposed }
+    }
+
+    internal init(id: String? = nil, disposables: Set<Disposable>) {
+        self.queue = DispatchQueue(label: (id ?? "redux.composite-disposable") + ".queue", attributes: .concurrent)
+        self.disposables = disposables
+    }
+
+    public convenience init(id: String? = nil) {
+        self.init(id: id, disposables: Set())
+    }
+
+    public convenience init(id: String? = nil, disposing disposables: Disposable...) {
+        self.init(id: id, disposables: Set(disposables))
+    }
+
+    public convenience init(id: String? = nil, disposing disposables: [Disposable]) {
+        self.init(id: id, disposables: Set(disposables))
     }
 
     public func add(_ disposable: Disposable) {
-        queue.sync {
-            guard !isDisposed else {
-                return disposable.dispose()
+        _ = queue.sync(flags: .barrier) {
+            guard !_isDisposed else {
+                disposable.dispose()
+                return
             }
-            disposables.append(disposable)
+            disposables.insert(disposable)
+        }
+    }
+
+    public func remove(_ disposable: Disposable) {
+        _ = queue.sync(flags: .barrier) {
+            disposables.remove(disposable)
         }
     }
 
     public func add(_ disposables: [Disposable]) {
-        queue.sync {
-            guard !self.isDisposed else {
-                return disposables.forEach { $0.dispose() }
+        _ = queue.sync(flags: .barrier) {
+            guard !_isDisposed else {
+                disposables.forEach { $0.dispose() }
+                return
             }
-            self.disposables += disposables
+            self.disposables.formUnion(Set(disposables))
         }
     }
 
-    private func dispose() {
-        let oldDisposables: [Disposable] = queue.sync {
+    public func dispose() {
+        let oldDisposables: Set<Disposable> = queue.sync(flags: .barrier) {
             let oldDisposables = disposables
             disposables.removeAll(keepingCapacity: false)
-            isDisposed = true
+            _isDisposed = true
             return oldDisposables
         }
         oldDisposables.forEach { $0.dispose() }
     }
-
-    deinit {
-        dispose()
-    }
 }
 
-extension DisposeBag {
+extension CompositeDisposable {
     @discardableResult
-    public static func += (lhs: DisposeBag, rhs: Disposable) -> Disposable {
+    public static func += (lhs: CompositeDisposable, rhs: Disposable) -> Disposable {
         lhs.add(rhs)
         return rhs
     }
 
     @discardableResult
-    public static func += (lhs: DisposeBag, rhs: @escaping () -> Void) -> Disposable {
-        let disposable = ActionDisposable(action: rhs)
+    public static func += (lhs: CompositeDisposable, rhs: Disposable?) -> Disposable? {
+        rhs.map(lhs.add)
+        return rhs
+    }
+
+    @discardableResult
+    public static func += (lhs: CompositeDisposable, rhs: @escaping () -> Void) -> Disposable {
+        let disposable = Disposable(action: rhs)
         lhs.add(disposable)
         return disposable
     }
