@@ -11,10 +11,10 @@ import Dispatch
 /// Simple observer implementation.
 /// Initialize it with update function and optional queue if you want to receive updates on it.
 
-final class Observer<Value> {
-    let update: (Value) -> Void
+public final class Observer<Value> {
+    public let update: (Value) -> Void
 
-    init(queue: DispatchQueue? = nil, update: @escaping (Value) -> Void) {
+    public init(queue: DispatchQueue? = nil, update: @escaping (Value) -> Void) {
         guard let queue = queue else {
             self.update = update
             return
@@ -28,11 +28,11 @@ final class Observer<Value> {
 }
 
 extension Observer: Hashable {
-    var hashValue: Int {
+    public var hashValue: Int {
         return ObjectIdentifier(self).hashValue
     }
 
-    static func == (left: Observer, right: Observer) -> Bool {
+    public static func == (left: Observer, right: Observer) -> Bool {
         return left === right
     }
 }

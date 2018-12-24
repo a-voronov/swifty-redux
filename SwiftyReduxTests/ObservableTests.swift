@@ -69,6 +69,18 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [0])
     }
 
+    func testDisposableIsNotKeptAfterItDisposes() {
+        let observable = Observable<Int> { _ in .nop() }
+        weak var disposable = observable.subscribe { value in }
+
+        XCTAssertNotNil(disposable)
+        XCTAssertFalse(disposable!.isDisposed)
+
+        disposable!.dispose()
+
+        XCTAssertNil(disposable)
+    }
+
     func testAllObserversAreDisposedWhenObservableDies() {
         var observable: Observable<Int>? = .init { _ in .nop() }
         let disposable1 = observable!.subscribe { value in }
@@ -80,7 +92,7 @@ class ObservableTests: XCTestCase {
         XCTAssertTrue([disposable1, disposable2, disposable3].allSatisfy { $0.isDisposed })
     }
 
-    func testNotifiesWithTransformedValuesUsingMap() {
+    func testObservable_whenUsingMap_notifiesWithTransformedValues() {
         var result: String!
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.map(String.init).subscribe { value in result = value }
@@ -90,7 +102,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, "42")
     }
 
-    func testNotNotifiesWithValuesNotPassingPredicateUsingFilter() {
+    func testObservable_whenUsingFilter_notifiesWithValuesThatPassPredicate() {
         var result = [Int]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.filter { $0 % 2 == 0 }.subscribe { value in result.append(value) }
@@ -103,7 +115,20 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [2, 4])
     }
 
-    func testNotifiesWithOnlyUniqueValuesAccordingToPredicateUsingSkipRepeat() {
+    func testObservable_whenUsingFilterMap_notifiesWithTransformedValuesIfTheyPassPredicate() {
+        var result = [String]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.filterMap { $0 % 2 == 0 ? "\($0)" : nil }.subscribe { value in result.append(value) }
+
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, ["2", "4"])
+    }
+
+    func testObservable_whenUsingSkipRepeats_notifiesWithOnlyUniqueValuesAccordingToPredicate() {
         var result = [Int]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.skipRepeats { $0 == $1 }.subscribe { value in result.append(value) }
@@ -117,7 +142,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [1, 2, 4, 2])
     }
 
-    func testNotNotifiesWithFirstNumberOfValuesUsingSkipFirst() {
+    func testObservable_whenUsingSkipFirst_notifiesAfterSpecifiedNumberOfValuesPass() {
         var result = [Int]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.skip(first: 2).subscribe { value in result.append(value) }
@@ -130,7 +155,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [3, 4])
     }
 
-    func testNotNotifiesWithValuesUntilOneFailsPredicateUsingSkipWhile() {
+    func testObservable_whenUsingSkipWhile_notifiesWithValuesAfterOneFailsPredicate() {
         var result = [Int]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.skip(while: { $0 != 3 }).subscribe { value in result.append(value) }
@@ -143,7 +168,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [3, 4])
     }
 
-    func testNotifiesOnlyWithFirstNumberOfValuesUsingTakeFirst() {
+    func testObservable_whenUsingTakeFirst_notifiesWithOnlyFirstNumberOfValues() {
         var result = [Int]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.take(first: 2).subscribe { value in result.append(value) }
@@ -156,7 +181,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [1, 2])
     }
 
-    func testNotifiesWithValuesUntilPredicateFailsUsingTakeWhile() {
+    func testObservable_whenUsingTakeWhile_notifiesWithValuesUntilOneFailsPredicate() {
         var result = [Int]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.take(while: { $0 != 3 }).subscribe { value in result.append(value) }
@@ -169,7 +194,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [1, 2])
     }
 
-    func testNotifiesWithBothPreviousAndCurrentValueAfterSecondValueWasDispatchedIfNoInitialValueProvidedUsingCombinePrevious() {
+    func testObservable_whenUsingCombinePrevious_andInitialValueNotProvided_notifiesOnlyAfterSecondValueWasDispatched() {
         var result = [Tuple<Int, Int>]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.combinePrevious().subscribe { value in result.append(.init(value.0, value.1)) }
@@ -182,7 +207,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [.init(1, 2), .init(2, 3), .init(3, 4)])
     }
 
-    func testNotifiesWithBothPreviousAndCurrentValueIncludingInitialValueWhileFirstEventIfItWasProvidedUsingCombinePrevious() {
+    func testObservable_whenUsingCombinePrevious_andInitialValueProvided_notifiesIncludingInitialValueWhileVeryFirstDispatch() {
         var result = [Tuple<Int, Int>]()
         let (notify, observable): ObservablePipe<Int> = pipe()
         observable.combinePrevious(initial: 0).subscribe { value in result.append(.init(value.0, value.1)) }
@@ -193,6 +218,29 @@ class ObservableTests: XCTestCase {
         notify(4)
 
         XCTAssertEqual(result, [.init(0, 1), .init(1, 2), .init(2, 3), .init(3, 4)])
+    }
+
+    func testObservable_whenUsingMapWithKeyPath_notifiesWithTransformedValues() {
+        var result: String!
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.map(\.string).subscribe { value in result = value }
+
+        notify(42)
+
+        XCTAssertEqual(result, "42")
+    }
+
+    func testObservable_whenUsingFilterWithKeyPath_notifiesWithValuesThatPassPredicate() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.filter(\.isEven).subscribe { value in result.append(value) }
+
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [2, 4])
     }
 }
 
@@ -213,5 +261,17 @@ private struct Tuple<T: Equatable, U: Equatable>: Equatable {
     init(_ first: T, _ second: U) {
         self.first = first
         self.second = second
+    }
+}
+
+private extension Int {
+    var string: String {
+        return "\(self)"
+    }
+}
+
+private extension Int {
+    var isEven: Bool {
+        return self % 2 == 0
     }
 }

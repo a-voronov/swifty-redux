@@ -21,14 +21,14 @@ import Dispatch
 public final class Observable<Value> {
     private let id: String
     private let queue: DispatchQueue
-    private let disposable: CompositeDisposable
+    private let disposables: CompositeDisposable
     private var observers = Set<Observer<Value>>()
 
     public init(id: String? = nil, observable: @escaping (@escaping (Value) -> Void) -> Disposable) {
         self.id = id ?? "redux.observable"
         self.queue = DispatchQueue(label: "\(self.id).queue")
-        self.disposable = CompositeDisposable(id: "\(self.id).composite-disposable")
-        self.disposable += observable { value in
+        self.disposables = CompositeDisposable(id: "\(self.id).composite-disposable")
+        self.disposables += observable { value in
             let currentObservers = self.queue.sync { self.observers }
             currentObservers.forEach { observer in observer.update(value) }
         }
@@ -44,19 +44,17 @@ public final class Observable<Value> {
         _ = queue.sync {
             self.observers.insert(observer)
         }
-        var observerDisposable: Disposable!
-        observerDisposable = Disposable(id: "\(id).disposable") { [weak self, weak observer, weak observerDisposable] in
+        return disposables += Disposable(id: "\(id).disposable") { [weak self, weak observer] disposable in
             guard let strongSelf = self, let observer = observer else { return }
             _ = strongSelf.queue.sync {
                 strongSelf.observers.remove(observer)
             }
-            observerDisposable.map(strongSelf.disposable.remove)
+            disposable.map(strongSelf.disposables.remove)
         }
-        return disposable += observerDisposable
     }
 
     deinit {
-        disposable.dispose()
+        disposables.dispose()
         observers.removeAll()
     }
 }
@@ -72,10 +70,6 @@ extension Observable {
         }
     }
 
-    public func map<T>(_ keyPath: KeyPath<Value, T>) -> Observable<T> {
-        return map { $0[keyPath: keyPath] }
-    }
-
     public func filter(_ predicate: @escaping (Value) -> Bool) -> Observable<Value> {
         return Observable(id: "\(id)-filter") { [weak self] action in
             guard let strongSelf = self else { return .nop() }
@@ -86,10 +80,6 @@ extension Observable {
                 }
             }
         }
-    }
-
-    public func filter(_ keyPath: KeyPath<Value, Bool>) -> Observable<Value> {
-        return filter { $0[keyPath: keyPath] }
     }
 
     public func filterMap<T>(_ transform: @escaping (Value) -> T?) -> Observable<T> {
@@ -206,21 +196,22 @@ extension Observable where Value: Equatable {
 }
 
 extension Observable {
-    internal static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, Observer<V>) {
+    public func map<T>(_ keyPath: KeyPath<Value, T>) -> Observable<T> {
+        return map { $0[keyPath: keyPath] }
+    }
+
+    public func filter(_ keyPath: KeyPath<Value, Bool>) -> Observable<Value> {
+        return filter { $0[keyPath: keyPath] }
+    }
+}
+
+extension Observable {
+    public static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, Observer<V>) {
         var observer: Observer<V>!
         let observable = Observable<V>(id: id) { action -> Disposable in
             observer = Observer(queue: queue, update: action)
             return disposable ?? .nop()
         }
         return (observable, observer)
-    }
-
-    public static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, (V) -> Void) {
-        let (observable, observer): (Observable<V>, Observer<V>) = Observable<V>.pipe(
-            id: id,
-            queue: queue,
-            disposable: disposable
-        )
-        return (observable, observer.update)
     }
 }

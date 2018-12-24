@@ -27,7 +27,7 @@ class StoreTests: XCTestCase {
         nopMiddleware = createMiddleware(sideEffect: { getState, dispatch, action in })
     }
 
-    func testStoreDeinitsAndAllDisposablesDisposeAfterSubscribeAndDispatchFlow() {
+    func testStore_afterSubscribeAndDispatchFlow_deinits_andAllDisposablesDispose() {
         weak var store: Store<State>?
         var disposable: Disposable!
 
@@ -43,7 +43,7 @@ class StoreTests: XCTestCase {
         XCTAssertNil(store)
     }
 
-    func testMiddlewareIsExecutedSequentiallyEvenIfRunOnDifferentQueues() {
+    func testMiddleware_evenIfRunOnDifferentQueues_isExecutedSequentially() {
         func asyncMiddleware(id: String, qos: DispatchQoS.QoSClass) -> Middleware<State> {
             let asyncExpectation = expectation(description: "\(id) async middleware expectation")
             return createMiddleware { getState, dispatch, next in
@@ -73,7 +73,7 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testStartReceivingStateUpdatesWhenSubscribing() {
+    func testStore_whenSubscribing_startReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
             switch action {
             case let action as StringAction where action == "mul": return state * 2
@@ -95,7 +95,7 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, [6, 9])
     }
 
-    func testReceiveUniqueStateUpdatesWhenSkippingRepeats() {
+    func testSubscribeToStore_whenSkippingRepeats_receiveUniqueStateUpdates() {
         let actions: [StringAction] = ["1", "2", "1", "1", "3", "3", "5", "2"]
         let reducer: Reducer<State> = { action, state in
             Int(action as! StringAction)!
@@ -113,7 +113,7 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, [1, 2, 1, 3, 5, 2])
     }
 
-    func testReceiveDuplicatedStateUpdatesWhenNotSkippingRepeats() {
+    func testSubscribeToStore_whenNotSkippingRepeats_receiveDuplicatedStateUpdates() {
         let actions: [StringAction] = ["1", "2", "1", "1", "3", "3", "5", "2"]
         let reducer: Reducer<State> = { action, state in
             Int(action as! StringAction)!
@@ -131,8 +131,8 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, [1, 2, 1, 1, 3, 3, 5, 2])
     }
 
-    func testReceiveStateUpdatesOnSelectedQueue() {
-        let id = "testReceiveStateUpdatesOnSelectedQueue"
+    func testStore_whenSubscribing_ReceiveStateUpdatesOnSelectedQueue() {
+        let id = "testStore_whenSubscribing_ReceiveStateUpdatesOnSelectedQueue"
         let queueId = DispatchSpecificKey<String>()
         let queue = DispatchQueue(label: id)
         queue.setSpecific(key: queueId, value: id)
@@ -153,8 +153,8 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testReceiveStateUpdatesOnDefaultQueueEvenIfSelectedQueuePreviously() {
-        let id = "testReceiveStateUpdatesOnSelectedQueue"
+    func testStore_whenSubscribingWithoutSelectedQueue_butDidSoBefore_receiveStateUpdatesOnDefaultQueue() {
+        let id = "testStore_whenSubscribingWithoutSelectedQueue_butDidSoBefore_receiveStateUpdatesOnDefaultQueue"
         let queueId = DispatchSpecificKey<String>()
         let queue = DispatchQueue(label: id)
         queue.setSpecific(key: queueId, value: id)
@@ -179,7 +179,7 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testStopReceivingStateUpdatesWhenUnsubscribing() {
+    func testStore_whenUnsubscribing_stopReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
             return Int(action as! StringAction)!
         }
@@ -203,7 +203,7 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, [1, 2, 3])
     }
 
-    func testStartReceivingStateUpdatesWhenSubscribingToObserver() {
+    func testStore_whenObserving_andSubscribingToObserver_startReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
             switch action {
             case let action as StringAction where action == "mul": return state * 2
@@ -225,7 +225,7 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, [6, 9])
     }
 
-    func testStopReceivingStateUpdatesWhenUnsubscribingFromObserver() {
+    func testStore_whenUnsubscribingFromObserver_stopReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
             return Int(action as! StringAction)!
         }

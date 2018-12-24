@@ -6,12 +6,18 @@
 //  Copyright © 2018 Alex Voronov. All rights reserved.
 //
 
+import Dispatch
+
 /// Used to dispose from any resources when needed.
 /// Initialize it with action to execute once disposal is needed.
 /// Additionaly you can see whether action was already executed or not. And it won't be executed if it was already
 /// Will serially execute action and toggle `isDisposed` flag.
 
 public final class Disposable {
+    private static func queue(id: String?) -> DispatchQueue {
+        return DispatchQueue(label: (id ?? "redux.disposable") + ".queue", attributes: .concurrent)
+    }
+
     private let queue: DispatchQueue
     private var action: (() -> Void)?
 
@@ -21,8 +27,15 @@ public final class Disposable {
     }
 
     public init(id: String? = nil, action: @escaping () -> Void) {
-        self.queue = DispatchQueue(label: (id ?? "redux.disposable") + ".queue", attributes: .concurrent)
+        self.queue = Disposable.queue(id: id)
         self.action = action
+    }
+
+    public init(id: String? = nil, action: @escaping (Disposable?) -> Void) {
+        self.queue = Disposable.queue(id: id)
+        self.action = { [weak self] in
+            action(self)
+        }
     }
 
     public func dispose() {
@@ -38,9 +51,13 @@ public final class Disposable {
     }
 
     public static func nop() -> Disposable {
-        let nop = Disposable(action: {})
-        nop._isDisposed = true
-        return nop
+        return Disposable()
+    }
+
+    private init() {
+        self.queue = DispatchQueue(label: "redux.nop-disposable.queue", attributes: .concurrent)
+        self.action = nil
+        self._isDisposed = true
     }
 }
 
@@ -56,9 +73,11 @@ extension Disposable: Hashable {
 
 public final class CompositeDisposable {
     private let queue: DispatchQueue
-    private var disposables: Set<Disposable>
+    private var disposables: Set<Disposable>?
 
-    private var _isDisposed: Bool = false
+    private var _isDisposed: Bool {
+        return disposables == nil
+    }
     public var isDisposed: Bool {
         return queue.sync { _isDisposed }
     }
@@ -86,13 +105,13 @@ public final class CompositeDisposable {
                 disposable.dispose()
                 return
             }
-            disposables.insert(disposable)
+            disposables?.insert(disposable)
         }
     }
 
     public func remove(_ disposable: Disposable) {
         _ = queue.sync(flags: .barrier) {
-            disposables.remove(disposable)
+            disposables?.remove(disposable)
         }
     }
 
@@ -102,18 +121,18 @@ public final class CompositeDisposable {
                 disposables.forEach { $0.dispose() }
                 return
             }
-            self.disposables.formUnion(Set(disposables))
+            self.disposables?.formUnion(Set(disposables))
         }
     }
 
     public func dispose() {
-        let oldDisposables: Set<Disposable> = queue.sync(flags: .barrier) {
-            let oldDisposables = disposables
-            disposables.removeAll(keepingCapacity: false)
-            _isDisposed = true
-            return oldDisposables
+        let currentDisposables: Set<Disposable>? = queue.sync(flags: .barrier) {
+            let currentDisposables = disposables
+            disposables?.removeAll(keepingCapacity: false)
+            disposables = nil
+            return currentDisposables
         }
-        oldDisposables.forEach { $0.dispose() }
+        currentDisposables?.forEach { $0.dispose() }
     }
 }
 
@@ -121,12 +140,6 @@ extension CompositeDisposable {
     @discardableResult
     public static func += (lhs: CompositeDisposable, rhs: Disposable) -> Disposable {
         lhs.add(rhs)
-        return rhs
-    }
-
-    @discardableResult
-    public static func += (lhs: CompositeDisposable, rhs: Disposable?) -> Disposable? {
-        rhs.map(lhs.add)
         return rhs
     }
 
