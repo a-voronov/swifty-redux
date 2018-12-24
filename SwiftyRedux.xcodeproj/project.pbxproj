@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D206D94921CEF50E0088E63E /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D206D94821CEF50E0088E63E /* ObservableTests.swift */; };
+		D206D94B21D13E7E0088E63E /* Lock.swift in Sources */ = {isa = PBXBuildFile; fileRef = D206D94A21D13E7E0088E63E /* Lock.swift */; };
 		D25B30C721C5D8AD009DA868 /* SwiftyRedux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D25B30BD21C5D8AD009DA868 /* SwiftyRedux.framework */; };
 		D25B30CE21C5D8AD009DA868 /* SwiftyRedux.h in Headers */ = {isa = PBXBuildFile; fileRef = D25B30C021C5D8AD009DA868 /* SwiftyRedux.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D25B30EF21C5D99F009DA868 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25B30E821C5D99F009DA868 /* Observer.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		D206D94821CEF50E0088E63E /* ObservableTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; };
+		D206D94A21D13E7E0088E63E /* Lock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lock.swift; sourceTree = "<group>"; };
 		D25B30BD21C5D8AD009DA868 /* SwiftyRedux.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyRedux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B30C021C5D8AD009DA868 /* SwiftyRedux.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyRedux.h; sourceTree = "<group>"; };
 		D25B30C121C5D8AD009DA868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -126,6 +128,7 @@
 				D25B30ED21C5D99F009DA868 /* Observable.swift */,
 				D25B30E821C5D99F009DA868 /* Observer.swift */,
 				D25B30EA21C5D99F009DA868 /* Disposable.swift */,
+				D206D94A21D13E7E0088E63E /* Lock.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				D25B30F321C5D99F009DA868 /* Store.swift in Sources */,
 				D25B30F021C5D99F009DA868 /* Reducer.swift in Sources */,
 				D25B30F121C5D99F009DA868 /* Disposable.swift in Sources */,
+				D206D94B21D13E7E0088E63E /* Lock.swift in Sources */,
 				D25B30F521C5D99F009DA868 /* Action.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

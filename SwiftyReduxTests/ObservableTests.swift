@@ -69,6 +69,18 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [0])
     }
 
+    func testDisposableIsNotKeptAfterItDisposes() {
+        let observable = Observable<Int> { _ in .nop() }
+        weak var disposable = observable.subscribe { value in }
+
+        XCTAssertNotNil(disposable)
+        XCTAssertFalse(disposable!.isDisposed)
+
+        disposable!.dispose()
+
+        XCTAssertNil(disposable)
+    }
+
     func testAllObserversAreDisposedWhenObservableDies() {
         var observable: Observable<Int>? = .init { _ in .nop() }
         let disposable1 = observable!.subscribe { value in }

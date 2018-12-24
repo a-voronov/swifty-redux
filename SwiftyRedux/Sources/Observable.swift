@@ -6,7 +6,7 @@
 //  Copyright © 2018 Alex Voronov. All rights reserved.
 //
 
-import Dispatch
+//import Dispatch
 
 /// Just an implementation of Observable.
 /// You can initialize it with another observable as an instance of this class or as an anonymous function.
@@ -19,51 +19,55 @@ import Dispatch
 /// - `observer` to send updates to, so that observable would get them and propagate to its observers.
 
 public final class Observable<Value> {
-    private let id: String
-    private let queue: DispatchQueue
-    private let disposable: CompositeDisposable
+    private let lock = Lock()
+    private let disposables: CompositeDisposable
     private var observers = Set<Observer<Value>>()
 
-    public init(id: String? = nil, observable: @escaping (@escaping (Value) -> Void) -> Disposable) {
-        self.id = id ?? "redux.observable"
-        self.queue = DispatchQueue(label: "\(self.id).queue")
-        self.disposable = CompositeDisposable(id: "\(self.id).composite-disposable")
-        self.disposable += observable { value in
-            let currentObservers = self.queue.sync { self.observers }
+    public init(observable: @escaping (@escaping (Value) -> Void) -> Disposable) {
+        self.disposables = CompositeDisposable()
+        self.disposables += observable { value in
+            self.lock.lock()
+            let currentObservers = self.observers
+            self.lock.unlock()
             currentObservers.forEach { observer in observer.update(value) }
         }
     }
 
-    public convenience init(id: String? = nil, observable: Observable<Value>) {
-        self.init(id: id, observable: { observable.subscribe(observer: $0) })
+    public convenience init(observable: Observable<Value>) {
+        self.init(observable: { observable.subscribe(observer: $0) })
     }
 
     @discardableResult
     public func subscribe(on observingQueue: DispatchQueue? = nil, observer: @escaping (Value) -> Void) -> Disposable {
         let observer = Observer(queue: observingQueue, update: observer)
-        _ = queue.sync {
-            self.observers.insert(observer)
-        }
-        var observerDisposable: Disposable!
-        observerDisposable = Disposable(id: "\(id).disposable") { [weak self, weak observer, weak observerDisposable] in
+
+        lock.lock()
+        self.observers.insert(observer)
+        lock.unlock()
+
+        let disposable = Disposable { [weak self, weak observer] in
             guard let strongSelf = self, let observer = observer else { return }
-            _ = strongSelf.queue.sync {
-                strongSelf.observers.remove(observer)
-            }
-            observerDisposable.map(strongSelf.disposable.remove)
+            strongSelf.lock.lock(); defer { strongSelf.lock.unlock() }
+            strongSelf.observers.remove(observer)
         }
-        return disposable += observerDisposable
+        // small hack to remove disposable when it's disposed
+        disposable.onDisposed = { [weak self, weak disposable] in
+            if let disposable = disposable {
+                self?.disposables.remove(disposable)
+            }
+        }
+        return disposables += disposable
     }
 
     deinit {
-        disposable.dispose()
+        disposables.dispose()
         observers.removeAll()
     }
 }
 
 extension Observable {
     public func map<T>(_ transform: @escaping (Value) -> T) -> Observable<T> {
-        return Observable<T>(id: "\(id)-map") { [weak self] action in
+        return Observable<T> { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             return strongSelf.subscribe { value in
@@ -77,7 +81,7 @@ extension Observable {
     }
 
     public func filter(_ predicate: @escaping (Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-filter") { [weak self] action in
+        return Observable { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             return strongSelf.subscribe { value in
@@ -93,7 +97,7 @@ extension Observable {
     }
 
     public func filterMap<T>(_ transform: @escaping (Value) -> T?) -> Observable<T> {
-        return Observable<T>(id: "\(id)-filterMap") { [weak self] action in
+        return Observable<T> { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             return strongSelf.subscribe { value in
@@ -103,7 +107,7 @@ extension Observable {
     }
 
     public func skipRepeats(_ isEquivalent: @escaping (Value, Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-skipRepeats") { [weak self] action in
+        return Observable { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             var previous: Value?
@@ -120,7 +124,7 @@ extension Observable {
     public func skip(first count: Int) -> Observable<Value> {
         precondition(count > 0)
 
-        return Observable(id: "\(id)-skipFirst") { [weak self] action in
+        return Observable { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             var skipped = 0
@@ -135,7 +139,7 @@ extension Observable {
     }
 
     public func skip(while predicate: @escaping (Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-skipWhile") { [weak self] action in
+        return Observable { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             var isSkipping = true
@@ -151,7 +155,7 @@ extension Observable {
     public func take(first count: Int) -> Observable<Value> {
         precondition(count > 0)
 
-        return Observable(id: "\(id)-takeFirst") { [weak self] action in
+        return Observable { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             var taken = 0
@@ -169,7 +173,7 @@ extension Observable {
     }
 
     public func take(while predicate: @escaping (Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-takeWhile") { [weak self] action in
+        return Observable { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             var disposable: Disposable!
@@ -185,7 +189,7 @@ extension Observable {
     }
 
     public func combinePrevious(initial: Value? = nil) -> Observable<(Value, Value)> {
-        return Observable<(Value, Value)>(id: "\(id)-combinePrevious") { [weak self] action in
+        return Observable<(Value, Value)> { [weak self] action in
             guard let strongSelf = self else { return .nop() }
 
             var previous = initial
@@ -206,21 +210,17 @@ extension Observable where Value: Equatable {
 }
 
 extension Observable {
-    internal static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, Observer<V>) {
+    internal static func pipe<V>(queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, Observer<V>) {
         var observer: Observer<V>!
-        let observable = Observable<V>(id: id) { action -> Disposable in
+        let observable = Observable<V> { action -> Disposable in
             observer = Observer(queue: queue, update: action)
             return disposable ?? .nop()
         }
         return (observable, observer)
     }
 
-    public static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, (V) -> Void) {
-        let (observable, observer): (Observable<V>, Observer<V>) = Observable<V>.pipe(
-            id: id,
-            queue: queue,
-            disposable: disposable
-        )
+    public static func pipe<V>(queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, (V) -> Void) {
+        let (observable, observer): (Observable<V>, Observer<V>) = Observable<V>.pipe(queue: queue, disposable: disposable)
         return (observable, observer.update)
     }
 }

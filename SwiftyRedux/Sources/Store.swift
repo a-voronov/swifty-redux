@@ -40,7 +40,7 @@ public final class Store<State> {
         self.reducer = reducer
         self.middleware = applyMiddleware(middleware)
 
-        (observable, observer) = Observable<State>.pipe(id: "\(id).observable")
+        (observable, observer) = Observable<State>.pipe()
     }
 
     public func dispatch(_ action: Action) {
