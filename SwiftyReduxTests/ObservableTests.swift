@@ -9,16 +9,6 @@
 import XCTest
 @testable import SwiftyRedux
 
-private typealias ObservablePipe<T> = (input: (T) -> Void, output: Observable<T>)
-private func pipe<T>(queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> ObservablePipe<T> {
-    var input: ((T) -> Void)!
-    let output = Observable<T> { updates in
-        input = Observer(queue: queue, update: updates).update
-        return disposable ?? .nop()
-    }
-    return (input, output)
-}
-
 class ObservableTests: XCTestCase {
     func testObserverIsNotifiedOfNewEvents() {
         var result: Int!
@@ -67,56 +57,161 @@ class ObservableTests: XCTestCase {
         }
     }
 
-//    func testObserverIsNotNotifiedAfterDisposing() {
-//        var result: Int!
-//        let disposable = Disposable {
-//
-//        }
-//        let (notify, observable): ObservablePipe<Int> = pipe()
-//        observable.subscribe { value in result = value }
-//
-//        notify(42)
-//
-//        XCTAssertEqual(result, 42)
-//    }
+    func testObserverIsNotNotifiedAfterDisposing() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        let disposable = observable.subscribe { value in result.append(value) }
 
-    func testAllObserversAreDisposedWhenObservableDies() {
+        notify(0)
+        disposable.dispose()
+        notify(42)
 
+        XCTAssertEqual(result, [0])
     }
 
-    func testNotifiesWithTransforemedValuesUsingMap() {
+    func testAllObserversAreDisposedWhenObservableDies() {
+        var observable: Observable<Int>? = .init { _ in .nop() }
+        let disposable1 = observable!.subscribe { value in }
+        let disposable2 = observable!.subscribe { value in }
+        let disposable3 = observable!.subscribe { value in }
 
+        observable = nil
+
+        XCTAssertTrue([disposable1, disposable2, disposable3].allSatisfy { $0.isDisposed })
+    }
+
+    func testNotifiesWithTransformedValuesUsingMap() {
+        var result: String!
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.map(String.init).subscribe { value in result = value }
+
+        notify(42)
+
+        XCTAssertEqual(result, "42")
     }
 
     func testNotNotifiesWithValuesNotPassingPredicateUsingFilter() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.filter { $0 % 2 == 0 }.subscribe { value in result.append(value) }
 
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [2, 4])
     }
 
     func testNotifiesWithOnlyUniqueValuesAccordingToPredicateUsingSkipRepeat() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.skipRepeats { $0 == $1 }.subscribe { value in result.append(value) }
 
+        notify(1)
+        notify(1)
+        notify(2)
+        notify(4)
+        notify(2)
+
+        XCTAssertEqual(result, [1, 2, 4, 2])
     }
 
     func testNotNotifiesWithFirstNumberOfValuesUsingSkipFirst() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.skip(first: 2).subscribe { value in result.append(value) }
 
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [3, 4])
     }
 
     func testNotNotifiesWithValuesUntilOneFailsPredicateUsingSkipWhile() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.skip(while: { $0 != 3 }).subscribe { value in result.append(value) }
 
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [3, 4])
     }
 
     func testNotifiesOnlyWithFirstNumberOfValuesUsingTakeFirst() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.take(first: 2).subscribe { value in result.append(value) }
 
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [1, 2])
     }
 
     func testNotifiesWithValuesUntilPredicateFailsUsingTakeWhile() {
+        var result = [Int]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.take(while: { $0 != 3 }).subscribe { value in result.append(value) }
 
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [1, 2])
     }
 
     func testNotifiesWithBothPreviousAndCurrentValueAfterSecondValueWasDispatchedIfNoInitialValueProvidedUsingCombinePrevious() {
+        var result = [Tuple<Int, Int>]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.combinePrevious().subscribe { value in result.append(.init(value.0, value.1)) }
 
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [.init(1, 2), .init(2, 3), .init(3, 4)])
     }
 
     func testNotifiesWithBothPreviousAndCurrentValueIncludingInitialValueWhileFirstEventIfItWasProvidedUsingCombinePrevious() {
+        var result = [Tuple<Int, Int>]()
+        let (notify, observable): ObservablePipe<Int> = pipe()
+        observable.combinePrevious(initial: 0).subscribe { value in result.append(.init(value.0, value.1)) }
 
+        notify(1)
+        notify(2)
+        notify(3)
+        notify(4)
+
+        XCTAssertEqual(result, [.init(0, 1), .init(1, 2), .init(2, 3), .init(3, 4)])
+    }
+}
+
+private typealias ObservablePipe<T> = (input: (T) -> Void, output: Observable<T>)
+private func pipe<T>(queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> ObservablePipe<T> {
+    var input: ((T) -> Void)!
+    let output = Observable<T> { updates in
+        input = Observer(queue: queue, update: updates).update
+        return disposable ?? .nop()
+    }
+    return (input, output)
+}
+
+private struct Tuple<T: Equatable, U: Equatable>: Equatable {
+    let first: T
+    let second: U
+
+    init(_ first: T, _ second: U) {
+        self.first = first
+        self.second = second
     }
 }
