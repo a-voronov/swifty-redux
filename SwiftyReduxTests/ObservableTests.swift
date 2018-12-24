@@ -70,7 +70,7 @@ class ObservableTests: XCTestCase {
     }
 
     func testDisposableIsNotKeptAfterItDisposes() {
-        let observable = Observable<Int> { _ in .nop() }
+        let observable = Observable<Int> { _ in nil }
         weak var disposable = observable.subscribe { value in }
 
         XCTAssertNotNil(disposable)
@@ -82,7 +82,7 @@ class ObservableTests: XCTestCase {
     }
 
     func testAllObserversAreDisposedWhenObservableDies() {
-        var observable: Observable<Int>? = .init { _ in .nop() }
+        var observable: Observable<Int>? = .init { _ in nil }
         let disposable1 = observable!.subscribe { value in }
         let disposable2 = observable!.subscribe { value in }
         let disposable3 = observable!.subscribe { value in }
@@ -249,7 +249,7 @@ private func pipe<T>(queue: DispatchQueue? = nil, disposable: Disposable? = nil)
     var input: ((T) -> Void)!
     let output = Observable<T> { updates in
         input = Observer(queue: queue, update: updates).update
-        return disposable ?? .nop()
+        return disposable
     }
     return (input, output)
 }

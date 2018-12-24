@@ -144,6 +144,12 @@ extension CompositeDisposable {
     }
 
     @discardableResult
+    public static func += (lhs: CompositeDisposable, rhs: Disposable?) -> Disposable? {
+        rhs.map(lhs.add)
+        return rhs
+    }
+
+    @discardableResult
     public static func += (lhs: CompositeDisposable, rhs: @escaping () -> Void) -> Disposable {
         let disposable = Disposable(action: rhs)
         lhs.add(disposable)
