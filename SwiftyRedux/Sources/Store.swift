@@ -25,9 +25,9 @@ import Dispatch
 
 public final class Store<State> {
     private let reducer: Reducer<State>
-    private let middleware: Middleware<State>
     private let queue: DispatchQueue
     private let (observable, observer): (Observable<State>, Observer<State>)
+    private var dispatchFunction: Dispatch!
 
     private var currentState: State
     public var state: State {
@@ -38,17 +38,17 @@ public final class Store<State> {
         self.queue = DispatchQueue(label: "\(id).queue", attributes: .concurrent)
         self.currentState = state
         self.reducer = reducer
-        self.middleware = applyMiddleware(middleware)
 
         (observable, observer) = Observable<State>.pipe(id: "\(id).observable")
+
+        dispatchFunction = applyMiddleware(middleware)(
+            { [weak self] in self?.state },
+            { [weak self] in self?.dispatch($0) },
+            { [weak self] in self?.defaultDispatch(from: $0) }
+        )
     }
 
     public func dispatch(_ action: Action) {
-        let dispatchFunction = middleware(
-            { self.state },
-            { [weak self] in self?.dispatch($0) },
-            { [weak self] action in self?.defaultDispatch(from: action) }
-        )
         dispatchFunction(action)
     }
 

@@ -130,4 +130,15 @@ class MiddlewareTests: XCTestCase {
 
         XCTAssertEqual(store.state, 42)
     }
+
+//    func testInfiniteCall() {
+//        let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
+//            return { action in
+//                dispatch(action)
+//            }
+//        }
+//        let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [middleware])
+//
+//        store.dispatch(nopAction)
+//    }
 }

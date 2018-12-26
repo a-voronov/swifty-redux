@@ -22,8 +22,17 @@
 ///
 /// Middleware can decide not to propagate action further by not calling `next` function,
 /// However it's better if action travels the whole way back to the store.
+///
+/// Note: be carefull, as this will cause an infinite loop
+/// ```
+/// let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
+///     return { action in
+///         dispatch(action)
+///     }
+/// }
+/// ```
 
-public typealias GetState<State> = () -> State
+public typealias GetState<State> = () -> State?
 public typealias Dispatch = (Action) -> Void
 
 public typealias Middleware<State> = (
