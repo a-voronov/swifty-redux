@@ -47,11 +47,11 @@ class MiddlewareTests: XCTestCase {
     func testSideEffectMiddlewarePropagatesActionToTheNextOne() {
         var result: StringAction = ""
         let middleware: Middleware<State> = applyMiddleware([
-            createMiddleware(sideEffect: { getState, dispatch, action in
-                result += (action as! StringAction) + " first "
+            createMiddleware(sideEffect: { getState, dispatch in
+                return { action in result += (action as! StringAction) + " first " }
             }),
-            createMiddleware(sideEffect: { getState, dispatch, action in
-                result += (action as! StringAction) + " second"
+            createMiddleware(sideEffect: { getState, dispatch in
+                return { action in  result += (action as! StringAction) + " second" }
             })
         ])
 
@@ -62,8 +62,8 @@ class MiddlewareTests: XCTestCase {
 
     func testCanGetState() {
         var result: State!
-        let middleware: Middleware<State> = createMiddleware(sideEffect: { getState, dispatch, action in
-            result = getState()
+        let middleware: Middleware<State> = createMiddleware(sideEffect: { getState, dispatch in
+            return { action in result = getState() }
         })
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [middleware])
         store.dispatch(nopAction)
@@ -73,11 +73,13 @@ class MiddlewareTests: XCTestCase {
 
     func testCanDispatch() {
         var result: StringAction!
-        let middleware: Middleware<State> = createMiddleware(sideEffect: { getState, dispatch, action in
-            if (action as! StringAction) == self.nopAction {
-                dispatch("new " + (action as! StringAction))
-            } else {
-                result = action as? StringAction
+        let middleware: Middleware<State> = createMiddleware(sideEffect: { getState, dispatch in
+            return { action in
+                if (action as! StringAction) == self.nopAction {
+                    dispatch("new " + (action as! StringAction))
+                } else {
+                    result = action as? StringAction
+                }
             }
         })
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [middleware])
@@ -91,8 +93,10 @@ class MiddlewareTests: XCTestCase {
             createMiddleware { getState, dispatch, next in
                 return { action in }
             },
-            createMiddleware { getState, dispatch, action in
-                XCTFail()
+            createMiddleware { getState, dispatch in
+                return { action in
+                    XCTFail()
+                }
             }
         ])
         store.dispatch(nopAction)
@@ -104,8 +108,8 @@ class MiddlewareTests: XCTestCase {
             createMiddleware { getState, dispatch, next in
                 return { action in next(action as! StringAction + " next") }
             },
-            createMiddleware { getState, dispatch, action in
-                result = action as? StringAction
+            createMiddleware { getState, dispatch in
+                return { action in result = action as? StringAction }
             }
         ])
         store.dispatch(nopAction)
@@ -131,6 +135,7 @@ class MiddlewareTests: XCTestCase {
         XCTAssertEqual(store.state, 42)
     }
 
+//    // uncomment to test call stack overflow
 //    func testInfiniteCall() {
 //        let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
 //            return { action in

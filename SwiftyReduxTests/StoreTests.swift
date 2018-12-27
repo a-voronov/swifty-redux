@@ -24,7 +24,68 @@ class StoreTests: XCTestCase {
         initialState = 0
         nopAction = "action"
         nopReducer = { action, state in state }
-        nopMiddleware = createMiddleware(sideEffect: { getState, dispatch, action in })
+        nopMiddleware = createMiddleware(sideEffect: { getState, dispatch in return { action in } })
+    }
+
+    func testMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
+        var result = 0
+        let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
+            result += 1
+            return { action in next(action) }
+        }
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+
+        store.dispatch("first")
+        store.dispatch("second")
+        store.dispatch("third")
+
+        XCTAssertEqual(result, 1)
+    }
+
+    func testSideEffectMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
+        var result = 0
+        let middleware: Middleware<State> = createMiddleware { getState, dispatch in
+            result += 1
+            return { action in }
+        }
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+
+        store.dispatch("first")
+        store.dispatch("second")
+        store.dispatch("third")
+
+        XCTAssertEqual(result, 1)
+    }
+
+    func testMiddlewareExecutesActionBodyAsManyTimesAsActionsReceived() {
+        var result = 0
+        let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
+            return { action in
+                result += 1
+                next(action)
+            }
+        }
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+
+        store.dispatch("first")
+        store.dispatch("second")
+        store.dispatch("third")
+
+        XCTAssertEqual(result, 3)
+    }
+
+    func testSideffectMiddlewareExecutesActionBodyAsManyTimesAsActionsReceived() {
+        var result = 0
+        let middleware: Middleware<State> = createMiddleware { getState, dispatch in
+            return { action in result += 1 }
+        }
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+
+        store.dispatch("first")
+        store.dispatch("second")
+        store.dispatch("third")
+
+        XCTAssertEqual(result, 3)
     }
 
     func testStore_afterSubscribeAndDispatchFlow_deinits_andAllDisposablesDispose() {
