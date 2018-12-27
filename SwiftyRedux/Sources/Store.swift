@@ -53,10 +53,11 @@ public final class Store<State> {
     }
 
     private func defaultDispatch(from action: Action) {
-        queue.async(flags: .barrier) {
-            self.currentState = self.reducer(action, self.currentState)
-            self.observer.update(self.currentState)
+        let newState: State = queue.sync(flags: .barrier) {
+            currentState = reducer(action, currentState)
+            return currentState
         }
+        self.observer.update(newState)
     }
 
     @discardableResult

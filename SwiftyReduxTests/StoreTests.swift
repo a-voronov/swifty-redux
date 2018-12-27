@@ -97,11 +97,32 @@ class StoreTests: XCTestCase {
             store = deinitStore
             disposable = deinitStore.subscribe(observer: { state in })
             deinitStore.dispatch("action")
-            _ = deinitStore.state 
         }
 
         XCTAssertTrue(disposable.isDisposed)
         XCTAssertNil(store)
+    }
+
+    func testMiddleware_whenRunOnDefaultQueue_isExecutedSequentiallyWithReducer() {
+        var result = ""
+        let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
+            return { action in
+                result += "m-\(action) "
+                next(action)
+            }
+        }
+        let reducer: Reducer<State> = { action, state in
+            result += "r-\(action) "
+            return state
+        }
+        let store = Store<State>(state: initialState, reducer: reducer, middleware: [middleware])
+
+        store.dispatch("a")
+        store.dispatch("b")
+        store.dispatch("c")
+        store.dispatch("d")
+
+        XCTAssertEqual(result, "m-a r-a m-b r-b m-c r-c m-d r-d ")
     }
 
     func testMiddleware_evenIfRunOnDifferentQueues_isExecutedSequentially() {
@@ -150,8 +171,6 @@ class StoreTests: XCTestCase {
         }
         store.dispatch("mul")
         store.dispatch("inc")
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
 
         XCTAssertEqual(result, [6, 9])
     }
@@ -168,8 +187,6 @@ class StoreTests: XCTestCase {
             result.append(state)
         }
         actions.forEach(store.dispatch)
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
 
         XCTAssertEqual(result, [1, 2, 1, 3, 5, 2])
     }
@@ -186,8 +203,6 @@ class StoreTests: XCTestCase {
             result.append(state)
         }
         actions.forEach(store.dispatch)
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
 
         XCTAssertEqual(result, [1, 2, 1, 1, 3, 3, 5, 2])
     }
@@ -253,13 +268,10 @@ class StoreTests: XCTestCase {
         store.dispatch("1")
         store.dispatch("2")
         store.dispatch("3")
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
+
         disposable.dispose()
         store.dispatch("4")
         store.dispatch("5")
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
 
         XCTAssertEqual(result, [1, 2, 3])
     }
@@ -280,8 +292,6 @@ class StoreTests: XCTestCase {
         }
         store.dispatch("mul")
         store.dispatch("inc")
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
 
         XCTAssertEqual(result, [6, 9])
     }
@@ -299,13 +309,10 @@ class StoreTests: XCTestCase {
         store.dispatch("1")
         store.dispatch("2")
         store.dispatch("3")
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
+
         disposable.dispose()
         store.dispatch("4")
         store.dispatch("5")
-        // reading state to wait on a calling thread until writing tasks complete
-        _ = store.state
 
         XCTAssertEqual(result, [1, 2, 3])
     }

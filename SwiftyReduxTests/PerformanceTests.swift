@@ -26,8 +26,6 @@ class PerformanceTests: XCTestCase {
         self.observers.forEach { self.store.subscribe(observer: $0) }
         self.measure {
             self.store.dispatch("action")
-            // reading state to wait on a calling thread until writing tasks complete to measure correct time
-            _ = self.store.state
         }
     }
 
