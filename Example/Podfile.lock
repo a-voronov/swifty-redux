@@ -1,0 +1,20 @@
+PODS:
+  - SwiftyRedux (0.1.0):
+    - SwiftyRedux/Core (= 0.1.0)
+  - SwiftyRedux/Core (0.1.0)
+  - SwiftyRedux/Core/Tests (0.1.0)
+
+DEPENDENCIES:
+  - SwiftyRedux (from `../`)
+  - SwiftyRedux/Core/Tests (from `../`)
+
+EXTERNAL SOURCES:
+  SwiftyRedux:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  SwiftyRedux: dc67e965f6be48ba36a9402ce27652f616eba3c9
+
+PODFILE CHECKSUM: db2850125af19d4515722d819529f578476adb33
+
+COCOAPODS: 1.5.3

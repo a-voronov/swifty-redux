@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D25B30BC21C5D8AD009DA868"
-               BuildableName = "SwiftyRedux.framework"
-               BlueprintName = "SwiftyRedux"
+               BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+               BuildableName = "SwiftyRedux_Example.app"
+               BlueprintName = "SwiftyRedux_Example"
+               ReferencedContainer = "container:SwiftyRedux.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "607FACE41AFB9204008FA782"
+               BuildableName = "SwiftyRedux_Tests.xctest"
+               BlueprintName = "SwiftyRedux_Tests"
                ReferencedContainer = "container:SwiftyRedux.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,10 +46,10 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D25B30BC21C5D8AD009DA868"
+            BlueprintIdentifier = "4E86223C451816301448E2C3C7377FD4"
             BuildableName = "SwiftyRedux.framework"
             BlueprintName = "SwiftyRedux"
-            ReferencedContainer = "container:SwiftyRedux.xcodeproj">
+            ReferencedContainer = "container:Pods/Pods.xcodeproj">
          </BuildableReference>
       </CodeCoverageTargets>
       <Testables>
@@ -43,19 +57,29 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D25B30C521C5D8AD009DA868"
-               BuildableName = "SwiftyReduxTests.xctest"
-               BlueprintName = "SwiftyReduxTests"
+               BlueprintIdentifier = "607FACE41AFB9204008FA782"
+               BuildableName = "SwiftyRedux_Tests.xctest"
+               BlueprintName = "SwiftyRedux_Tests"
                ReferencedContainer = "container:SwiftyRedux.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "76C5A9AE486FC6D6EABE3DC5363BA01C"
+               BuildableName = "SwiftyRedux-Unit-Tests.xctest"
+               BlueprintName = "SwiftyRedux-Unit-Tests"
+               ReferencedContainer = "container:Pods/Pods.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D25B30BC21C5D8AD009DA868"
-            BuildableName = "SwiftyRedux.framework"
-            BlueprintName = "SwiftyRedux"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "SwiftyRedux_Example.app"
+            BlueprintName = "SwiftyRedux_Example"
             ReferencedContainer = "container:SwiftyRedux.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -72,15 +96,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D25B30BC21C5D8AD009DA868"
-            BuildableName = "SwiftyRedux.framework"
-            BlueprintName = "SwiftyRedux"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "SwiftyRedux_Example.app"
+            BlueprintName = "SwiftyRedux_Example"
             ReferencedContainer = "container:SwiftyRedux.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -90,15 +115,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "D25B30BC21C5D8AD009DA868"
-            BuildableName = "SwiftyRedux.framework"
-            BlueprintName = "SwiftyRedux"
+            BlueprintIdentifier = "607FACCF1AFB9204008FA782"
+            BuildableName = "SwiftyRedux_Example.app"
+            BlueprintName = "SwiftyRedux_Example"
             ReferencedContainer = "container:SwiftyRedux.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

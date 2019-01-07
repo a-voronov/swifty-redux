@@ -1,0 +1,15 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+use_frameworks!
+inhibit_all_warnings!
+
+target 'SwiftyRedux_Example' do
+  pod 'SwiftyRedux', :path => '../', :testspecs => ['Core/Tests'], :inhibit_warnings => false
+
+  target 'SwiftyRedux_Tests' do
+    inherit! :search_paths
+
+  end
+end

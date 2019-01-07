@@ -1,0 +1,6 @@
+framework module SwiftyRedux {
+  umbrella header "SwiftyRedux-umbrella.h"
+
+  export *
+  module * { export * }
+}
