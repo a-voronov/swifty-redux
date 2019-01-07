@@ -17,5 +17,5 @@ install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
 
 script:
-- set -o pipefail && xcodebuild test -workspace Example/SwiftyRedux.xcworkspace -scheme SwiftyRedux-Tests -sdk iphonesimulator12.1 -destination 'platform=iOS Simulator,name=iPhone 6,OS=12.1' | xcpretty -c
+- set -o pipefail && xcodebuild test -workspace Example/SwiftyRedux.xcworkspace -scheme SwiftyRedux-Unit-Tests -sdk iphonesimulator12.1 -destination 'platform=iOS Simulator,name=iPhone 6,OS=12.1' | xcpretty -c
 - pod lib lint --quick --allow-warnings
