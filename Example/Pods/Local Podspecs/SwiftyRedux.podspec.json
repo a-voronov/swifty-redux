@@ -44,7 +44,14 @@
 
         ]
       },
-      "source_files": "SwiftyRedux/Sources/BatchedActions/**/*.{swift}"
+      "source_files": "SwiftyRedux/Sources/BatchedActions/**/*.{swift}",
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/BatchedActions/**/*.{swift}"
+        }
+      ]
     },
     {
       "name": "Epics",

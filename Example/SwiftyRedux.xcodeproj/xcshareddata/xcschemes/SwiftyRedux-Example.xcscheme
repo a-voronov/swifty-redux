@@ -57,7 +57,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9EF74178803271D07555DC99A3B0C01B"
+               BlueprintIdentifier = "D7D443416D511802C2889B379DE11E56"
                BuildableName = "SwiftyRedux-Unit-Tests.xctest"
                BlueprintName = "SwiftyRedux-Unit-Tests"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

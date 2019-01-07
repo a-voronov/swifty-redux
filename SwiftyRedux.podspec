@@ -43,6 +43,10 @@ Swifty implementation of Redux with optional add-ons.
   s.subspec 'BatchedActions' do |ss|
     ss.dependency 'SwiftyRedux/Core'
     ss.source_files = 'SwiftyRedux/Sources/BatchedActions/**/*.{swift}'
+
+    ss.test_spec 'Tests' do |ts|
+      ts.source_files = 'SwiftyRedux/Tests/BatchedActions/**/*.{swift}'
+    end
   end
 
   s.subspec 'Epics' do |ss|

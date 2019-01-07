@@ -1,7 +1,11 @@
 /// original: https://github.com/tshelburne/redux-batched-actions
 /// Batching action and associated higher order reducer that enables batching subscriber notifications for an array of actions.
 
-public struct BatchAction: Action {
+public protocol BatchedActions: Action {
+    var actions: [Action] { get }
+}
+
+public struct BatchAction: BatchedActions {
     public let actions: [Action]
 
     public init(_ first: Action, _ rest: Action...) {
@@ -13,7 +17,7 @@ public struct BatchAction: Action {
 
 public func enableBatching<State>(_ reducer: @escaping Reducer<State>) -> Reducer<State> {
     func batchingReducer(_ action: Action, _ state: State) -> State {
-        guard let batchAction = action as? BatchAction else {
+        guard let batchAction = action as? BatchedActions else {
             return reducer(action, state)
         }
         return batchAction.actions.reduce(state) { batchingReducer($1, $0) }
@@ -29,7 +33,7 @@ public func enableBatching<State>(_ reducer: @escaping Reducer<State>) -> Reduce
 
 public func batchDispatchMiddleware<State>() -> Middleware<State> {
     func dispatchChildActions(_ getState: @escaping GetState<State>, _ dispatch: @escaping Dispatch, _ action: Action) {
-        guard let batchAction = action as? BatchAction else {
+        guard let batchAction = action as? BatchedActions else {
             return dispatch(action)
         }
         batchAction.actions.forEach { action in
@@ -39,7 +43,7 @@ public func batchDispatchMiddleware<State>() -> Middleware<State> {
 
     return { getState, dispatch, next in
         return { action in
-            guard let batchAction = action as? BatchAction else {
+            guard let batchAction = action as? BatchedActions else {
                 return next(action)
             }
             return dispatchChildActions(getState, dispatch, batchAction)

@@ -9,6 +9,8 @@ PODS:
     - SwiftyRedux/SideEffects
   - SwiftyRedux/BatchedActions (0.1.0):
     - SwiftyRedux/Core
+  - SwiftyRedux/BatchedActions/Tests (0.1.0):
+    - SwiftyRedux/Core
   - SwiftyRedux/Core (0.1.0)
   - SwiftyRedux/Core/Tests (0.1.0)
   - SwiftyRedux/Epics (0.1.0):
@@ -19,6 +21,7 @@ PODS:
 
 DEPENDENCIES:
   - SwiftyRedux/All (from `../`)
+  - SwiftyRedux/BatchedActions/Tests (from `../`)
   - SwiftyRedux/Core/Tests (from `../`)
 
 SPEC REPOS:
@@ -33,8 +36,8 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   ReactiveSwift: a2bb9ace428a109e9c0209615645d9d286c8c433
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
-  SwiftyRedux: 144bc06a26c15b78a855d094035f22503f5cd900
+  SwiftyRedux: 48eb7bc8c70ba8ad2857e54d929efb952b913614
 
-PODFILE CHECKSUM: a062569c0ef8b0e54e95d2b7b25844f779ce3d08
+PODFILE CHECKSUM: 998e9eb8e4147733cbac91f01a87a8b17cb80c1f
 
 COCOAPODS: 1.5.3

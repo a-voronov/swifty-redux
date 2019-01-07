@@ -6,8 +6,8 @@ extension String: Action {}
 private typealias State = Int
 
 private class MockReducer {
-    var calledWithAction: [Action] = []
-    var reducer: Reducer<State>!
+    private(set) var calledWithAction: [Action] = []
+    private(set) var reducer: Reducer<State>!
 
     init() {
         reducer = { action, state in
