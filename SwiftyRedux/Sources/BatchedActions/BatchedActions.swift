@@ -43,10 +43,10 @@ public func batchDispatchMiddleware<State>() -> Middleware<State> {
 
     return { getState, dispatch, next in
         return { action in
-            guard let batchAction = action as? BatchedActions else {
-                return next(action)
+            if let batchAction = action as? BatchedActions {
+                dispatchChildActions(getState, dispatch, batchAction)
             }
-            return dispatchChildActions(getState, dispatch, batchAction)
+            return next(action)
         }
     }
 }
