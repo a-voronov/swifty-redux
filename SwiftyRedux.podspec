@@ -30,7 +30,7 @@ Swifty implementation of Redux with optional add-ons.
 
   s.ios.deployment_target = '10.0'
 
-  s.default_subspec = 'Core'
+  s.default_subspecs = 'Core', 'BatchedActions', 'SideEffects'
 
   s.subspec 'Core' do |ss|
     ss.source_files = 'SwiftyRedux/Sources/Core/**/*.{swift}'
@@ -40,9 +40,26 @@ Swifty implementation of Redux with optional add-ons.
     end
   end
 
-  # s.subspec 'AddOns' do |ss|
-  #   ss.dependency 'SwiftyRedux/Core'
-  #   ss.dependency 'ReactiveSwift', '~> 4.0'
-  #   ss.source_files = 'SwiftyRedux/AddOns/**/*.{swift}'
-  # end
+  s.subspec 'BatchedActions' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.source_files = 'SwiftyRedux/Sources/BatchedActions/**/*.{swift}'
+  end
+
+  s.subspec 'Epics' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.dependency 'ReactiveSwift', '~> 4.0'
+    ss.source_files = 'SwiftyRedux/Sources/Epics/**/*.{swift}'
+  end
+
+  s.subspec 'SideEffects' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.source_files = 'SwiftyRedux/Sources/SideEffects/**/*.{swift}'
+  end
+
+  s.subspec 'All' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.dependency 'SwiftyRedux/BatchedActions'
+    ss.dependency 'SwiftyRedux/Epics'
+    ss.dependency 'SwiftyRedux/SideEffects'
+  end
 end

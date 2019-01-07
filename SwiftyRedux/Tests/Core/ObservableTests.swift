@@ -1,11 +1,3 @@
-//
-//  ObservableTests.swift
-//  SwiftyReduxTests
-//
-//  Created by Alexander Voronov on 12/23/18.
-//  Copyright © 2018 Alex Voronov. All rights reserved.
-//
-
 import XCTest
 @testable import SwiftyRedux
 

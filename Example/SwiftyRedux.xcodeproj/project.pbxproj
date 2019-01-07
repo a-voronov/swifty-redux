@@ -14,7 +14,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		A8D02A47D145F90FE8430B66 /* Pods_SwiftyRedux_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F60300B7A04B2DD6C10246C9 /* Pods_SwiftyRedux_Tests.framework */; };
 		C44B851CAB16ED0754F08880 /* Pods_SwiftyRedux_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA000D41A3BEEBFDC4E3DA03 /* Pods_SwiftyRedux_Example.framework */; };
-		D206D96C21E3C7E60088E63E /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D206D96B21E3C7E60088E63E /* Tests.swift */; };
+		D206D96E21E3D4DD0088E63E /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D206D96D21E3D4DD0088E63E /* Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +44,7 @@
 		98178907EAEEA365A43BC382 /* Pods-SwiftyRedux_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyRedux_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyRedux_Tests/Pods-SwiftyRedux_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		BBAB97F20575A9342072BA29 /* Pods-SwiftyRedux_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyRedux_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyRedux_Tests/Pods-SwiftyRedux_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BDFEBE1A86A4DDD1BDF2F1CB /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		D206D96B21E3C7E60088E63E /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
+		D206D96D21E3D4DD0088E63E /* Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
 		EA000D41A3BEEBFDC4E3DA03 /* Pods_SwiftyRedux_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyRedux_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F60300B7A04B2DD6C10246C9 /* Pods_SwiftyRedux_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyRedux_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -124,8 +124,8 @@
 		607FACE81AFB9204008FA782 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				D206D96D21E3D4DD0088E63E /* Tests.swift */,
 				607FACE91AFB9204008FA782 /* Supporting Files */,
-				D206D96B21E3C7E60088E63E /* Tests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -212,7 +212,7 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1010;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -270,12 +270,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyRedux_Example/Pods-SwiftyRedux_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyRedux/SwiftyRedux.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyRedux.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,7 +347,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D206D96C21E3C7E60088E63E /* Tests.swift in Sources */,
+				D206D96E21E3D4DD0088E63E /* Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,8 +495,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -507,8 +510,7 @@
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};
@@ -530,8 +532,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftyRedux_Example.app/SwiftyRedux_Example";
 			};
 			name = Debug;
@@ -549,8 +550,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SwiftyRedux_Example.app/SwiftyRedux_Example";
 			};
 			name = Release;

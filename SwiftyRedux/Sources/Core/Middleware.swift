@@ -1,11 +1,3 @@
-//
-//  Middleware.swift
-//  SwiftyRedux
-//
-//  Created by Alexander Voronov on 12/16/18.
-//  Copyright © 2018 Alex Voronov. All rights reserved.
-//
-
 /// from https://redux.js.org/advanced/middleware
 /// It provides a third-party extension point between dispatching an action, and the moment it reaches the reducer.
 /// People use Redux middleware for logging, crash reporting, talking to an asynchronous API, routing, and more.

@@ -20,7 +20,11 @@
   "platforms": {
     "ios": "10.0"
   },
-  "default_subspecs": "Core",
+  "default_subspecs": [
+    "Core",
+    "BatchedActions",
+    "SideEffects"
+  ],
   "subspecs": [
     {
       "name": "Core",
@@ -32,6 +36,53 @@
           "source_files": "SwiftyRedux/Tests/Core/**/*.{swift}"
         }
       ]
+    },
+    {
+      "name": "BatchedActions",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ]
+      },
+      "source_files": "SwiftyRedux/Sources/BatchedActions/**/*.{swift}"
+    },
+    {
+      "name": "Epics",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ],
+        "ReactiveSwift": [
+          "~> 4.0"
+        ]
+      },
+      "source_files": "SwiftyRedux/Sources/Epics/**/*.{swift}"
+    },
+    {
+      "name": "SideEffects",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ]
+      },
+      "source_files": "SwiftyRedux/Sources/SideEffects/**/*.{swift}"
+    },
+    {
+      "name": "All",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ],
+        "SwiftyRedux/BatchedActions": [
+
+        ],
+        "SwiftyRedux/Epics": [
+
+        ],
+        "SwiftyRedux/SideEffects": [
+
+        ]
+      }
     }
   ]
 }

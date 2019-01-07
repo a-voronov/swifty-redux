@@ -46,7 +46,7 @@
       <CodeCoverageTargets>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4E86223C451816301448E2C3C7377FD4"
+            BlueprintIdentifier = "7B4EEFF692F050D206C33189C457E1E6"
             BuildableName = "SwiftyRedux.framework"
             BlueprintName = "SwiftyRedux"
             ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -57,17 +57,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "607FACE41AFB9204008FA782"
-               BuildableName = "SwiftyRedux_Tests.xctest"
-               BlueprintName = "SwiftyRedux_Tests"
-               ReferencedContainer = "container:SwiftyRedux.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "76C5A9AE486FC6D6EABE3DC5363BA01C"
+               BlueprintIdentifier = "9EF74178803271D07555DC99A3B0C01B"
                BuildableName = "SwiftyRedux-Unit-Tests.xctest"
                BlueprintName = "SwiftyRedux-Unit-Tests"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

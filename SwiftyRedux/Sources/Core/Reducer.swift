@@ -1,11 +1,3 @@
-//
-//  Reducer.swift
-//  SwiftyRedux
-//
-//  Created by Alexander Voronov on 12/16/18.
-//  Copyright © 2018 Alex Voronov. All rights reserved.
-//
-
 /// from https://redux.js.org/basics/reducers
 /// Reducers specify how the application's state changes in response to actions sent to the store.
 /// Remember that actions only describe what happened, but don't describe how the application's state changes.

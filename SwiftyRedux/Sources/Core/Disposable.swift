@@ -1,11 +1,3 @@
-//
-//  Disposable.swift
-//  SwiftyRedux
-//
-//  Created by Alexander Voronov on 12/16/18.
-//  Copyright © 2018 Alex Voronov. All rights reserved.
-//
-
 import Dispatch
 
 /// Used to dispose from any resources when needed.
