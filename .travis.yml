@@ -1,0 +1,21 @@
+# references:
+# * http://www.objc.io/issue-6/travis-ci.html
+# * https://github.com/supermarin/xcpretty#usage
+
+osx_image: xcode10.1
+
+language: objective-c
+cache: cocoapods
+podfile: Example/Podfile
+
+before_install:
+- pod repo update --silent
+- pod update --project-directory=Example
+- pod install --project-directory=Example
+
+install:
+- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
+
+script:
+- set -o pipefail && xcodebuild test -workspace Example/SwiftyRedux.xcworkspace -scheme SwiftyRedux-Tests -sdk iphonesimulator12.1 -destination 'platform=iOS Simulator,name=iPhone 6,OS=12.1' | xcpretty -c
+- pod lib lint --quick --allow-warnings
