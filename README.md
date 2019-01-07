@@ -35,21 +35,3 @@ Swifty implementation of [Redux](https://redux.js.org)
 * Can propagate actions to domain reducers
 * ??? May not propagate actions to domain reducers
 * [Recipes about structuring reducers](https://redux.js.org/recipes/structuringreducers)
-
-### [Presenter/mapStateToProps](https://redux.js.org/basics/usage-with-react)
-* Pure function
-* Observes store's state changes
-* Maps state to domain props
-* Calls view's `render` method with new props
-* [React-Redux example](https://github.com/reduxjs/react-redux/blob/master/docs/api.md)
-
-### Props/ViewState
-* Data structure
-* Only domain state
-* May contain callbacks (usually prepared by presenter with dispatch inside)
-
-### View
-* Renders props once it comes from presenter
-* Stores its props so that it can calculate diff between previous one
-* ??? Connects to store
-* Dispatches actions through props
