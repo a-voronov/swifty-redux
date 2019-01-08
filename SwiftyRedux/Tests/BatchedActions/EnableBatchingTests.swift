@@ -2,11 +2,8 @@ import XCTest
 @testable import SwiftyRedux
 
 private typealias State = Int
-private struct StringAction: Action, Equatable {
-    let value: String
-    init(_ value: String) {
-        self.value = value
-    }
+private enum AnyAction: Action, Equatable {
+    case one, two, three, four, five
 }
 
 private class MockReducer {
@@ -33,37 +30,34 @@ class EnableBatchingTests: XCTestCase {
     }
 
     func testNonBatchedActionsArePassedThrough() {
-        _ = batchedReducer(StringAction("1"), 0)
-        _ = batchedReducer(StringAction("2"), 0)
+        _ = batchedReducer(AnyAction.one, 0)
+        _ = batchedReducer(AnyAction.two, 0)
 
-        XCTAssertEqual(mock.calledWithAction as! [StringAction], [StringAction("1"), StringAction("2")])
+        XCTAssertEqual(mock.calledWithAction as! [AnyAction], [.one, .two])
     }
 
     func testEachActionInsideBatchedActionIsPassedThroughSeparately() {
-        _ = batchedReducer(BatchAction(StringAction("1"), StringAction("2")), 0)
+        _ = batchedReducer(BatchAction(AnyAction.one, AnyAction.two), 0)
 
-        XCTAssertEqual(mock.calledWithAction as! [StringAction], [StringAction("1"), StringAction("2")])
+        XCTAssertEqual(mock.calledWithAction as! [AnyAction], [.one, .two])
     }
 
     func testEachActionInsideNestedBatchedActionIsPassedThroughSeparatelyInCorrectOrder() {
         _ = batchedReducer(
             BatchAction(
-                StringAction("1"),
+                AnyAction.one,
                 BatchAction(
                     BatchAction(
-                        StringAction("2"),
-                        StringAction("3")
+                        AnyAction.two,
+                        AnyAction.three
                     ),
-                    StringAction("4")
+                    AnyAction.four
                 ),
-                StringAction("5")
+                AnyAction.five
             ),
         0)
 
-        XCTAssertEqual(
-            mock.calledWithAction as! [StringAction],
-            [StringAction("1"), StringAction("2"), StringAction("3"), StringAction("4"), StringAction("5")]
-        )
+        XCTAssertEqual(mock.calledWithAction as! [AnyAction], [.one, .two, .three, .four, .five])
     }
 
     func testCustomBatchedActionsArePassedThrough() {
@@ -71,8 +65,8 @@ class EnableBatchingTests: XCTestCase {
             let actions: [Action]
         }
 
-        _ = batchedReducer(CustomBatchAction(actions: [StringAction("1"), StringAction("2")]), 0)
+        _ = batchedReducer(CustomBatchAction(actions: [AnyAction.one, AnyAction.two]), 0)
 
-        XCTAssertEqual(mock.calledWithAction as! [StringAction], [StringAction("1"), StringAction("2")])
+        XCTAssertEqual(mock.calledWithAction as! [AnyAction], [.one, .two])
     }
 }

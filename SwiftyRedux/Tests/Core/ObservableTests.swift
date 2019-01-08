@@ -1,6 +1,38 @@
 import XCTest
 @testable import SwiftyRedux
 
+private typealias ObservablePipe<T> = (input: (T) -> Void, output: Observable<T>)
+private func pipe<T>(queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> ObservablePipe<T> {
+    var input: ((T) -> Void)!
+    let output = Observable<T> { updates in
+        input = Observer(queue: queue, update: updates).update
+        return disposable
+    }
+    return (input, output)
+}
+
+private struct Tuple<T: Equatable, U: Equatable>: Equatable {
+    let first: T
+    let second: U
+
+    init(_ first: T, _ second: U) {
+        self.first = first
+        self.second = second
+    }
+}
+
+private extension Int {
+    var string: String {
+        return "\(self)"
+    }
+}
+
+private extension Int {
+    var isEven: Bool {
+        return self % 2 == 0
+    }
+}
+
 class ObservableTests: XCTestCase {
     func testObserverIsNotifiedOfNewEvents() {
         var result: Int!
@@ -233,37 +265,5 @@ class ObservableTests: XCTestCase {
         notify(4)
 
         XCTAssertEqual(result, [2, 4])
-    }
-}
-
-private typealias ObservablePipe<T> = (input: (T) -> Void, output: Observable<T>)
-private func pipe<T>(queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> ObservablePipe<T> {
-    var input: ((T) -> Void)!
-    let output = Observable<T> { updates in
-        input = Observer(queue: queue, update: updates).update
-        return disposable
-    }
-    return (input, output)
-}
-
-private struct Tuple<T: Equatable, U: Equatable>: Equatable {
-    let first: T
-    let second: U
-
-    init(_ first: T, _ second: U) {
-        self.first = first
-        self.second = second
-    }
-}
-
-private extension Int {
-    var string: String {
-        return "\(self)"
-    }
-}
-
-private extension Int {
-    var isEven: Bool {
-        return self % 2 == 0
     }
 }
