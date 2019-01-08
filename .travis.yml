@@ -13,4 +13,4 @@ branches:
   - master
 
 script:
-- pod lib lint --allow-warnings --verbose
+- pod lib lint --allow-warnings
