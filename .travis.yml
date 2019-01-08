@@ -8,6 +8,10 @@ language: objective-c
 cache: cocoapods
 podfile: Example/Podfile
 
+branches:
+  only:
+  - master
+
 before_install:
 - pod repo update --silent
 - pod update --project-directory=Example
