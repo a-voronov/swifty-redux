@@ -12,14 +12,5 @@ branches:
   only:
   - master
 
-before_install:
-- pod repo update --silent
-- pod update --project-directory=Example
-- pod install --project-directory=Example
-
-install:
-- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-
 script:
-- set -o pipefail && xcodebuild test -workspace Example/SwiftyRedux.xcworkspace -scheme SwiftyRedux-Unit-Tests -sdk iphonesimulator12.1 -destination 'platform=iOS Simulator,name=iPhone 6,OS=12.1' | xcpretty -c
-- pod lib lint --quick --allow-warnings
+- pod lib lint --allow-warnings --verbose
