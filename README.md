@@ -1,4 +1,4 @@
-# swifty-redux
+# swifty-redux [![Build Status](https://travis-ci.com/a-voronov/swifty-redux.svg?branch=master)](https://travis-ci.com/a-voronov/swifty-redux)
 
 Swifty implementation of [Redux](https://redux.js.org)
 
