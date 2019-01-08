@@ -2,18 +2,24 @@ import XCTest
 @testable import SwiftyRedux
 
 private typealias State = Int
-private typealias StringAction = String
+private struct StringAction: Action, Equatable {
+    let value: String
+    init(_ value: String) { self.value = value }
+}
+
+private func + (lhs: StringAction, rhs: String) -> StringAction { return StringAction(lhs.value + rhs) }
+private func + (lhs: String, rhs: StringAction) -> StringAction { return rhs + lhs }
 
 class MiddlewareTests: XCTestCase {
     private var initialState: State!
-    private var nopAction: StringAction = ""
+    private var nopAction: StringAction!
     private var nopReducer: Reducer<State>!
 
     override func setUp() {
         super.setUp()
 
         initialState = 0
-        nopAction = "action"
+        nopAction = StringAction("action")
         nopReducer = { action, state in state }
     }
 
@@ -33,23 +39,23 @@ class MiddlewareTests: XCTestCase {
 
         middleware({ self.initialState }, { _ in }, { action in result = action as? StringAction })(nopAction)
 
-        XCTAssertEqual(result, "\(nopAction) first second third")
+        XCTAssertEqual(result, nopAction + " first second third")
     }
 
     func testSideEffectMiddlewarePropagatesActionToTheNextOne() {
-        var result: StringAction = ""
+        var result = ""
         let middleware: Middleware<State> = applyMiddleware([
             createMiddleware(sideEffect: { getState, dispatch in
-                return { action in result += (action as! StringAction) + " first " }
+                return { action in result += (action as! StringAction).value + " first " }
             }),
             createMiddleware(sideEffect: { getState, dispatch in
-                return { action in  result += (action as! StringAction) + " second" }
+                return { action in result += (action as! StringAction).value + " second" }
             })
         ])
 
         middleware({ self.initialState }, { _ in }, { _ in })(nopAction)
 
-        XCTAssertEqual(result, "\(nopAction) first \(nopAction) second")
+        XCTAssertEqual(result, "\(nopAction.value) first \(nopAction.value) second")
     }
 
     func testCanGetState() {
@@ -77,7 +83,7 @@ class MiddlewareTests: XCTestCase {
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [middleware])
         store.dispatch(nopAction)
 
-        XCTAssertEqual(result, "new \(nopAction)")
+        XCTAssertEqual(result, "new " + nopAction)
     }
 
     func testSkipsActionIfPreviousDontPropagateNext() {
@@ -106,18 +112,18 @@ class MiddlewareTests: XCTestCase {
         ])
         store.dispatch(nopAction)
 
-        XCTAssertEqual(result, "\(nopAction) next")
+        XCTAssertEqual(result, nopAction + " next")
     }
 
     func testChangesStateAfterPropagatingToTheNextMiddleware() {
         let reducer: Reducer<State> = { action, state in
-            state + Int(action as! String)!
+            state + Int((action as! StringAction).value)!
         }
         let store = Store<State>(state: initialState, reducer: reducer, middleware: [
             createMiddleware { getState, dispatch, next in
                 return { action in
                     XCTAssertEqual(getState(), self.initialState)
-                    next("42")
+                    next(StringAction("42"))
                     XCTAssertEqual(getState(), 42)
                 }
             }

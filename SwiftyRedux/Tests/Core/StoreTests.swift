@@ -2,11 +2,15 @@ import XCTest
 @testable import SwiftyRedux
 
 private typealias State = Int
-private typealias StringAction = String
+private enum AnyAction: Int, Action { case one = 1, two, three, four, five }
+private enum OpAction: Action, Equatable { case inc, mul }
+private struct StringAction: Action {
+    let value: String
+    init(_ value: String) { self.value = value }
+}
 
 class StoreTests: XCTestCase {
     private var initialState: State!
-    private var nopAction: StringAction = ""
     private var nopReducer: Reducer<State>!
     private var nopMiddleware: Middleware<State>!
 
@@ -14,7 +18,6 @@ class StoreTests: XCTestCase {
         super.setUp()
 
         initialState = 0
-        nopAction = "action"
         nopReducer = { action, state in state }
         nopMiddleware = createMiddleware(sideEffect: { getState, dispatch in return { action in } })
     }
@@ -27,9 +30,9 @@ class StoreTests: XCTestCase {
         }
         let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
 
-        store.dispatch("first")
-        store.dispatch("second")
-        store.dispatch("third")
+        store.dispatch(AnyAction.one)
+        store.dispatch(AnyAction.two)
+        store.dispatch(AnyAction.three)
 
         XCTAssertEqual(result, 1)
     }
@@ -42,9 +45,9 @@ class StoreTests: XCTestCase {
         }
         let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
 
-        store.dispatch("first")
-        store.dispatch("second")
-        store.dispatch("third")
+        store.dispatch(AnyAction.one)
+        store.dispatch(AnyAction.two)
+        store.dispatch(AnyAction.three)
 
         XCTAssertEqual(result, 1)
     }
@@ -59,9 +62,9 @@ class StoreTests: XCTestCase {
         }
         let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
 
-        store.dispatch("first")
-        store.dispatch("second")
-        store.dispatch("third")
+        store.dispatch(AnyAction.one)
+        store.dispatch(AnyAction.two)
+        store.dispatch(AnyAction.three)
 
         XCTAssertEqual(result, 3)
     }
@@ -73,9 +76,9 @@ class StoreTests: XCTestCase {
         }
         let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
 
-        store.dispatch("first")
-        store.dispatch("second")
-        store.dispatch("third")
+        store.dispatch(AnyAction.one)
+        store.dispatch(AnyAction.two)
+        store.dispatch(AnyAction.three)
 
         XCTAssertEqual(result, 3)
     }
@@ -88,7 +91,7 @@ class StoreTests: XCTestCase {
             let deinitStore = Store(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
             store = deinitStore
             disposable = deinitStore.subscribe(observer: { state in })
-            deinitStore.dispatch("action")
+            deinitStore.dispatch(AnyAction.one)
         }
 
         XCTAssertTrue(disposable.isDisposed)
@@ -96,25 +99,25 @@ class StoreTests: XCTestCase {
     }
 
     func testMiddleware_whenRunOnDefaultQueue_isExecutedSequentiallyWithReducer() {
-        var result = ""
+        var result = [String]()
         let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
             return { action in
-                result += "m-\(action) "
+                result.append("m-\(action)")
                 next(action)
             }
         }
         let reducer: Reducer<State> = { action, state in
-            result += "r-\(action) "
+            result.append("r-\(action)")
             return state
         }
         let store = Store<State>(state: initialState, reducer: reducer, middleware: [middleware])
 
-        store.dispatch("a")
-        store.dispatch("b")
-        store.dispatch("c")
-        store.dispatch("d")
+        store.dispatch(AnyAction.one)
+        store.dispatch(AnyAction.two)
+        store.dispatch(AnyAction.three)
+        store.dispatch(AnyAction.four)
 
-        XCTAssertEqual(result, "m-a r-a m-b r-b m-c r-c m-d r-d ")
+        XCTAssertEqual(result, ["m-one", "r-one", "m-two", "r-two", "m-three", "r-three", "m-four", "r-four"])
     }
 
     func testMiddleware_evenIfRunOnDifferentQueues_isExecutedSequentially() {
@@ -123,7 +126,8 @@ class StoreTests: XCTestCase {
             return createMiddleware { getState, dispatch, next in
                 return { action in
                     DispatchQueue.global(qos: qos).async {
-                        next("\(action) \(id)");
+                        let action = (action as! StringAction).value
+                        next(StringAction("\(action) \(id)"))
                         asyncExpectation.fulfill()
                     }
                 }
@@ -132,7 +136,8 @@ class StoreTests: XCTestCase {
 
         var result = ""
         let reducer: Reducer<State> = { action, state in
-            result += action as! StringAction
+            let action = (action as! StringAction).value
+            result += action
             return state
         }
         let middleware1 = asyncMiddleware(id: "first", qos: .default)
@@ -140,7 +145,7 @@ class StoreTests: XCTestCase {
         let middleware3 = asyncMiddleware(id: "third", qos: .background)
         let store = Store<State>(state: initialState, reducer: reducer, middleware: [middleware1, middleware2, middleware3])
 
-        store.dispatch(nopAction)
+        store.dispatch(StringAction("action"))
 
         waitForExpectations(timeout: 0.1) { e in
             XCTAssertEqual(result, "action first second third")
@@ -150,8 +155,8 @@ class StoreTests: XCTestCase {
     func testStore_whenSubscribing_startReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
             switch action {
-            case let action as StringAction where action == "mul": return state * 2
-            case let action as StringAction where action == "inc": return state + 3
+            case let action as OpAction where action == OpAction.mul: return state * 2
+            case let action as OpAction where action == OpAction.inc: return state + 3
             default: return state
             }
         }
@@ -161,16 +166,16 @@ class StoreTests: XCTestCase {
         store.subscribe { state in
             result.append(state)
         }
-        store.dispatch("mul")
-        store.dispatch("inc")
+        store.dispatch(OpAction.mul)
+        store.dispatch(OpAction.inc)
 
         XCTAssertEqual(result, [6, 9])
     }
 
     func testSubscribeToStore_whenSkippingRepeats_receiveUniqueStateUpdates() {
-        let actions: [StringAction] = ["1", "2", "1", "1", "3", "3", "5", "2"]
+        let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
         let reducer: Reducer<State> = { action, state in
-            Int(action as! StringAction)!
+            (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: initialState, reducer: reducer)
 
@@ -184,9 +189,9 @@ class StoreTests: XCTestCase {
     }
 
     func testSubscribeToStore_whenNotSkippingRepeats_receiveDuplicatedStateUpdates() {
-        let actions: [StringAction] = ["1", "2", "1", "1", "3", "3", "5", "2"]
+        let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
         let reducer: Reducer<State> = { action, state in
-            Int(action as! StringAction)!
+            (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: initialState, reducer: reducer)
 
@@ -212,7 +217,7 @@ class StoreTests: XCTestCase {
             result = DispatchQueue.getSpecific(key: queueId)
             queueExpectation.fulfill()
         }
-        store.dispatch(nopAction)
+        store.dispatch(AnyAction.one)
 
         waitForExpectations(timeout: 0.1) { e in
             queue.setSpecific(key: queueId, value: nil)
@@ -238,7 +243,7 @@ class StoreTests: XCTestCase {
             defaultQueueExpectation.fulfill()
             result = DispatchQueue.getSpecific(key: queueId)
         }
-        store.dispatch(nopAction)
+        store.dispatch(AnyAction.one)
 
         waitForExpectations(timeout: 0.1) { e in
             queue.setSpecific(key: queueId, value: nil)
@@ -249,7 +254,7 @@ class StoreTests: XCTestCase {
 
     func testStore_whenUnsubscribing_stopReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
-            return Int(action as! StringAction)!
+            (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: initialState, reducer: reducer)
 
@@ -257,13 +262,13 @@ class StoreTests: XCTestCase {
         let disposable = store.subscribe { state in
             result.append(state)
         }
-        store.dispatch("1")
-        store.dispatch("2")
-        store.dispatch("3")
+        store.dispatch(AnyAction.one)
+        store.dispatch(AnyAction.two)
+        store.dispatch(AnyAction.three)
 
         disposable.dispose()
-        store.dispatch("4")
-        store.dispatch("5")
+        store.dispatch(AnyAction.four)
+        store.dispatch(AnyAction.five)
 
         XCTAssertEqual(result, [1, 2, 3])
     }
@@ -271,8 +276,8 @@ class StoreTests: XCTestCase {
     func testStore_whenObserving_andSubscribingToObserver_startReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
             switch action {
-            case let action as StringAction where action == "mul": return state * 2
-            case let action as StringAction where action == "inc": return state + 3
+            case let action as OpAction where action == .mul: return state * 2
+            case let action as OpAction where action == .inc: return state + 3
             default: return state
             }
         }
@@ -282,15 +287,15 @@ class StoreTests: XCTestCase {
         store.observe().subscribe { state in
             result.append(state)
         }
-        store.dispatch("mul")
-        store.dispatch("inc")
+        store.dispatch(OpAction.mul)
+        store.dispatch(OpAction.inc)
 
         XCTAssertEqual(result, [6, 9])
     }
 
     func testStore_whenUnsubscribingFromObserver_stopReceivingStateUpdates() {
         let reducer: Reducer<State> = { action, state in
-            return Int(action as! StringAction)!
+            (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: initialState, reducer: reducer)
 
@@ -298,13 +303,13 @@ class StoreTests: XCTestCase {
         let disposable = store.observe().subscribe { state in
             result.append(state)
         }
-        store.dispatch("1")
-        store.dispatch("2")
-        store.dispatch("3")
+        store.dispatch(AnyAction.one)
+        store.dispatch(AnyAction.two)
+        store.dispatch(AnyAction.three)
 
         disposable.dispose()
-        store.dispatch("4")
-        store.dispatch("5")
+        store.dispatch(AnyAction.four)
+        store.dispatch(AnyAction.five)
 
         XCTAssertEqual(result, [1, 2, 3])
     }

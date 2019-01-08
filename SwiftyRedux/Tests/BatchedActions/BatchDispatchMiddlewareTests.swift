@@ -2,7 +2,9 @@ import XCTest
 @testable import SwiftyRedux
 
 private typealias State = Int
-private typealias StringAction = String
+private enum AnyAction: Action, Equatable {
+    case one, two, three, four
+}
 
 class BatchDispatchMiddlewareTests: XCTestCase {
     var nextCalledWithAction: [Action]!
@@ -23,30 +25,39 @@ class BatchDispatchMiddlewareTests: XCTestCase {
     }
 
     func testDispatchesAllBatchedActions() {
-        dispatchMiddleware(BatchAction("action1", "action2"))
+        dispatchMiddleware(BatchAction(AnyAction.one, AnyAction.two))
 
-        XCTAssertEqual(dispatchCalledWithAction as! [StringAction], ["action1", "action2"])
+        XCTAssertEqual(dispatchCalledWithAction as! [AnyAction], [.one, .two])
     }
 
     func testCallsNextOnlyOnceOnBatchedActions() {
-        dispatchMiddleware(BatchAction("action1", "action2"))
+        dispatchMiddleware(BatchAction(AnyAction.one, AnyAction.two))
 
         XCTAssertEqual(nextCalledWithAction.count, 1)
         XCTAssertTrue(nextCalledWithAction.first is BatchAction)
     }
 
     func testHandlesNestedBatchedActions() {
-        dispatchMiddleware(BatchAction("action1", BatchAction("action2", "action3"), "action4"))
+        dispatchMiddleware(
+            BatchAction(
+                AnyAction.one,
+                BatchAction(
+                    AnyAction.two,
+                    AnyAction.three
+                ),
+                AnyAction.four
+            )
+        )
 
         XCTAssertEqual(nextCalledWithAction.count, 1)
         XCTAssertTrue(nextCalledWithAction.first is BatchAction)
-        XCTAssertEqual(dispatchCalledWithAction as! [StringAction], ["action1", "action2", "action3", "action4"])
+        XCTAssertEqual(dispatchCalledWithAction as! [AnyAction], [.one, .two, .three, .four])
     }
 
     func testCallsNextButNotDispatchForNonBatchedActions() {
-        dispatchMiddleware("action")
+        dispatchMiddleware(AnyAction.one)
 
-        XCTAssertEqual(nextCalledWithAction as! [StringAction], ["action"])
+        XCTAssertEqual(nextCalledWithAction as! [AnyAction], [.one])
         XCTAssertEqual(dispatchCalledWithAction.count, 0)
     }
 
@@ -55,10 +66,10 @@ class BatchDispatchMiddlewareTests: XCTestCase {
             let actions: [Action]
         }
 
-        dispatchMiddleware(CustomBatchAction(actions: ["action1", "action2"]))
+        dispatchMiddleware(CustomBatchAction(actions: [AnyAction.one, AnyAction.two]))
 
         XCTAssertEqual(nextCalledWithAction.count, 1)
         XCTAssertTrue(nextCalledWithAction.first is CustomBatchAction)
-        XCTAssertEqual(dispatchCalledWithAction as! [StringAction], ["action1", "action2"])
+        XCTAssertEqual(dispatchCalledWithAction as! [AnyAction], [.one, .two])
     }
 }

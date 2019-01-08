@@ -1,6 +1,8 @@
 import XCTest
 @testable import SwiftyRedux
 
+private struct AnyAction: Action {}
+
 class PerformanceTests: XCTestCase {
     typealias State = Int
 
@@ -17,7 +19,7 @@ class PerformanceTests: XCTestCase {
     func testNotify() {
         self.observers.forEach { self.store.subscribe(observer: $0) }
         self.measure {
-            self.store.dispatch("action")
+            self.store.dispatch(AnyAction())
         }
     }
 

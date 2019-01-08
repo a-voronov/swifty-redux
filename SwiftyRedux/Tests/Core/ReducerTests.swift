@@ -1,9 +1,8 @@
 import XCTest
 @testable import SwiftyRedux
 
-extension String: Action {}
-
 private typealias State = Int
+private struct AnyAction: Action, Equatable {}
 
 private class MockReducer {
     private(set) var calledWithAction: [Action] = []
@@ -23,7 +22,7 @@ private let increaseByThreeReducer: Reducer<State> = { action, state in state + 
 
 class ReducerTests: XCTestCase {
     func testCallsReducersOnce() {
-        let action = "action"
+        let action = AnyAction()
         let mock1 = MockReducer()
         let mock2 = MockReducer()
         let reducer = combineReducers(mock1.reducer, mock2.reducer)
@@ -32,13 +31,13 @@ class ReducerTests: XCTestCase {
 
         XCTAssertEqual(mock1.calledWithAction.count, 1)
         XCTAssertEqual(mock2.calledWithAction.count, 1)
-        XCTAssertEqual(mock1.calledWithAction.first as! String, action)
-        XCTAssertEqual(mock2.calledWithAction.first as! String, action)
+        XCTAssertEqual(mock1.calledWithAction.first as! AnyAction, action)
+        XCTAssertEqual(mock2.calledWithAction.first as! AnyAction, action)
     }
 
     func testCombinedReducerResultsCorrectly() {
         let reducer = combineReducers(multiplyByTwoReducer, increaseByThreeReducer)
-        let newState = reducer("action", 3)
+        let newState = reducer(AnyAction(), 3)
 
         XCTAssertEqual(newState, 9)
     }
