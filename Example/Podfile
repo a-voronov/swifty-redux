@@ -6,7 +6,7 @@ use_frameworks!
 inhibit_all_warnings!
 
 target 'SwiftyRedux_Example' do
-  pod 'SwiftyRedux', :path => '../', :subspecs => ['All'], :testspecs => ['Core/Tests', 'BatchedActions/Tests'], :inhibit_warnings => false
+  pod 'SwiftyRedux', :path => '../', :subspecs => ['All'], :testspecs => ['All/Tests'], :inhibit_warnings => false
 
   target 'SwiftyRedux_Tests' do
     inherit! :search_paths

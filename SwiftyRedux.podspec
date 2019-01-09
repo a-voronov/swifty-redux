@@ -58,6 +58,10 @@ Swifty implementation of Redux with optional add-ons.
   s.subspec 'SideEffects' do |ss|
     ss.dependency 'SwiftyRedux/Core'
     ss.source_files = 'SwiftyRedux/Sources/SideEffects/**/*.{swift}'
+
+    ss.test_spec 'Tests' do |ts|
+      ts.source_files = 'SwiftyRedux/Tests/SideEffects/**/*.{swift}'
+    end
   end
 
   s.subspec 'All' do |ss|
@@ -65,5 +69,9 @@ Swifty implementation of Redux with optional add-ons.
     ss.dependency 'SwiftyRedux/BatchedActions'
     ss.dependency 'SwiftyRedux/Epics'
     ss.dependency 'SwiftyRedux/SideEffects'
+
+    ss.test_spec 'Tests' do |ts|
+      ts.source_files = 'SwiftyRedux/Tests/**/*.{swift}'
+    end
   end
 end

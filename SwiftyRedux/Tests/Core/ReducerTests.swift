@@ -19,7 +19,6 @@ private class MockReducer {
 private let multiplyByTwoReducer: Reducer<State> = { action, state in state * 2 }
 private let increaseByThreeReducer: Reducer<State> = { action, state in state + 3 }
 
-
 class ReducerTests: XCTestCase {
     func testCallsReducersOnce() {
         let action = AnyAction()

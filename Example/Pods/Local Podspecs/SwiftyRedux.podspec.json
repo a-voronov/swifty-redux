@@ -72,7 +72,14 @@
 
         ]
       },
-      "source_files": "SwiftyRedux/Sources/SideEffects/**/*.{swift}"
+      "source_files": "SwiftyRedux/Sources/SideEffects/**/*.{swift}",
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/SideEffects/**/*.{swift}"
+        }
+      ]
     },
     {
       "name": "All",
@@ -89,7 +96,14 @@
         "SwiftyRedux/SideEffects": [
 
         ]
-      }
+      },
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/**/*.{swift}"
+        }
+      ]
     }
   ]
 }
