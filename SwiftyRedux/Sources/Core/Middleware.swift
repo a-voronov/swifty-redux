@@ -43,9 +43,9 @@ public func applyMiddleware<State>(_ middleware: [Middleware<State>]) -> Middlew
     }
 }
 
-public func createMiddleware<State>(sideEffect: @escaping (@escaping GetState<State>, @escaping Dispatch) -> Dispatch) -> Middleware<State> {
+public func createFallThroughMiddleware<State>(_ middleware: @escaping (@escaping GetState<State>, @escaping Dispatch) -> Dispatch) -> Middleware<State> {
     return { getState, dispatch, next in
-        let current = sideEffect(getState, dispatch)
+        let current = middleware(getState, dispatch)
         return { action in
             current(action)
             return next(action)

@@ -19,7 +19,7 @@ class StoreTests: XCTestCase {
 
         initialState = 0
         nopReducer = { action, state in state }
-        nopMiddleware = createMiddleware(sideEffect: { getState, dispatch in return { action in } })
+        nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
     func testMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
@@ -37,9 +37,9 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, 1)
     }
 
-    func testSideEffectMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
+    func testFallThroughMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
         var result = 0
-        let middleware: Middleware<State> = createMiddleware { getState, dispatch in
+        let middleware: Middleware<State> = createFallThroughMiddleware { getState, dispatch in
             result += 1
             return { action in }
         }
@@ -69,9 +69,9 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, 3)
     }
 
-    func testSideffectMiddlewareExecutesActionBodyAsManyTimesAsActionsReceived() {
+    func testFallThroughMiddlewareExecutesActionBodyAsManyTimesAsActionsReceived() {
         var result = 0
-        let middleware: Middleware<State> = createMiddleware { getState, dispatch in
+        let middleware: Middleware<State> = createFallThroughMiddleware { getState, dispatch in
             return { action in result += 1 }
         }
         let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
