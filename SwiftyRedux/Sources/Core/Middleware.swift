@@ -53,6 +53,6 @@ public func createFallThroughMiddleware<State>(_ middleware: @escaping (@escapin
     }
 }
 
-public func createMiddleware<State>(middleware: @escaping Middleware<State>) -> Middleware<State> {
+public func createMiddleware<State>(_ middleware: @escaping Middleware<State>) -> Middleware<State> {
     return middleware
 }

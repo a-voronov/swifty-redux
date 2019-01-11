@@ -63,7 +63,14 @@
           "~> 4.0"
         ]
       },
-      "source_files": "SwiftyRedux/Sources/Epics/**/*.{swift}"
+      "source_files": "SwiftyRedux/Sources/Epics/**/*.{swift}",
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/Epics/**/*.{swift}"
+        }
+      ]
     },
     {
       "name": "SideEffects",

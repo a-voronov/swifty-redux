@@ -68,22 +68,16 @@ class SideEffectsTests: XCTestCase {
     }
 
     func testSideEffectMiddlewareStoreCallbackIsCalledOnce() {
-        var storeCallbackCallsCount = 0
-        var actionCallbackCallsCount = 0
-        let middleware: Middleware<State> = createSideEffectMiddleware { getState, dispatch in
-            storeCallbackCallsCount += 1
-            return { action in
-                actionCallbackCallsCount += 1
-            }
-        }
+        let mock = MockSideEffect()
+        let middleware = createSideEffectMiddleware(mock.sideEffect)
         let dispatch = middleware({ 0 }, { _ in }, { _ in })
-        
+
         dispatch(AnyAction.one)
         dispatch(AnyAction.two)
         dispatch(AnyAction.three)
 
-        XCTAssertEqual(storeCallbackCallsCount, 1)
-        XCTAssertEqual(actionCallbackCallsCount, 3)
+        XCTAssertEqual(mock.calledWithStoreCount, 1)
+        XCTAssertEqual(mock.calledWithAction.count, 3)
     }
 
     func testSideEffectMiddlewareNextIsCalledBeforeSideEffect() {
@@ -99,17 +93,5 @@ class SideEffectsTests: XCTestCase {
         dispatch(AnyAction.one)
 
         XCTAssertEqual(result, [.next, .action])
-    }
-
-    func testSideEffectMiddlewarePropagatesActionToTheNextOne() {
-        var result: AnyAction?
-        let middleware: Middleware<State> = createSideEffectMiddleware { getState, dispatch in
-            return { action in }
-        }
-        let dispatch = middleware({ 0 }, { _ in }, { action in result = action as? AnyAction })
-
-        dispatch(AnyAction.one)
-
-        XCTAssertEqual(result, .one)
     }
 }
