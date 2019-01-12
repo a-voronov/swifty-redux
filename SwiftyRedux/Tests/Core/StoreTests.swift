@@ -161,7 +161,7 @@ class StoreTests: XCTestCase {
 
         store.dispatch(StringAction("action"))
 
-        waitForExpectations(timeout: 0.1) { e in
+        waitForExpectations(timeout: 1) { e in
             XCTAssertEqual(result, "action first second third")
         }
     }

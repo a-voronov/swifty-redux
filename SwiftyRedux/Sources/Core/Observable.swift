@@ -198,9 +198,9 @@ extension Observable {
 }
 
 extension Observable {
-    public static func pipe<V>(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable<V>, Observer<V>) {
-        var observer: Observer<V>!
-        let observable = Observable<V>(id: id) { action in
+    public static func pipe(id: String? = nil, queue: DispatchQueue? = nil, disposable: Disposable? = nil) -> (Observable, Observer<Value>) {
+        var observer: Observer<Value>!
+        let observable = Observable(id: id) { action in
             observer = Observer(queue: queue, update: action)
             return disposable
         }

@@ -72,8 +72,6 @@ class ObservableTests: XCTestCase {
 
         notify(42)
 
-        XCTAssertNil(result)
-
         waitForExpectations(timeout: 0.1) { e in
             queue.setSpecific(key: queueId, value: nil)
 

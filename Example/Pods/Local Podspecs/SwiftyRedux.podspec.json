@@ -22,6 +22,7 @@
   },
   "default_subspecs": [
     "Core",
+    "Command",
     "BatchedActions",
     "SideEffects"
   ],
@@ -38,6 +39,33 @@
       ]
     },
     {
+      "name": "All",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ],
+        "SwiftyRedux/Command": [
+
+        ],
+        "SwiftyRedux/BatchedActions": [
+
+        ],
+        "SwiftyRedux/Epics": [
+
+        ],
+        "SwiftyRedux/SideEffects": [
+
+        ]
+      },
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/**/*.{swift}"
+        }
+      ]
+    },
+    {
       "name": "BatchedActions",
       "dependencies": {
         "SwiftyRedux/Core": [
@@ -50,6 +78,22 @@
           "name": "Tests",
           "test_type": "unit",
           "source_files": "SwiftyRedux/Tests/BatchedActions/**/*.{swift}"
+        }
+      ]
+    },
+    {
+      "name": "Command",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ]
+      },
+      "source_files": "SwiftyRedux/Sources/Command/**/*.{swift}",
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/Command/**/*.{swift}"
         }
       ]
     },
@@ -85,30 +129,6 @@
           "name": "Tests",
           "test_type": "unit",
           "source_files": "SwiftyRedux/Tests/SideEffects/**/*.{swift}"
-        }
-      ]
-    },
-    {
-      "name": "All",
-      "dependencies": {
-        "SwiftyRedux/Core": [
-
-        ],
-        "SwiftyRedux/BatchedActions": [
-
-        ],
-        "SwiftyRedux/Epics": [
-
-        ],
-        "SwiftyRedux/SideEffects": [
-
-        ]
-      },
-      "testspecs": [
-        {
-          "name": "Tests",
-          "test_type": "unit",
-          "source_files": "SwiftyRedux/Tests/**/*.{swift}"
         }
       ]
     }
