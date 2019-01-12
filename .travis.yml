@@ -12,5 +12,8 @@ branches:
   only:
   - master
 
+before_script:
+- pod repo update
+
 script:
 - pod lib lint --allow-warnings
