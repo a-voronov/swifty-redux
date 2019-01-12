@@ -5,15 +5,11 @@
 osx_image: xcode10.1
 
 language: objective-c
-cache: cocoapods
 podfile: Example/Podfile
 
 branches:
   only:
   - master
-
-before_script:
-- pod repo update
 
 script:
 - pod lib lint --allow-warnings
