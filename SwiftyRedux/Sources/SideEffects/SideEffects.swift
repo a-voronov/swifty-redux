@@ -15,7 +15,8 @@ public func createSideEffectMiddleware<State>(_ sideEffect: @escaping SideEffect
     }
 }
 
-public func combineSideEffects<State>(_ sideEffects: [SideEffect<State>]) -> SideEffect<State> {
+public func combineSideEffects<State>(_ first: @escaping SideEffect<State>, _ rest: SideEffect<State>...) -> SideEffect<State> {
+    let sideEffects = [first] + rest
     return { getState, dispatch in
         let dispatches = sideEffects.map { $0(getState, dispatch) }
         return { action in

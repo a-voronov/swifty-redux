@@ -11,7 +11,7 @@ public extension Signal where Value == Action, Error == NoError {
 
 public extension Observable {
     func toSignal() -> Signal<Value, NoError> {
-        return Signal { (observer, lifetime) in
+        return Signal { observer, lifetime in
             let disposable = self.subscribe(observer: observer.send)
             lifetime.observeEnded(disposable.dispose)
         }

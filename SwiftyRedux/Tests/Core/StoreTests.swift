@@ -2,11 +2,42 @@ import XCTest
 @testable import SwiftyRedux
 
 private typealias State = Int
+
 private enum AnyAction: Int, Action { case one = 1, two, three, four, five }
 private enum OpAction: Action, Equatable { case inc, mul }
 private struct StringAction: Action {
     let value: String
     init(_ value: String) { self.value = value }
+}
+
+private class MockMiddleware {
+    private(set) var calledWithStoreCount: Int = 0
+    private(set) var calledWithAction: [Action] = []
+    private(set) var middleware: Middleware<State>!
+
+    init() {
+        middleware = createMiddleware { getState, dispatch, next in
+            self.calledWithStoreCount += 1
+            return { action in
+                self.calledWithAction.append(action)
+                next(action)
+            }
+        }
+    }
+}
+private class MockFallThroughMiddleware {
+    private(set) var calledWithStoreCount: Int = 0
+    private(set) var calledWithAction: [Action] = []
+    private(set) var middleware: Middleware<State>!
+
+    init() {
+        middleware = createFallThroughMiddleware { getState, dispatch in
+            self.calledWithStoreCount += 1
+            return { action in
+                self.calledWithAction.append(action)
+            }
+        }
+    }
 }
 
 class StoreTests: XCTestCase {
@@ -19,68 +50,51 @@ class StoreTests: XCTestCase {
 
         initialState = 0
         nopReducer = { action, state in state }
-        nopMiddleware = createMiddleware(sideEffect: { getState, dispatch in return { action in } })
+        nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
     func testMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
-        var result = 0
-        let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
-            result += 1
-            return { action in next(action) }
-        }
-        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+        let mock = MockMiddleware()
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [mock.middleware])
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
         store.dispatch(AnyAction.three)
 
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(mock.calledWithStoreCount, 1)
     }
 
-    func testSideEffectMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
-        var result = 0
-        let middleware: Middleware<State> = createMiddleware { getState, dispatch in
-            result += 1
-            return { action in }
-        }
-        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+    func testFallThroughMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
+        let mock = MockFallThroughMiddleware()
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [mock.middleware])
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
         store.dispatch(AnyAction.three)
 
-        XCTAssertEqual(result, 1)
+        XCTAssertEqual(mock.calledWithStoreCount, 1)
     }
 
     func testMiddlewareExecutesActionBodyAsManyTimesAsActionsReceived() {
-        var result = 0
-        let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
-            return { action in
-                result += 1
-                next(action)
-            }
-        }
-        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+        let mock = MockMiddleware()
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [mock.middleware])
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
         store.dispatch(AnyAction.three)
 
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(mock.calledWithAction.count, 3)
     }
 
-    func testSideffectMiddlewareExecutesActionBodyAsManyTimesAsActionsReceived() {
-        var result = 0
-        let middleware: Middleware<State> = createMiddleware { getState, dispatch in
-            return { action in result += 1 }
-        }
-        let store = Store(state: initialState, reducer: nopReducer, middleware: [middleware])
+    func testFallThroughMiddlewareExecutesActionBodyAsManyTimesAsActionsReceived() {
+        let mock = MockMiddleware()
+        let store = Store(state: initialState, reducer: nopReducer, middleware: [mock.middleware])
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
         store.dispatch(AnyAction.three)
 
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(mock.calledWithAction.count, 3)
     }
 
     func testStore_afterSubscribeAndDispatchFlow_deinits_andAllDisposablesDispose() {
