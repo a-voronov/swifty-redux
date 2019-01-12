@@ -58,8 +58,8 @@ extension Disposable: Hashable {
         return ObjectIdentifier(self).hashValue
     }
 
-    public static func == (left: Disposable, right: Disposable) -> Bool {
-        return left === right
+    public static func == (lhs: Disposable, rhs: Disposable) -> Bool {
+        return lhs === rhs
     }
 }
 

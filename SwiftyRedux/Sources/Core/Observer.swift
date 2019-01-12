@@ -24,7 +24,7 @@ extension Observer: Hashable {
         return ObjectIdentifier(self).hashValue
     }
 
-    public static func == (left: Observer, right: Observer) -> Bool {
-        return left === right
+    public static func == (lhs: Observer, rhs: Observer) -> Bool {
+        return lhs === rhs
     }
 }

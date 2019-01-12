@@ -30,7 +30,7 @@ Swifty implementation of Redux with optional add-ons.
 
   s.ios.deployment_target = '10.0'
 
-  s.default_subspecs = 'Core', 'BatchedActions', 'SideEffects'
+  s.default_subspecs = 'Core', 'Command', 'BatchedActions', 'SideEffects'
 
   s.subspec 'Core' do |ss|
     ss.source_files = 'SwiftyRedux/Sources/Core/**/*.{swift}'
@@ -40,12 +40,33 @@ Swifty implementation of Redux with optional add-ons.
     end
   end
 
+  s.subspec 'All' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.dependency 'SwiftyRedux/Command'
+    ss.dependency 'SwiftyRedux/BatchedActions'
+    ss.dependency 'SwiftyRedux/Epics'
+    ss.dependency 'SwiftyRedux/SideEffects'
+
+    ss.test_spec 'Tests' do |ts|
+      ts.source_files = 'SwiftyRedux/Tests/**/*.{swift}'
+    end
+  end
+
   s.subspec 'BatchedActions' do |ss|
     ss.dependency 'SwiftyRedux/Core'
     ss.source_files = 'SwiftyRedux/Sources/BatchedActions/**/*.{swift}'
 
     ss.test_spec 'Tests' do |ts|
       ts.source_files = 'SwiftyRedux/Tests/BatchedActions/**/*.{swift}'
+    end
+  end
+
+  s.subspec 'Command' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.source_files = 'SwiftyRedux/Sources/Command/**/*.{swift}'
+
+    ss.test_spec 'Tests' do |ts|
+      ts.source_files = 'SwiftyRedux/Tests/Command/**/*.{swift}'
     end
   end
 
@@ -65,17 +86,6 @@ Swifty implementation of Redux with optional add-ons.
 
     ss.test_spec 'Tests' do |ts|
       ts.source_files = 'SwiftyRedux/Tests/SideEffects/**/*.{swift}'
-    end
-  end
-
-  s.subspec 'All' do |ss|
-    ss.dependency 'SwiftyRedux/Core'
-    ss.dependency 'SwiftyRedux/BatchedActions'
-    ss.dependency 'SwiftyRedux/Epics'
-    ss.dependency 'SwiftyRedux/SideEffects'
-
-    ss.test_spec 'Tests' do |ts|
-      ts.source_files = 'SwiftyRedux/Tests/**/*.{swift}'
     end
   end
 end
