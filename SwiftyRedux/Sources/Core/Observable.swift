@@ -12,16 +12,15 @@ import Dispatch
 
 public final class Observable<Value> {
     private let id: String
-    private let queue: DispatchQueue
     private let disposables: CompositeDisposable
-    private var observers = Set<Observer<Value>>()
+    private let observers: Atomic<Set<Observer<Value>>>
 
     public init(id: String? = nil, observable: @escaping (@escaping (Value) -> Void) -> Disposable?) {
         self.id = id ?? "redux.observable"
-        self.queue = DispatchQueue(label: "\(self.id).queue")
+        self.observers = Atomic(id: self.id, value: Set())
         self.disposables = CompositeDisposable(id: "\(self.id).composite-disposable")
         self.disposables += observable { value in
-            let currentObservers = self.queue.sync { self.observers }
+            let currentObservers = self.observers.value
             currentObservers.forEach { observer in observer.update(value) }
         }
     }
@@ -33,21 +32,19 @@ public final class Observable<Value> {
     @discardableResult
     public func subscribe(on observingQueue: DispatchQueue? = nil, observer: @escaping (Value) -> Void) -> Disposable {
         let observer = Observer(queue: observingQueue, update: observer)
-        _ = queue.sync {
-            self.observers.insert(observer)
-        }
+        observers.mutate { $0.insert(observer) }
+
         return disposables += Disposable(id: "\(id).disposable") { [weak self, weak observer] disposable in
             guard let strongSelf = self, let observer = observer else { return }
-            _ = strongSelf.queue.sync {
-                strongSelf.observers.remove(observer)
-            }
+            strongSelf.observers.mutate { $0.remove(observer) }
+            // kinda optimization not to store all the disposables (in case this Observable is intended for Store)
             disposable.map(strongSelf.disposables.remove)
         }
     }
 
     deinit {
         disposables.dispose()
-        observers.removeAll()
+        observers.mutate { $0.removeAll() }
     }
 }
 
