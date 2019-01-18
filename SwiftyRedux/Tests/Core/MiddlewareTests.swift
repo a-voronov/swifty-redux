@@ -64,7 +64,7 @@ class MiddlewareTests: XCTestCase {
             return { action in result = getState() }
         }
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [middleware])
-        store.dispatch(nopAction)
+        store.dispatchAndWait(nopAction)
 
         XCTAssertEqual(result, initialState)
     }
@@ -81,7 +81,7 @@ class MiddlewareTests: XCTestCase {
             }
         }
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [middleware])
-        store.dispatch(nopAction)
+        store.dispatchAndWait(nopAction)
 
         XCTAssertEqual(result, "new " + nopAction)
     }
@@ -110,7 +110,7 @@ class MiddlewareTests: XCTestCase {
                 return { action in result = action as? StringAction }
             }
         ])
-        store.dispatch(nopAction)
+        store.dispatchAndWait(nopAction)
 
         XCTAssertEqual(result, nopAction + " next")
     }
