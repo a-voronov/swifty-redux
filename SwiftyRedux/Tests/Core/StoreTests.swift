@@ -81,7 +81,7 @@ class StoreTests: XCTestCase {
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         XCTAssertEqual(mock.calledWithAction.count, 3)
     }
@@ -92,9 +92,37 @@ class StoreTests: XCTestCase {
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         XCTAssertEqual(mock.calledWithAction.count, 3)
+    }
+
+    func testStore_whenDispatchingWithoutWaiting_shouldPerformAsynchronously() {
+        var result: State = 0
+        let asyncExpectation = expectation(description: "testStore_whenDispatchingWithoutWaiting_shouldPerformAsynchronously")
+        let store = Store(state: 42, reducer: nopReducer, middleware: [nopMiddleware])
+        store.subscribe { state in
+            result = state
+            asyncExpectation.fulfill()
+        }
+
+        store.dispatch(AnyAction.one)
+
+        waitForExpectations(timeout: 0.1) { e in
+            XCTAssertEqual(result, 42)
+        }
+    }
+
+    func testStore_whenDispatchingAndWaiting_shouldPerformSynchronously() {
+        var result: State = 0
+        let store = Store(state: 42, reducer: nopReducer, middleware: [nopMiddleware])
+        store.subscribe { state in
+            result = state
+        }
+
+        store.dispatchAndWait(AnyAction.one)
+
+        XCTAssertEqual(result, 42)
     }
 
     func testStore_afterSubscribeAndDispatchFlow_deinits_andAllDisposablesDispose() {
@@ -105,7 +133,7 @@ class StoreTests: XCTestCase {
             let deinitStore = Store(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
             store = deinitStore
             disposable = deinitStore.subscribe(observer: { state in })
-            deinitStore.dispatch(AnyAction.one)
+            deinitStore.dispatchAndWait(AnyAction.one)
         }
 
         XCTAssertTrue(disposable.isDisposed)
@@ -129,7 +157,7 @@ class StoreTests: XCTestCase {
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
         store.dispatch(AnyAction.three)
-        store.dispatch(AnyAction.four)
+        store.dispatchAndWait(AnyAction.four)
 
         XCTAssertEqual(result, ["m-one", "r-one", "m-two", "r-two", "m-three", "r-three", "m-four", "r-four"])
     }
@@ -181,7 +209,7 @@ class StoreTests: XCTestCase {
             result.append(state)
         }
         store.dispatch(OpAction.mul)
-        store.dispatch(OpAction.inc)
+        store.dispatchAndWait(OpAction.inc)
 
         XCTAssertEqual(result, [6, 9])
     }
@@ -197,7 +225,7 @@ class StoreTests: XCTestCase {
         store.subscribe(skipRepeats: true) { state in
             result.append(state)
         }
-        actions.forEach(store.dispatch)
+        actions.forEach(store.dispatchAndWait)
 
         XCTAssertEqual(result, [1, 2, 1, 3, 5, 2])
     }
@@ -213,7 +241,7 @@ class StoreTests: XCTestCase {
         store.subscribe(skipRepeats: false) { state in
             result.append(state)
         }
-        actions.forEach(store.dispatch)
+        actions.forEach(store.dispatchAndWait)
 
         XCTAssertEqual(result, [1, 2, 1, 1, 3, 3, 5, 2])
     }
@@ -278,11 +306,11 @@ class StoreTests: XCTestCase {
         }
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         disposable.dispose()
         store.dispatch(AnyAction.four)
-        store.dispatch(AnyAction.five)
+        store.dispatchAndWait(AnyAction.five)
 
         XCTAssertEqual(result, [1, 2, 3])
     }
@@ -302,7 +330,7 @@ class StoreTests: XCTestCase {
             result.append(state)
         }
         store.dispatch(OpAction.mul)
-        store.dispatch(OpAction.inc)
+        store.dispatchAndWait(OpAction.inc)
 
         XCTAssertEqual(result, [6, 9])
     }
@@ -319,11 +347,11 @@ class StoreTests: XCTestCase {
         }
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         disposable.dispose()
         store.dispatch(AnyAction.four)
-        store.dispatch(AnyAction.five)
+        store.dispatchAndWait(AnyAction.five)
 
         XCTAssertEqual(result, [1, 2, 3])
     }

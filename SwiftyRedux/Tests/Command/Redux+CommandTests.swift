@@ -54,7 +54,7 @@ class ReduxCommandTests: XCTestCase {
 
         store.dispatch(AnyAction())
         store.dispatch(AnyAction())
-        store.dispatch(AnyAction())
+        store.dispatchAndWait(AnyAction())
 
         // wait for serial queue to finish executing previous async tasks
         queue.sync {}
@@ -71,7 +71,7 @@ class ReduxCommandTests: XCTestCase {
 
         store.dispatch(AnyAction())
         store.dispatch(AnyAction())
-        store.dispatch(AnyAction())
+        store.dispatchAndWait(AnyAction())
 
         // wait for serial queue to finish executing previous async tasks
         queue.sync {}

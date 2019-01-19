@@ -17,17 +17,17 @@ import Dispatch
 
 public final class Store<State> {
     private let reducer: Reducer<State>
-    private let queue: DispatchQueue
+    private let queue: ReadWriteQueue
     private let (observable, observer): (Observable<State>, Observer<State>)
     private var dispatchFunction: Dispatch!
 
     private var currentState: State
     public var state: State {
-        return queue.sync { currentState }
+        return queue.read { currentState }
     }
 
     public init(id: String = "redux.store", state: State, reducer: @escaping Reducer<State>, middleware: [Middleware<State>] = []) {
-        self.queue = DispatchQueue(label: "\(id).queue", attributes: .concurrent)
+        self.queue = ReadWriteQueue(label: "\(id).queue")
         self.currentState = state
         self.reducer = reducer
 
@@ -41,15 +41,22 @@ public final class Store<State> {
     }
 
     public func dispatch(_ action: Action) {
-        dispatchFunction(action)
+        queue.write {
+            self.dispatchFunction(action)
+        }
+    }
+
+    public func dispatchAndWait(_ action: Action) {
+        queue.writeAndWait {
+            self.dispatchFunction(action)
+        }
     }
 
     private func defaultDispatch(from action: Action) {
-        let newState: State = queue.sync(flags: .barrier) {
-            currentState = reducer(action, currentState)
-            return currentState
+        queue.writeAndWait {
+            self.currentState = self.reducer(action, self.currentState)
+            self.observer.update(self.currentState)
         }
-        self.observer.update(newState)
     }
 
     @discardableResult

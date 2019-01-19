@@ -19,7 +19,7 @@ class PerformanceTests: XCTestCase {
     func testNotify() {
         self.observers.forEach { self.store.subscribe(observer: $0) }
         self.measure {
-            self.store.dispatch(AnyAction())
+            self.store.dispatchAndWait(AnyAction())
         }
     }
 
