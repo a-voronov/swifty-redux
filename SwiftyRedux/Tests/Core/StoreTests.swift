@@ -108,10 +108,7 @@ class StoreTests: XCTestCase {
 
         store.dispatch(AnyAction.one)
 
-        // not yet
-        XCTAssertEqual(result, 0)
         waitForExpectations(timeout: 0.1) { e in
-            // here we go
             XCTAssertEqual(result, 42)
         }
     }
