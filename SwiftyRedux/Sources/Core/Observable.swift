@@ -15,7 +15,7 @@ public final class Observable<Value> {
     private let disposables: CompositeDisposable
     private let observers: Atomic<Set<Observer<Value>>>
 
-    public init(id: String? = nil, observable: @escaping (@escaping (Value) -> Void) -> Disposable?) {
+    public init(id: String? = nil, observable: (@escaping (Value) -> Void) -> Disposable?) {
         self.id = id ?? "redux.observable"
         self.observers = Atomic(id: self.id, value: Set())
         self.disposables = CompositeDisposable(id: "\(self.id).composite-disposable")
@@ -50,20 +50,16 @@ public final class Observable<Value> {
 
 extension Observable {
     public func map<T>(_ transform: @escaping (Value) -> T) -> Observable<T> {
-        return Observable<T>(id: "\(id)-map") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
-            return strongSelf.subscribe { value in
+        return Observable<T>(id: "\(id)-map") { action in
+            return self.subscribe { value in
                 action(transform(value))
             }
         }
     }
 
     public func filter(_ predicate: @escaping (Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-filter") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
-            return strongSelf.subscribe { value in
+        return Observable(id: "\(id)-filter") { action in
+            return self.subscribe { value in
                 if predicate(value) {
                     action(value)
                 }
@@ -72,21 +68,17 @@ extension Observable {
     }
 
     public func filterMap<T>(_ transform: @escaping (Value) -> T?) -> Observable<T> {
-        return Observable<T>(id: "\(id)-filterMap") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
-            return strongSelf.subscribe { value in
+        return Observable<T>(id: "\(id)-filterMap") { action in
+            return self.subscribe { value in
                 transform(value).map(action)
             }
         }
     }
 
     public func skipRepeats(_ isEquivalent: @escaping (Value, Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-skipRepeats") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
+        return Observable(id: "\(id)-skipRepeats") { action in
             var previous: Value?
-            return strongSelf.subscribe { value in
+            return self.subscribe { value in
                 if let previous = previous, isEquivalent(previous, value) {
                     return
                 }
@@ -99,11 +91,9 @@ extension Observable {
     public func skip(first count: Int) -> Observable<Value> {
         precondition(count > 0)
 
-        return Observable(id: "\(id)-skipFirst") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
+        return Observable(id: "\(id)-skipFirst") { action in
             var skipped = 0
-            return strongSelf.subscribe { value in
+            return self.subscribe { value in
                 if skipped < count {
                     skipped += 1
                 } else {
@@ -114,11 +104,9 @@ extension Observable {
     }
 
     public func skip(while predicate: @escaping (Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-skipWhile") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
+        return Observable(id: "\(id)-skipWhile") { action in
             var isSkipping = true
-            return strongSelf.subscribe { value in
+            return self.subscribe { value in
                 isSkipping = isSkipping && predicate(value)
                 if !isSkipping {
                     action(value)
@@ -130,12 +118,10 @@ extension Observable {
     public func take(first count: Int) -> Observable<Value> {
         precondition(count > 0)
 
-        return Observable(id: "\(id)-takeFirst") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
+        return Observable(id: "\(id)-takeFirst") { action in
             var taken = 0
             var disposable: Disposable!
-            disposable = strongSelf.subscribe { value in
+            disposable = self.subscribe { value in
                 if taken < count {
                     taken += 1
                     action(value)
@@ -148,11 +134,9 @@ extension Observable {
     }
 
     public func take(while predicate: @escaping (Value) -> Bool) -> Observable<Value> {
-        return Observable(id: "\(id)-takeWhile") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
+        return Observable(id: "\(id)-takeWhile") { action in
             var disposable: Disposable!
-            disposable = strongSelf.subscribe { value in
+            disposable = self.subscribe { value in
                 if predicate(value) {
                     action(value)
                 } else {
@@ -164,11 +148,9 @@ extension Observable {
     }
 
     public func combinePrevious(initial: Value? = nil) -> Observable<(Value, Value)> {
-        return Observable<(Value, Value)>(id: "\(id)-combinePrevious") { [weak self] action in
-            guard let strongSelf = self else { return nil }
-
+        return Observable<(Value, Value)>(id: "\(id)-combinePrevious") { action in
             var previous = initial
-            return strongSelf.subscribe { value in
+            return self.subscribe { value in
                 if let previous = previous {
                     action((previous, value))
                 }
