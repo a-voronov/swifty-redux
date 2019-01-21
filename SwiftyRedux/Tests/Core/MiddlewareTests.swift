@@ -97,7 +97,7 @@ class MiddlewareTests: XCTestCase {
                 }
             }
         ])
-        store.dispatch(nopAction)
+        store.dispatchAndWait(nopAction)
     }
 
     func testCanPropagateActionToNextMiddleware() {
@@ -128,7 +128,7 @@ class MiddlewareTests: XCTestCase {
                 }
             }
         ])
-        store.dispatch(nopAction)
+        store.dispatchAndWait(nopAction)
 
         XCTAssertEqual(store.state, 42)
     }

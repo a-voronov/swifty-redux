@@ -59,7 +59,7 @@ class StoreTests: XCTestCase {
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         XCTAssertEqual(mock.calledWithStoreCount, 1)
     }
@@ -70,7 +70,7 @@ class StoreTests: XCTestCase {
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         XCTAssertEqual(mock.calledWithStoreCount, 1)
     }
