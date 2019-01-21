@@ -65,6 +65,7 @@
 		D235AA5821E9790600D3532E /* Redux+CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235AA5621E978EA00D3532E /* Redux+CommandTests.swift */; };
 		D235AA5E21F28ECA00D3532E /* ReadWriteQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235AA5D21F28ECA00D3532E /* ReadWriteQueue.swift */; };
 		D235AA6021F29D7400D3532E /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = D235AA5F21F29D7400D3532E /* Atomic.swift */; };
+		D2A292DB21F5369A00F5082D /* ObservableProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A292DA21F5369A00F5082D /* ObservableProducer.swift */; };
 		D2FBB0C3F9710932CD3DCD16C3563A88 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3330CA21AAEE506F2427EA59C28C297 /* Disposable.swift */; };
 		D4594FA55A7FA34FC03BA1B81D47BB0C /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54CDAFFF2A1A0765AD46548893E7E5D /* ReactiveSwift.framework */; };
 		DC1B388309C6B79CB2F317856CE3794E /* EnableBatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB6507D4F933BF763FC20A6E600DFD6D /* EnableBatchingTests.swift */; };
@@ -254,6 +255,7 @@
 		D235AA5D21F28ECA00D3532E /* ReadWriteQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReadWriteQueue.swift; path = SwiftyRedux/Sources/Core/ReadWriteQueue.swift; sourceTree = "<group>"; };
 		D235AA5F21F29D7400D3532E /* Atomic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Atomic.swift; path = SwiftyRedux/Sources/Core/Atomic.swift; sourceTree = "<group>"; };
 		D2698466BAC09C10BA158A74847FFA46 /* Epics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Epics.swift; path = SwiftyRedux/Sources/Epics/Epics.swift; sourceTree = "<group>"; };
+		D2A292DA21F5369A00F5082D /* ObservableProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ObservableProducer.swift; path = SwiftyRedux/Sources/Core/ObservableProducer.swift; sourceTree = "<group>"; };
 		DB305D1341BA2EE27262C6B0E302456D /* Pods-SwiftyRedux_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyRedux_Example-resources.sh"; sourceTree = "<group>"; };
 		E262A7DDAE55516379F9EF3C73DB031F /* DisposableTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DisposableTests.swift; sourceTree = "<group>"; };
 		E7A2AE0AEF5ED6B68B1852E8A9E96CBE /* Result.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Result.modulemap; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				C3330CA21AAEE506F2427EA59C28C297 /* Disposable.swift */,
 				41D408D0AC6F9B1EB6B869EFDFBB9AB8 /* Middleware.swift */,
 				5078145709060AFDFAB666B1FD8FA661 /* Observable.swift */,
+				D2A292DA21F5369A00F5082D /* ObservableProducer.swift */,
 				11839375AE3BCCF7019B4AD6F4E12A36 /* Observer.swift */,
 				AF4DA4609B3E96F37C2FF9723EEDD932 /* Reducer.swift */,
 				9CB6363BAB3F92037F4FE79FDF32B6D4 /* Store.swift */,
@@ -1020,6 +1023,7 @@
 				69E6722B080D6D2527088D532BA24F8E /* Observer.swift in Sources */,
 				F1716D10EB07626F6ADCBA874E8F439E /* Reactive+Extensions.swift in Sources */,
 				89330BDE1FC3883C6773F1695488A3BA /* Reducer.swift in Sources */,
+				D2A292DB21F5369A00F5082D /* ObservableProducer.swift in Sources */,
 				D235AA5E21F28ECA00D3532E /* ReadWriteQueue.swift in Sources */,
 				1C8A6E295812C0BFE8316058CF218A81 /* Redux+Command.swift in Sources */,
 				19EBFDEC36FEB325901A386B0C3630CE /* SideEffects.swift in Sources */,
