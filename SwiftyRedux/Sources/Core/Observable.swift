@@ -32,6 +32,11 @@ public final class Observable<Value> {
     @discardableResult
     public func subscribe(on observingQueue: DispatchQueue? = nil, observer: @escaping (Value) -> Void) -> Disposable {
         let observer = Observer(queue: observingQueue, update: observer)
+        return subscribe(observer: observer)
+    }
+
+    @discardableResult
+    public func subscribe(observer: Observer<Value>) -> Disposable {
         observers.mutate { $0.insert(observer) }
 
         return disposables += Disposable(id: "\(id).disposable") { [weak self, weak observer] disposable in

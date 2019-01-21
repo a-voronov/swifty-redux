@@ -64,8 +64,21 @@ public final class Store<State> {
         return observable.subscribe(on: queue, observer: observer)
     }
 
+    @discardableResult
+    public func subscribeWithCurrentState(on queue: DispatchQueue? = nil, observer: @escaping (State) -> Void) -> Disposable {
+        let observer = Observer(queue: queue, update: observer)
+        observer.update(state)
+        return observable.subscribe(observer: observer)
+    }
+
     public func observe() -> Observable<State> {
         return observable
+    }
+
+    public func observeWithCurrentState() -> ObservableProducer<State> {
+        return ObservableProducer { [weak self] observer, disposables in
+            disposables += self?.subscribeWithCurrentState(observer: observer.update)
+        }
     }
 }
 
