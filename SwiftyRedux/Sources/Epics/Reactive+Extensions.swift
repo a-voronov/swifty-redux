@@ -26,6 +26,23 @@ public extension Signal where Error == NoError {
     }
 }
 
+public extension ObservableProducer {
+    func toSignalProducer() -> SignalProducer<Value, NoError> {
+        return SignalProducer { observer, lifetime in
+            let disposable = self.start(observer: observer.send)
+            lifetime.observeEnded(disposable.dispose)
+        }
+    }
+}
+
+public extension SignalProducer where Error == NoError {
+    func toObservableProducer() -> ObservableProducer<Value> {
+        return ObservableProducer { observer, disposables in
+            disposables += Disposable(disposable: self.startWithValues(observer.update))
+        }
+    }
+}
+
 public extension Disposable {
     convenience init(disposable: ReactiveSwift.Disposable) {
         self.init(action: disposable.dispose)
