@@ -53,6 +53,8 @@ class StoreTests: XCTestCase {
         nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
+    // TODO: test subscribe includingCurrentState: true
+
     func testMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
         let mock = MockMiddleware()
         let store = Store(state: initialState, reducer: nopReducer, middleware: [mock.middleware])
@@ -302,47 +304,6 @@ class StoreTests: XCTestCase {
 
         var result: [State] = []
         let disposable = store.subscribe(includingCurrentState: false) { state in
-            result.append(state)
-        }
-        store.dispatch(AnyAction.one)
-        store.dispatch(AnyAction.two)
-        store.dispatchAndWait(AnyAction.three)
-
-        disposable.dispose()
-        store.dispatch(AnyAction.four)
-        store.dispatchAndWait(AnyAction.five)
-
-        XCTAssertEqual(result, [1, 2, 3])
-    }
-
-    func testStore_whenObserving_andSubscribingToObserver_startReceivingStateUpdates() {
-        let reducer: Reducer<State> = { action, state in
-            switch action {
-            case let action as OpAction where action == .mul: return state * 2
-            case let action as OpAction where action == .inc: return state + 3
-            default: return state
-            }
-        }
-        let store = Store<State>(state: 3, reducer: reducer)
-
-        var result: [State] = []
-        store.stateObservable().subscribe { state in
-            result.append(state)
-        }
-        store.dispatch(OpAction.mul)
-        store.dispatchAndWait(OpAction.inc)
-
-        XCTAssertEqual(result, [6, 9])
-    }
-
-    func testStore_whenUnsubscribingFromObserver_stopReceivingStateUpdates() {
-        let reducer: Reducer<State> = { action, state in
-            (action as! AnyAction).rawValue
-        }
-        let store = Store<State>(state: initialState, reducer: reducer)
-
-        var result: [State] = []
-        let disposable = store.stateObservable().subscribe { state in
             result.append(state)
         }
         store.dispatch(AnyAction.one)

@@ -18,6 +18,8 @@ class ReduxCommandTests: XCTestCase {
         nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
+    // TODO: test subscribe includingCurrentState: true
+
     func testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandOnSpecifiedQueueForActionDispatched() {
         let id = "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandOnSpecifiedQueueForActionDispatched"
         let key = DispatchSpecificKey<String>()

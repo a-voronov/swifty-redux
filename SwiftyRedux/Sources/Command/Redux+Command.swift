@@ -18,14 +18,6 @@ extension Observable {
     }
 }
 
-// MARK: - Observable Producer
-
-extension ObservableProducer {
-    public func start(on observingQueue: DispatchQueue? = nil, _ command: Command<Value>) -> Disposable {
-        return start(on: observingQueue, observer: command.execute)
-    }
-}
-
 // MARK: - Observer
 
 extension Observer {
