@@ -25,7 +25,7 @@ class ReduxCommandTests: XCTestCase {
         queue.setSpecific(key: key, value: id)
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
 
-        store.subscribe(on: queue, Command { value in
+        store.subscribe(on: queue, includingCurrentState: false, Command { value in
             XCTAssertEqual(DispatchQueue.getSpecific(key: key), id)
             XCTAssertEqual(value, self.initialState)
 
@@ -43,7 +43,7 @@ class ReduxCommandTests: XCTestCase {
         queue.setSpecific(key: key, value: id)
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
 
-        store.subscribe(on: queue, skipRepeats: true, Command { value in
+        store.subscribeUnique(on: queue, includingCurrentState: false, Command { value in
             result += 1
 
             XCTAssertEqual(DispatchQueue.getSpecific(key: key), id)
@@ -67,7 +67,7 @@ class ReduxCommandTests: XCTestCase {
         let queue = DispatchQueue(label: "testStore_whenSubscribingWithCommand_andNotSkippingRepeats_shouldRedirectToOriginalMethod")
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
 
-        store.subscribe(on: queue, skipRepeats: false, Command { value in result += 1 })
+        store.subscribe(on: queue, includingCurrentState: false, Command { value in result += 1 })
 
         store.dispatch(AnyAction())
         store.dispatch(AnyAction())

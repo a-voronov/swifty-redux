@@ -59,7 +59,7 @@ class StoreTests: XCTestCase {
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         XCTAssertEqual(mock.calledWithStoreCount, 1)
     }
@@ -70,7 +70,7 @@ class StoreTests: XCTestCase {
 
         store.dispatch(AnyAction.one)
         store.dispatch(AnyAction.two)
-        store.dispatch(AnyAction.three)
+        store.dispatchAndWait(AnyAction.three)
 
         XCTAssertEqual(mock.calledWithStoreCount, 1)
     }
@@ -101,7 +101,7 @@ class StoreTests: XCTestCase {
         var result: State = 0
         let asyncExpectation = expectation(description: "testStore_whenDispatchingWithoutWaiting_shouldPerformAsynchronously")
         let store = Store(state: 42, reducer: nopReducer, middleware: [nopMiddleware])
-        store.subscribe { state in
+        store.subscribe(includingCurrentState: false) { state in
             result = state
             asyncExpectation.fulfill()
         }
@@ -116,7 +116,7 @@ class StoreTests: XCTestCase {
     func testStore_whenDispatchingAndWaiting_shouldPerformSynchronously() {
         var result: State = 0
         let store = Store(state: 42, reducer: nopReducer, middleware: [nopMiddleware])
-        store.subscribe { state in
+        store.subscribe(includingCurrentState: false) { state in
             result = state
         }
 
@@ -132,7 +132,7 @@ class StoreTests: XCTestCase {
         autoreleasepool {
             let deinitStore = Store(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
             store = deinitStore
-            disposable = deinitStore.subscribe(observer: { state in })
+            disposable = deinitStore.subscribe(includingCurrentState: false, observer: { state in })
             deinitStore.dispatchAndWait(AnyAction.one)
         }
 
@@ -205,7 +205,7 @@ class StoreTests: XCTestCase {
         let store = Store<State>(state: 3, reducer: reducer)
 
         var result: [State] = []
-        store.subscribe { state in
+        store.subscribe(includingCurrentState: false) { state in
             result.append(state)
         }
         store.dispatch(OpAction.mul)
@@ -222,7 +222,7 @@ class StoreTests: XCTestCase {
         let store = Store<State>(state: initialState, reducer: reducer)
 
         var result: [State] = []
-        store.subscribe(skipRepeats: true) { state in
+        store.subscribeUnique(includingCurrentState: false) { state in
             result.append(state)
         }
         actions.forEach(store.dispatchAndWait)
@@ -238,7 +238,7 @@ class StoreTests: XCTestCase {
         let store = Store<State>(state: initialState, reducer: reducer)
 
         var result: [State] = []
-        store.subscribe(skipRepeats: false) { state in
+        store.subscribe(includingCurrentState: false) { state in
             result.append(state)
         }
         actions.forEach(store.dispatchAndWait)
@@ -255,7 +255,7 @@ class StoreTests: XCTestCase {
 
         var result: String!
         let queueExpectation = expectation(description: id)
-        store.subscribe(on: queue) { state in
+        store.subscribe(on: queue, includingCurrentState: false) { state in
             result = DispatchQueue.getSpecific(key: queueId)
             queueExpectation.fulfill()
         }
@@ -278,10 +278,10 @@ class StoreTests: XCTestCase {
         var result: String!
         let onQueueExpectation = expectation(description: "\(id) on queue")
         let defaultQueueExpectation = expectation(description: "\(id) default queue")
-        store.subscribe(on: queue) { state in
+        store.subscribe(on: queue, includingCurrentState: false) { state in
             onQueueExpectation.fulfill()
         }
-        store.subscribe { state in
+        store.subscribe(includingCurrentState: false) { state in
             defaultQueueExpectation.fulfill()
             result = DispatchQueue.getSpecific(key: queueId)
         }
@@ -301,7 +301,7 @@ class StoreTests: XCTestCase {
         let store = Store<State>(state: initialState, reducer: reducer)
 
         var result: [State] = []
-        let disposable = store.subscribe { state in
+        let disposable = store.subscribe(includingCurrentState: false) { state in
             result.append(state)
         }
         store.dispatch(AnyAction.one)
@@ -326,7 +326,7 @@ class StoreTests: XCTestCase {
         let store = Store<State>(state: 3, reducer: reducer)
 
         var result: [State] = []
-        store.observe().subscribe { state in
+        store.stateObservable().subscribe { state in
             result.append(state)
         }
         store.dispatch(OpAction.mul)
@@ -342,7 +342,7 @@ class StoreTests: XCTestCase {
         let store = Store<State>(state: initialState, reducer: reducer)
 
         var result: [State] = []
-        let disposable = store.observe().subscribe { state in
+        let disposable = store.stateObservable().subscribe { state in
             result.append(state)
         }
         store.dispatch(AnyAction.one)
