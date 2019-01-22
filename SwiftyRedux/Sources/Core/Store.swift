@@ -60,34 +60,32 @@ public final class Store<State> {
     }
 
     @discardableResult
-    public func subscribe(on queue: DispatchQueue? = nil, observer: @escaping (State) -> Void) -> Disposable {
-        return observable.subscribe(on: queue, observer: observer)
-    }
-
-    @discardableResult
-    public func subscribeWithCurrentState(on queue: DispatchQueue? = nil, observer: @escaping (State) -> Void) -> Disposable {
+    public func subscribe(on queue: DispatchQueue? = nil, includingCurrentState: Bool = true, observer: @escaping (State) -> Void) -> Disposable {
         let observer = Observer(queue: queue, update: observer)
-        observer.update(state)
+        if includingCurrentState {
+            observer.update(state)
+        }
         return observable.subscribe(observer: observer)
     }
 
-    public func observe() -> Observable<State> {
+    public func stateObservable() -> Observable<State> {
         return observable
     }
 
-    public func observeWithCurrentState() -> ObservableProducer<State> {
-        return ObservableProducer { [weak self] observer, disposables in
-            disposables += self?.subscribeWithCurrentState(observer: observer.update)
+    public func stateProducer() -> ObservableProducer<State> {
+        return ObservableProducer { observer, disposables in
+            disposables += self.subscribe(includingCurrentState: true, observer: observer.update)
         }
     }
 }
 
 extension Store where State: Equatable {
     @discardableResult
-    public func subscribe(on queue: DispatchQueue? = nil, skipRepeats: Bool = false, observer: @escaping (State) -> Void) -> Disposable {
-        if skipRepeats {
-            return observable.skipRepeats().subscribe(on: queue, observer: observer)
+    public func subscribeUnique(on queue: DispatchQueue? = nil, includingCurrentState: Bool = true, observer: @escaping (State) -> Void) -> Disposable {
+        if includingCurrentState {
+            return stateProducer().skipRepeats().start(on: queue, observer: observer)
+        } else {
+            return stateObservable().skipRepeats().subscribe(on: queue, observer: observer)
         }
-        return observable.subscribe(on: queue, observer: observer)
     }
 }
