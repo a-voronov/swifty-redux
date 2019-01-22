@@ -30,7 +30,7 @@ Swifty implementation of Redux with optional add-ons.
 
   s.ios.deployment_target = '10.0'
 
-  s.default_subspecs = 'Core', 'Command', 'BatchedActions', 'SideEffects'
+  s.default_subspecs = 'Core', 'Steroids', 'Command', 'BatchedActions', 'SideEffects'
 
   s.subspec 'Core' do |ss|
     ss.source_files = 'SwiftyRedux/Sources/Core/**/*.{swift}'
@@ -42,13 +42,24 @@ Swifty implementation of Redux with optional add-ons.
 
   s.subspec 'All' do |ss|
     ss.dependency 'SwiftyRedux/Core'
+    ss.dependency 'SwiftyRedux/Steroids'
     ss.dependency 'SwiftyRedux/Command'
     ss.dependency 'SwiftyRedux/BatchedActions'
-    ss.dependency 'SwiftyRedux/Epics'
     ss.dependency 'SwiftyRedux/SideEffects'
+    ss.dependency 'SwiftyRedux/Epics'
+    ss.dependency 'SwiftyRedux/ReactiveExtensions'
 
     ss.test_spec 'Tests' do |ts|
       ts.source_files = 'SwiftyRedux/Tests/**/*.{swift}'
+    end
+  end
+
+  s.subspec 'Steroids' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.source_files = 'SwiftyRedux/Sources/Steroids/**/*.{swift}'
+
+    ss.test_spec 'Tests' do |ts|
+      ts.source_files = 'SwiftyRedux/Tests/Steroids/**/*.{swift}'
     end
   end
 
@@ -70,6 +81,15 @@ Swifty implementation of Redux with optional add-ons.
     end
   end
 
+  s.subspec 'SideEffects' do |ss|
+    ss.dependency 'SwiftyRedux/Core'
+    ss.source_files = 'SwiftyRedux/Sources/SideEffects/**/*.{swift}'
+
+    ss.test_spec 'Tests' do |ts|
+      ts.source_files = 'SwiftyRedux/Tests/SideEffects/**/*.{swift}'
+    end
+  end
+
   s.subspec 'Epics' do |ss|
     ss.dependency 'SwiftyRedux/Core'
     ss.dependency 'ReactiveSwift', '~> 4.0'
@@ -80,12 +100,14 @@ Swifty implementation of Redux with optional add-ons.
     end
   end
 
-  s.subspec 'SideEffects' do |ss|
+  s.subspec 'ReactiveExtensions' do |ss|
     ss.dependency 'SwiftyRedux/Core'
-    ss.source_files = 'SwiftyRedux/Sources/SideEffects/**/*.{swift}'
+    ss.dependency 'SwiftyRedux/Steroids'
+    ss.dependency 'ReactiveSwift', '~> 4.0'
+    ss.source_files = 'SwiftyRedux/Sources/ReactiveExtensions/**/*.{swift}'
 
     ss.test_spec 'Tests' do |ts|
-      ts.source_files = 'SwiftyRedux/Tests/SideEffects/**/*.{swift}'
+      ts.source_files = 'SwiftyRedux/Tests/ReactiveExtensions/**/*.{swift}'
     end
   end
 end

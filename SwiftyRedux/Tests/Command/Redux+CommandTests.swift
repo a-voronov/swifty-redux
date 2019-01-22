@@ -18,8 +18,8 @@ class ReduxCommandTests: XCTestCase {
         nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
-    func testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod() {
-        let id = "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod"
+    func testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandOnSpecifiedQueueForActionDispatched() {
+        let id = "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandOnSpecifiedQueueForActionDispatched"
         let key = DispatchSpecificKey<String>()
         let queue = DispatchQueue(label: id)
         queue.setSpecific(key: key, value: id)
@@ -35,36 +35,9 @@ class ReduxCommandTests: XCTestCase {
         store.dispatch(AnyAction())
     }
 
-    func testStore_whenSubscribingWithCommand_andSkippingRepeats_shouldRedirectToOriginalMethod() {
+    func testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched() {
         var result = 0
-        let id = "testStore_whenSubscribingWithCommand_andSkippingRepeats_shouldRedirectToOriginalMethod"
-        let key = DispatchSpecificKey<String>()
-        let queue = DispatchQueue(label: id)
-        queue.setSpecific(key: key, value: id)
-        let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
-
-        store.subscribeUnique(on: queue, includingCurrentState: false, Command { value in
-            result += 1
-
-            XCTAssertEqual(DispatchQueue.getSpecific(key: key), id)
-            XCTAssertEqual(value, self.initialState)
-
-            queue.setSpecific(key: key, value: nil)
-        })
-
-        store.dispatch(AnyAction())
-        store.dispatch(AnyAction())
-        store.dispatchAndWait(AnyAction())
-
-        // wait for serial queue to finish executing previous async tasks
-        queue.sync {}
-
-        XCTAssertEqual(result, 1)
-    }
-
-    func testStore_whenSubscribingWithCommand_andNotSkippingRepeats_shouldRedirectToOriginalMethod() {
-        var result = 0
-        let queue = DispatchQueue(label: "testStore_whenSubscribingWithCommand_andNotSkippingRepeats_shouldRedirectToOriginalMethod")
+        let queue = DispatchQueue(label: "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched")
         let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
 
         store.subscribe(on: queue, includingCurrentState: false, Command { value in result += 1 })

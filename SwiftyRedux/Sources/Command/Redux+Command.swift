@@ -9,13 +9,6 @@ extension Store {
     }
 }
 
-extension Store where State: Equatable {
-    @discardableResult
-    public func subscribeUnique(on queue: DispatchQueue? = nil, includingCurrentState: Bool = true, _ command: Command<State>) -> Disposable {
-        return subscribeUnique(on: queue, includingCurrentState: includingCurrentState, observer: command.execute)
-    }
-}
-
 // MARK: - Observable
 
 extension Observable {
