@@ -67,6 +67,12 @@ public final class CompositeDisposable {
 
 extension CompositeDisposable {
     @discardableResult
+    public static func += (lhs: CompositeDisposable, rhs: CompositeDisposable) -> CompositeDisposable {
+        lhs.add(Disposable(action: rhs.dispose))
+        return rhs
+    }
+
+    @discardableResult
     public static func += (lhs: CompositeDisposable, rhs: Disposable) -> Disposable {
         lhs.add(rhs)
         return rhs

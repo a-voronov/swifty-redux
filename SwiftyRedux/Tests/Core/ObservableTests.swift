@@ -2,9 +2,7 @@ import XCTest
 @testable import SwiftyRedux
 
 class ObservableTests: XCTestCase {
-    // TODO: test Observable pipe
-
-    func testObserverIsNotifiedOfNewEvents() {
+    func testSubscriberIsNotifiedOfNewUpdates() {
         var result: Int!
         let (observable, observer) = Observable<Int>.pipe()
         observable.subscribe { value in result = value }
@@ -14,7 +12,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, 42)
     }
 
-    func testNewObserverIsNotNotifiedOfOldEvents() {
+    func testNewSubscriberIsNotNotifiedOfOldUpdates() {
         var result: Int!
         let (observable, observer) = Observable<Int>.pipe()
 
@@ -25,7 +23,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, 42)
     }
 
-    func testObserverIsNotifiedOnSpecifiedQueueAsynchronously() {
+    func testSubscriberIsNotifiedOnSpecifiedQueueAsynchronously() {
         let id = "testObserverIsNotifiedOnSpecifiedQueueAsynchronously"
         let queueId = DispatchSpecificKey<String>()
         let queue = DispatchQueue(label: id)
@@ -49,7 +47,7 @@ class ObservableTests: XCTestCase {
         }
     }
 
-    func testObserverIsNotNotifiedAfterDisposing() {
+    func testSubscriberIsNotNotifiedAfterDisposing() {
         var result = [Int]()
         let (observable, observer) = Observable<Int>.pipe()
         let disposable = observable.subscribe { value in result.append(value) }
@@ -61,7 +59,7 @@ class ObservableTests: XCTestCase {
         XCTAssertEqual(result, [0])
     }
 
-    func testDisposableIsNotKeptAfterItDisposes() {
+    func testDisposableIsNotRetainedAfterItDisposes() {
         let observable = Observable<Int> { _ in nil }
         weak var disposable = observable.subscribe { value in }
 
@@ -73,7 +71,7 @@ class ObservableTests: XCTestCase {
         XCTAssertNil(disposable)
     }
 
-    func testAllObserversAreDisposedWhenObservableDies() {
+    func testAllSubscribersAreDisposedWhenObservableDies() {
         var observable: Observable<Int>? = .init { _ in nil }
         let disposable1 = observable!.subscribe { value in }
         let disposable2 = observable!.subscribe { value in }
@@ -82,5 +80,35 @@ class ObservableTests: XCTestCase {
         observable = nil
 
         XCTAssertTrue([disposable1, disposable2, disposable3].allSatisfy { $0.isDisposed })
+    }
+
+    func testPipe_whenSpecifyingObserverQueue_andSubscribingToObservableWithDifferentQueue_shouldNotifySubscribersOnSubscribingQueue() {
+        let id = "testPipe_whenSpecifyingObserverQueue_andSubscribingToObservableWithDifferentQueue_shouldNotifySubscribersOnSubscribingQueue"
+
+        let observerQueueId = DispatchSpecificKey<String>()
+        let observerQueue = DispatchQueue(label: id + "observer")
+        observerQueue.setSpecific(key: observerQueueId, value: observerQueue.label)
+
+        let subscribersQueueId = DispatchSpecificKey<String>()
+        let subscribersQueue = DispatchQueue(label: id + "subscribers")
+        subscribersQueue.setSpecific(key: subscribersQueueId, value: subscribersQueue.label)
+
+        var result: String!
+        let (observable, observer) = Observable<Int>.pipe(queue: observerQueue)
+        let queueExpectation = expectation(description: id)
+
+        observable.subscribe(on: subscribersQueue) { value in
+            result = DispatchQueue.getSpecific(key: subscribersQueueId)
+            queueExpectation.fulfill()
+        }
+
+        observer.update(42)
+
+        waitForExpectations(timeout: 0.1) { e in
+            observerQueue.setSpecific(key: observerQueueId, value: nil)
+            subscribersQueue.setSpecific(key: subscribersQueueId, value: nil)
+
+            XCTAssertEqual(result, subscribersQueue.label)
+        }
     }
 }

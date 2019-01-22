@@ -17,8 +17,7 @@ extension Store where State: Equatable {
     public func subscribeUnique(on queue: DispatchQueue? = nil, includingCurrentState: Bool = true, observer: @escaping (State) -> Void) -> Disposable {
         if includingCurrentState {
             return stateProducer().skipRepeats().start(on: queue, observer: observer)
-        } else {
-            return stateObservable().skipRepeats().subscribe(on: queue, observer: observer)
         }
+        return stateObservable().skipRepeats().subscribe(on: queue, observer: observer)
     }
 }

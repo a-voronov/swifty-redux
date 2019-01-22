@@ -19,46 +19,51 @@
 		25E593582647F3CB969B936AF8A9D175 /* Flatten.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AED73DBF3EA5EFEFE5D16445D6BAB3 /* Flatten.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		2DA051B705B0637E0A982DD9C1758C98 /* Disposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1E7B5E72D03482D66D1B39F1C88E076 /* Disposable.swift */; };
 		2E97B39A518DD825BE23B462C04B1C62 /* CompositeDisposable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F078B20C71BA5E612141043476941B74 /* CompositeDisposable.swift */; };
-		2FD2D39BBAB4940FF885DAECD0BA3F4D /* DisposableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17911825EE9E8F1C8A89AACB08AA86B5 /* DisposableTests.swift */; };
+		2EEFE1A18A08BFC368CCBBCD265CCD8D /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDA4A9CC44DFBD4398FA9705F7806F53 /* PerformanceTests.swift */; };
 		317A2301C4A2BEF2FA65A75463D32CC0 /* ReactiveExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C6609B3CAF8F03E939D66FA6802F6505 /* ReactiveExtensions.swift */; };
-		36B199598C629CAC9916BE712AFD3502 /* Observable+SteroidsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AA87BF8876FEC636E9B161EA9FC1BC /* Observable+SteroidsTests.swift */; };
 		3950D2078712DF53904679BE326A327C /* SwiftyRedux-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D77DFFCBBC39ADE9C2A7B801BC86EBF /* SwiftyRedux-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3B59CA1E52D70302FCEDFE8B71376449 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D764B4F8634E0FD506588B9136EB1A /* Result.framework */; };
+		3D1E0D9FA1767121A699CE1B72FCAA94 /* ObservableProducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DFF7A666D43D012016296DA70C96621 /* ObservableProducerTests.swift */; };
 		3EA5492D276A00ADDB6E6C72F8871148 /* Signal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7510210E99066CA815A05E7211BE8471 /* Signal.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		42E459248A831A42A600E5F58DF86A35 /* EnableBatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B08D4FECCB699C5950056DA7FBBB310 /* EnableBatchingTests.swift */; };
+		42E7B2E8FC1D53C6E001DA8857DD1284 /* CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF27F383B389A8E3EB20EF95A572C01 /* CommandTests.swift */; };
+		4635A80A5937064A514526EED343B77C /* SwiftyRedux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C247C6402FB2C8090A11372A49A3895A /* SwiftyRedux.framework */; };
 		490B7AE154AB93601F3C2986232B125F /* SignalProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C328FBE107006CCF0FE40A413BE072 /* SignalProducer.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4A22F974243770B9D8291BEFB16B24B6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD315F31E69FCF480834360D66B5B11 /* Foundation.framework */; };
 		4A544E66B9F49848F0AD5F3F900FB64E /* AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05945952C6B444B74C87DB67A32A7A75 /* AnyError.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		4A8390C733CD21A1573CCBFD02C217A5 /* Middleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38E33C8817B8DE115894D4174175A628 /* Middleware.swift */; };
 		4AEDA484455A95AED6722CB64C6077BD /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D764B4F8634E0FD506588B9136EB1A /* Result.framework */; };
-		4D3A73F33EF9E40C9D562C03F504C172 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECD09657F0F2590EF437894BBE229B79 /* ObservableTests.swift */; };
-		5AF9386B385171FADFD2DBDADE87F373 /* CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F3021BF3F445F3756749DD3D9C349F4 /* CommandTests.swift */; };
-		5B597C49AFD4AF96FF702CEB8C6E9F90 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54CDAFFF2A1A0765AD46548893E7E5D /* ReactiveSwift.framework */; };
-		5B611FFB04CBE6B2CC7E5898EF4DA25E /* Redux+CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0738CC966F72C1CA85578E805A2830 /* Redux+CommandTests.swift */; };
+		50335D66C8B6603D068331BFDF7BA67A /* Redux+CommandTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F6AFE09BD1A139FA9E10251ED63367 /* Redux+CommandTests.swift */; };
+		50BB1C114E6DB7D7939C7F8AD3E30D2E /* EpicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2636289783384AD13B7A35ED69C93B /* EpicsTests.swift */; };
+		529E4FF08F399D03C1770F3428E7DF0F /* BatchDispatchMiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4BA9E6A0D4604951A0485ACBC612DAF /* BatchDispatchMiddlewareTests.swift */; };
+		60875C202B8126327E7443D9D03D45F5 /* SideEffectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D82CEF2247E73694D99F95A9982DC4 /* SideEffectsTests.swift */; };
 		65D14EF066D096F71AC612E73090545A /* SwiftyRedux-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9913A9D060135780689D89E2193C7E5F /* SwiftyRedux-dummy.m */; };
 		66D2C9BE983315CDD6E8B603BA3016A6 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2D05A44F2BC5C2C86A21BB56183ACA /* Action.swift */; };
-		67C45E47CA31EE677C5F300ECC1D4ADC /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E213011596F1DB06FDE43ED15521EBCE /* StoreTests.swift */; };
 		69F05CDD571C0AC471C64F7979CFEDAA /* ReactiveSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B9B3008C2D1B5207826BF7A3FF82F3 /* ReactiveSwift-dummy.m */; };
 		6C543020E39E89D85481CC7EAA39B9C9 /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7098107A6E9A27A2D41B32CA5C1DFC73 /* FoundationExtensions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		706F717A2E81109D9E809E25774ABEAF /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BFCD287A700F083B9207D17F481B9A1 /* Observer.swift */; };
 		71C3DB96E4A45A1C4E07BE6BFF9769BC /* Observable+Steroids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1646A02AF3F09EF20EBA762BEDC37E /* Observable+Steroids.swift */; };
+		760769CDC1AE41713611A22EC549E16F /* ReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE8C1E308420977CBAE6F8D7CFC59572 /* ReducerTests.swift */; };
 		78DA7BC50719EE5753BA870D28816225 /* Deprecations+Removals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E3BC87E720C646E1BD127BB71F9A6F /* Deprecations+Removals.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		7CB366184F74EBA1A96472F4687216AA /* MiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0531CECF4803E584000933154920CF1D /* MiddlewareTests.swift */; };
 		7D909011E8EB4A3091EAD87E6B8EE89E /* ReadWriteQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C219835F7C14A956FF07140993858C /* ReadWriteQueue.swift */; };
 		7EA2984FB70735421B94DB95F6C68E40 /* Result-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29869D85F4B27E72095C9C4C36EDF594 /* Result-dummy.m */; };
 		7ECD6A86CBD698A666016DA52645F682 /* Pods-SwiftyRedux_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F2CC20610B45AB3AB473DC1A61743FE2 /* Pods-SwiftyRedux_Tests-dummy.m */; };
 		7F97A8A84D8DC1AA9BF765A79876260A /* Redux+Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54878015EB01FB1C1D6AB107919C7BF1 /* Redux+Command.swift */; };
 		7FAE7FEEE75834EB008C127DA3466653 /* ReactiveSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = ED2E7B4064A8771465AA996FE37F0614 /* ReactiveSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8120B13165BF59F95E61B2F2D1364277 /* UnidirectionalBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476F70E545807231D12642E6550B20E0 /* UnidirectionalBinding.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		82849556FB415DAF8EC58710BC99EEBA /* BatchDispatchMiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CDDF34F22B5E73E9CD4659B9E69DD60 /* BatchDispatchMiddlewareTests.swift */; };
+		830F70E38439AB143EDDE974693107F1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD315F31E69FCF480834360D66B5B11 /* Foundation.framework */; };
+		8444AB94943D6D6C17421C1395C46698 /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54CDAFFF2A1A0765AD46548893E7E5D /* ReactiveSwift.framework */; };
 		8A463E43F875E449DCA2AC5F40B5D2FD /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20A7BD86C0B8D868E52E1F9857F8A060 /* Reducer.swift */; };
 		8C34129EB0BF3BB9147DBC4A370F1C7C /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B3F0762B39DCDC4E3D84D71651778C /* Atomic.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
+		8E6D2E0561DCEF1C0C4669AABD6359BF /* EnableBatchingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E358ECAC65E82BA7BAE5113DD7188836 /* EnableBatchingTests.swift */; };
+		8FC67D204E29A95E9B2DAEC8FCB0A290 /* ObservableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F19EE3F7971A18ADC6F9770A0237749 /* ObservableTests.swift */; };
 		903AE33CB23E05912A1CBE9D516D7DD2 /* Epics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AD64E8DF6AA2D28606B337B6E18F54F /* Epics.swift */; };
+		9214B1E821157F1976B7F62AA48908EF /* Store+SteroidsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC976296118CA76AC148EDCC181D398 /* Store+SteroidsTests.swift */; };
+		9557854F05C34E0A0C8700E8E5232B67 /* DisposableTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1353DCA18BA3FB6B5A4004B3A2FC14 /* DisposableTests.swift */; };
 		97AA935D877F17E73B37F14329A1A0C3 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A6A1001F5A1A369C1CAF4E7532FA7 /* Event.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		9941CA87C57F007FB132DF3FE1A6C57C /* Pods-SwiftyRedux_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C25AA3DC1FC947D1E306F11F1C4263 /* Pods-SwiftyRedux_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9A6BC60CD79EC7648B94806A80712FA8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD315F31E69FCF480834360D66B5B11 /* Foundation.framework */; };
 		9D908C2DC5E67888EAF7CC5FF7EE2259 /* SideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46A190384BA5ABEC5A494817BD123B2D /* SideEffects.swift */; };
-		9FBFB0D0A14002CCDD75087B0D946E35 /* PerformanceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80263B0EA1886613EB901C1B390694AB /* PerformanceTests.swift */; };
-		A2B459D0F3D65AD16197F79511294FAF /* MiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 967B730F50424B687FA53555DDF2956B /* MiddlewareTests.swift */; };
 		A8AC1380802ECE36EAEA980DD181E646 /* Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A9E88F39F83D161D24EB0C47E90AD64 /* Property.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A9E29DAB4C2A27E4E5A7BB1069F72F83 /* Store+Steroids.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EB8B5F7ECAC69AFCF70332F0D137A08 /* Store+Steroids.swift */; };
 		AD62576261281B0123EEF59C9246C164 /* Atomic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A9454D922B5E17940E2C69929E4EBD /* Atomic.swift */; };
@@ -68,20 +73,16 @@
 		BA8E318EABB3A9919EFC1F29EBF1051B /* BatchedActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D97C148A82D9DEB3F044C729AA23F6 /* BatchedActions.swift */; };
 		BB01F47EB323E50A32CA8666039FA26D /* UninhabitedTypeGuards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118277CAE01EBDF499AC81231DED0ED5 /* UninhabitedTypeGuards.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		BD89F5E5CD3C183BEDDFA42E65A4BB9C /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99560384F96C02668AA4E1B7ED103DE /* Command.swift */; };
+		BDE5C22B7C4E95E9A139B23ADC5EF154 /* StoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C283E97122234C0C343F939D2026EA2E /* StoreTests.swift */; };
 		BEB48F1AF877306E05C98785F5B3C0AF /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82772FB6CE5036DA9FB9D3185EA6093D /* Optional.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C07D1035F21B064978933D5979ED9FB0 /* SwiftyRedux.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C247C6402FB2C8090A11372A49A3895A /* SwiftyRedux.framework */; };
-		C38FC2324353B4474B738C22B3BDB1D3 /* Store+SteroidsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 102F0B5E2FFC3F26547F145B3BD2C504 /* Store+SteroidsTests.swift */; };
-		C4133745012492E50D936C72E9DFA97C /* ReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83B3462C0C22D60F0FA0082A340F9CB /* ReducerTests.swift */; };
-		C4BD2E97FABE60BA27F58CAAC5146844 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D764B4F8634E0FD506588B9136EB1A /* Result.framework */; };
 		C6CCF7EFADE7BFC11EB1FFCDC3F585D5 /* Observer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D098FBA05C8F73C8EE1BD2D052C8570 /* Observer.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		CACE0CA38B3F1EA96AD1604D8EF74940 /* EpicsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 688A930EEEA3DFAE9E9E0C8F84475139 /* EpicsTests.swift */; };
 		CB32181EB38E61DD9E7BBA906BF615FA /* Pods-SwiftyRedux_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E8793FCE625FECACB54CD17D881B5292 /* Pods-SwiftyRedux_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF18A954DB7E62BDBE58A73D47861986 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD315F31E69FCF480834360D66B5B11 /* Foundation.framework */; };
-		D138C23FB627CEC70AB3B53854C8C550 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD315F31E69FCF480834360D66B5B11 /* Foundation.framework */; };
 		D27A783102747E04C7056B1AC565A7C5 /* ObservableProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0F5BD6976778ECF59D15EA106CEBADB /* ObservableProducer.swift */; };
 		D4594FA55A7FA34FC03BA1B81D47BB0C /* ReactiveSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A54CDAFFF2A1A0765AD46548893E7E5D /* ReactiveSwift.framework */; };
-		D49085583A8E75A6F530E7669FFC63E6 /* SideEffectsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3834C049F48575405CA9575B0C8CE6 /* SideEffectsTests.swift */; };
+		D4A133A08419758D90D82D319FCDA66F /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84D764B4F8634E0FD506588B9136EB1A /* Result.framework */; };
 		D801555ECFAE0CC0F69C8A42E3805350 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E16D5F1F8AED62ECAF325BD438F283 /* Observable.swift */; };
+		D9C131E4AD1822BF38DB25ECBD559656 /* Observable+SteroidsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACC7A9ECC7BA9E9FCE181E6895BB715 /* Observable+SteroidsTests.swift */; };
 		E04002C4E49318E016B1EC9E9902F9ED /* Pods-SwiftyRedux_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA8540C35093B283EFAD44139C3E04E /* Pods-SwiftyRedux_Example-dummy.m */; };
 		EB46DF98A2DCE86922D67E910789F584 /* ResultExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C88351CDF7AAD7353D33EE21A4707040 /* ResultExtensions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		EEB1B61ACB47A9F645A9969B98DDA8D7 /* Lifetime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18FF8BD11C49908F5E1202237978524D /* Lifetime.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
@@ -90,6 +91,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		08B0BA8E611CA3E8E686165AB4A54A17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B4EEFF692F050D206C33189C457E1E6;
+			remoteInfo = SwiftyRedux;
+		};
 		1DF5D9ACB3AA0A09DC4F7648246AA6CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -111,13 +119,6 @@
 			remoteGlobalIDString = 6FEEFD5062967DD80B245F48254A7BFD;
 			remoteInfo = ReactiveSwift;
 		};
-		32F20C6771FE6618D8712C9A1FC3D8BF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7B4EEFF692F050D206C33189C457E1E6;
-			remoteInfo = SwiftyRedux;
-		};
 		363BE2B49031EA3E2AF983FEA7EF9537 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -132,6 +133,13 @@
 			remoteGlobalIDString = 7B4EEFF692F050D206C33189C457E1E6;
 			remoteInfo = SwiftyRedux;
 		};
+		5E1927E596E58F3A35FC0C6B173C66F2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FEEFD5062967DD80B245F48254A7BFD;
+			remoteInfo = ReactiveSwift;
+		};
 		74CA4290420322E17DE9E08E9D201173 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
@@ -139,21 +147,14 @@
 			remoteGlobalIDString = 378E15F97FBEF8CB6B08FB2C711E5082;
 			remoteInfo = "Pods-SwiftyRedux_Example";
 		};
-		818092BCBF40B80F36B153AD3AE1C221 /* PBXContainerItemProxy */ = {
+		CFD4CAA4FE5EB00CD8DB7DDB7BDB6EB2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 8E7BFB9E0514AAFDD72849C041839E0C;
 			remoteInfo = Result;
 		};
-		A9169D7B12EB8984B6A3B50CE212363C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6FEEFD5062967DD80B245F48254A7BFD;
-			remoteInfo = ReactiveSwift;
-		};
-		CFD4CAA4FE5EB00CD8DB7DDB7BDB6EB2 /* PBXContainerItemProxy */ = {
+		D0734F1C0F0E5C841951DF4A96CE95CF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -164,17 +165,16 @@
 
 /* Begin PBXFileReference section */
 		01C219835F7C14A956FF07140993858C /* ReadWriteQueue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReadWriteQueue.swift; sourceTree = "<group>"; };
+		0531CECF4803E584000933154920CF1D /* MiddlewareTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MiddlewareTests.swift; sourceTree = "<group>"; };
 		05945952C6B444B74C87DB67A32A7A75 /* AnyError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyError.swift; path = Result/AnyError.swift; sourceTree = "<group>"; };
 		05B9B3008C2D1B5207826BF7A3FF82F3 /* ReactiveSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ReactiveSwift-dummy.m"; sourceTree = "<group>"; };
 		0B078C308B91D9F7404768BDA4351696 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0BFCD287A700F083B9207D17F481B9A1 /* Observer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Observer.swift; sourceTree = "<group>"; };
 		0D103409E394796406E0C106A06AFF6C /* ValidatingProperty.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ValidatingProperty.swift; path = Sources/ValidatingProperty.swift; sourceTree = "<group>"; };
 		0D2D05A44F2BC5C2C86A21BB56183ACA /* Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Action.swift; path = SwiftyRedux/Sources/Core/Action.swift; sourceTree = "<group>"; };
-		102F0B5E2FFC3F26547F145B3BD2C504 /* Store+SteroidsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Store+SteroidsTests.swift"; sourceTree = "<group>"; };
 		118277CAE01EBDF499AC81231DED0ED5 /* UninhabitedTypeGuards.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UninhabitedTypeGuards.swift; path = Sources/UninhabitedTypeGuards.swift; sourceTree = "<group>"; };
 		12049F6B02B14C4D36136BA9BBB73BA2 /* SwiftyRedux-Unit-Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "SwiftyRedux-Unit-Tests"; path = "SwiftyRedux-Unit-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1638026ECE1E95948A08961F670653D5 /* SwiftyRedux.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyRedux.modulemap; sourceTree = "<group>"; };
-		17911825EE9E8F1C8A89AACB08AA86B5 /* DisposableTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DisposableTests.swift; sourceTree = "<group>"; };
 		1867FD397B34A68C37837E33BD53BAF4 /* NoError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NoError.swift; path = Result/NoError.swift; sourceTree = "<group>"; };
 		18FF8BD11C49908F5E1202237978524D /* Lifetime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Lifetime.swift; path = Sources/Lifetime.swift; sourceTree = "<group>"; };
 		19D7F72E6D87A94A0F5E55AAC72914C4 /* SwiftyRedux-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyRedux-prefix.pch"; sourceTree = "<group>"; };
@@ -189,7 +189,8 @@
 		2C9D6EEBC69D59AA3A3FBF87FC14F933 /* Disposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Disposable.swift; path = Sources/Disposable.swift; sourceTree = "<group>"; };
 		3691BD2099D0074856D7BC8F155456E7 /* Pods_SwiftyRedux_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwiftyRedux_Example.framework; path = "Pods-SwiftyRedux_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E33C8817B8DE115894D4174175A628 /* Middleware.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Middleware.swift; path = SwiftyRedux/Sources/Core/Middleware.swift; sourceTree = "<group>"; };
-		3B0738CC966F72C1CA85578E805A2830 /* Redux+CommandTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Redux+CommandTests.swift"; sourceTree = "<group>"; };
+		3DFF7A666D43D012016296DA70C96621 /* ObservableProducerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ObservableProducerTests.swift; sourceTree = "<group>"; };
+		3F19EE3F7971A18ADC6F9770A0237749 /* ObservableTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; };
 		3F5A61FB85FB8530E9737611399A43F8 /* Pods-SwiftyRedux_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyRedux_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		457D05CB17E04619F25B663E7AE357C3 /* EventLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventLogger.swift; path = Sources/EventLogger.swift; sourceTree = "<group>"; };
 		46A190384BA5ABEC5A494817BD123B2D /* SideEffects.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SideEffects.swift; path = SwiftyRedux/Sources/SideEffects/SideEffects.swift; sourceTree = "<group>"; };
@@ -197,20 +198,21 @@
 		48EA27EDE974F08EDB99D7ACEC5B322C /* Result-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Result-umbrella.h"; sourceTree = "<group>"; };
 		496A6A1001F5A1A369C1CAF4E7532FA7 /* Event.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Event.swift; path = Sources/Event.swift; sourceTree = "<group>"; };
 		4D10FD3F51D905E103EFCE65691C1B6E /* Pods-SwiftyRedux_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyRedux_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		4E1353DCA18BA3FB6B5A4004B3A2FC14 /* DisposableTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DisposableTests.swift; sourceTree = "<group>"; };
 		5150835696B6746906FDE67804238F91 /* Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Action.swift; path = Sources/Action.swift; sourceTree = "<group>"; };
 		52BBE88C5D1B3687A801B17BCEAD8DAB /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54878015EB01FB1C1D6AB107919C7BF1 /* Redux+Command.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Redux+Command.swift"; path = "SwiftyRedux/Sources/Command/Redux+Command.swift"; sourceTree = "<group>"; };
 		56C25AA3DC1FC947D1E306F11F1C4263 /* Pods-SwiftyRedux_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftyRedux_Tests-umbrella.h"; sourceTree = "<group>"; };
+		58D82CEF2247E73694D99F95A9982DC4 /* SideEffectsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SideEffectsTests.swift; sourceTree = "<group>"; };
 		58ECFFB8B0DD7030E946EEA18FDDA64E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C1646A02AF3F09EF20EBA762BEDC37E /* Observable+Steroids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Observable+Steroids.swift"; path = "SwiftyRedux/Sources/Steroids/Observable+Steroids.swift"; sourceTree = "<group>"; };
+		5F2636289783384AD13B7A35ED69C93B /* EpicsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EpicsTests.swift; sourceTree = "<group>"; };
 		601A5CF837B308D4AB693B05F64E9D93 /* SwiftyRedux.unit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyRedux.unit.xcconfig; sourceTree = "<group>"; };
-		688A930EEEA3DFAE9E9E0C8F84475139 /* EpicsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EpicsTests.swift; sourceTree = "<group>"; };
 		694DF8EEF0A4A853503CEC5F40B939E5 /* SwiftyRedux-Unit-Tests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyRedux-Unit-Tests-prefix.pch"; sourceTree = "<group>"; };
 		6AD64E8DF6AA2D28606B337B6E18F54F /* Epics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Epics.swift; path = SwiftyRedux/Sources/Epics/Epics.swift; sourceTree = "<group>"; };
 		6D098FBA05C8F73C8EE1BD2D052C8570 /* Observer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Sources/Observer.swift; sourceTree = "<group>"; };
 		6DD315F31E69FCF480834360D66B5B11 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		6E579C4143F9766F80005F3FE8107A58 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Result.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6F3021BF3F445F3756749DD3D9C349F4 /* CommandTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommandTests.swift; sourceTree = "<group>"; };
 		7098107A6E9A27A2D41B32CA5C1DFC73 /* FoundationExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationExtensions.swift; path = Sources/FoundationExtensions.swift; sourceTree = "<group>"; };
 		70A9454D922B5E17940E2C69929E4EBD /* Atomic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		712398BD6A058572D60DF0BD77F853F2 /* Pods-SwiftyRedux_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwiftyRedux_Example.modulemap"; sourceTree = "<group>"; };
@@ -221,40 +223,38 @@
 		79FE939E8AA44D3BC3EC5912D775F828 /* SwiftyRedux-Unit-Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyRedux-Unit-Tests-Info.plist"; sourceTree = "<group>"; };
 		7D77DFFCBBC39ADE9C2A7B801BC86EBF /* SwiftyRedux-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyRedux-umbrella.h"; sourceTree = "<group>"; };
 		7EEE718818CCA30EDA00CC52E9B0DE54 /* Scheduler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scheduler.swift; path = Sources/Scheduler.swift; sourceTree = "<group>"; };
-		80263B0EA1886613EB901C1B390694AB /* PerformanceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
+		80F6AFE09BD1A139FA9E10251ED63367 /* Redux+CommandTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Redux+CommandTests.swift"; sourceTree = "<group>"; };
 		82772FB6CE5036DA9FB9D3185EA6093D /* Optional.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Optional.swift; path = Sources/Optional.swift; sourceTree = "<group>"; };
 		84D764B4F8634E0FD506588B9136EB1A /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88AED73DBF3EA5EFEFE5D16445D6BAB3 /* Flatten.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Flatten.swift; path = Sources/Flatten.swift; sourceTree = "<group>"; };
 		89F191AA115D592E7656B174F59CA38D /* Pods-SwiftyRedux_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyRedux_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8B5D81074706DAED3E3A101F15C5140B /* Pods-SwiftyRedux_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyRedux_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		8BF873859AC3EAA00852AACF7A5B5F10 /* ReactiveSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ReactiveSwift.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CDDF34F22B5E73E9CD4659B9E69DD60 /* BatchDispatchMiddlewareTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BatchDispatchMiddlewareTests.swift; sourceTree = "<group>"; };
 		90E3BC87E720C646E1BD127BB71F9A6F /* Deprecations+Removals.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Deprecations+Removals.swift"; path = "Sources/Deprecations+Removals.swift"; sourceTree = "<group>"; };
 		9231387B79C4625860CDB43060124BD1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		967B730F50424B687FA53555DDF2956B /* MiddlewareTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = MiddlewareTests.swift; sourceTree = "<group>"; };
 		96E16D5F1F8AED62ECAF325BD438F283 /* Observable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		96FA63664711F542417251AC45E874F9 /* SwiftyRedux.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = SwiftyRedux.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9913A9D060135780689D89E2193C7E5F /* SwiftyRedux-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyRedux-dummy.m"; sourceTree = "<group>"; };
 		99B3F0762B39DCDC4E3D84D71651778C /* Atomic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Atomic.swift; path = Sources/Atomic.swift; sourceTree = "<group>"; };
 		99CB577949CD8324F51B38EAF2271038 /* Pods-SwiftyRedux_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwiftyRedux_Tests.modulemap"; sourceTree = "<group>"; };
-		9B08D4FECCB699C5950056DA7FBBB310 /* EnableBatchingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EnableBatchingTests.swift; sourceTree = "<group>"; };
 		9DC7597B2AD79E29080696ACC9374AB3 /* Store.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Store.swift; path = SwiftyRedux/Sources/Core/Store.swift; sourceTree = "<group>"; };
 		9EB8B5F7ECAC69AFCF70332F0D137A08 /* Store+Steroids.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Store+Steroids.swift"; path = "SwiftyRedux/Sources/Steroids/Store+Steroids.swift"; sourceTree = "<group>"; };
 		9F05A86E0814663609ABCBF3D1D7048C /* SwiftyRedux-Unit-Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "SwiftyRedux-Unit-Tests-resources.sh"; sourceTree = "<group>"; };
-		A1AA87BF8876FEC636E9B161EA9FC1BC /* Observable+SteroidsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Observable+SteroidsTests.swift"; sourceTree = "<group>"; };
 		A2D97C148A82D9DEB3F044C729AA23F6 /* BatchedActions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BatchedActions.swift; path = SwiftyRedux/Sources/BatchedActions/BatchedActions.swift; sourceTree = "<group>"; };
 		A54CDAFFF2A1A0765AD46548893E7E5D /* ReactiveSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A6AFBF5D96610D317564C0C79866D55B /* Pods-SwiftyRedux_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyRedux_Example.release.xcconfig"; sourceTree = "<group>"; };
-		A83B3462C0C22D60F0FA0082A340F9CB /* ReducerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReducerTests.swift; sourceTree = "<group>"; };
 		AA8216B9B3A434762EB24B078F988D82 /* Pods-SwiftyRedux_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyRedux_Tests-resources.sh"; sourceTree = "<group>"; };
 		AD3254C5A1D26521E3DE5627CAE6D88E /* ReactiveSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ReactiveSwift.xcconfig; sourceTree = "<group>"; };
+		AEF27F383B389A8E3EB20EF95A572C01 /* CommandTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CommandTests.swift; sourceTree = "<group>"; };
 		B0F5BD6976778ECF59D15EA106CEBADB /* ObservableProducer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ObservableProducer.swift; path = SwiftyRedux/Sources/Steroids/ObservableProducer.swift; sourceTree = "<group>"; };
 		B1E7B5E72D03482D66D1B39F1C88E076 /* Disposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
+		B4BA9E6A0D4604951A0485ACBC612DAF /* BatchDispatchMiddlewareTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BatchDispatchMiddlewareTests.swift; sourceTree = "<group>"; };
 		B5C328FBE107006CCF0FE40A413BE072 /* SignalProducer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignalProducer.swift; path = Sources/SignalProducer.swift; sourceTree = "<group>"; };
 		B785F41E20592D8BA4E11686B2C9443B /* Pods_SwiftyRedux_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwiftyRedux_Tests.framework; path = "Pods-SwiftyRedux_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB371817B2B6CE728543CAC3B1A56E3A /* Result-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Result-prefix.pch"; sourceTree = "<group>"; };
 		C247C6402FB2C8090A11372A49A3895A /* SwiftyRedux.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyRedux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C283E97122234C0C343F939D2026EA2E /* StoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		C2A39C00EB26ECDB2AF082704239A54A /* SwiftyRedux-Unit-Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "SwiftyRedux-Unit-Tests-frameworks.sh"; sourceTree = "<group>"; };
 		C38A00FC766B530B34FA4F14FD93CDF3 /* Reactive.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Reactive.swift; path = Sources/Reactive.swift; sourceTree = "<group>"; };
 		C6609B3CAF8F03E939D66FA6802F6505 /* ReactiveExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ReactiveExtensions.swift; path = SwiftyRedux/Sources/ReactiveExtensions/ReactiveExtensions.swift; sourceTree = "<group>"; };
@@ -265,22 +265,35 @@
 		CFCAC8264C40DF503FC7B527FF45F459 /* Pods-SwiftyRedux_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyRedux_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		D89DCF324834520A5AD12CEC6201F897 /* SwiftyRedux.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyRedux.xcconfig; sourceTree = "<group>"; };
 		DB305D1341BA2EE27262C6B0E302456D /* Pods-SwiftyRedux_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyRedux_Example-resources.sh"; sourceTree = "<group>"; };
-		E213011596F1DB06FDE43ED15521EBCE /* StoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
+		DEC976296118CA76AC148EDCC181D398 /* Store+SteroidsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Store+SteroidsTests.swift"; sourceTree = "<group>"; };
+		E358ECAC65E82BA7BAE5113DD7188836 /* EnableBatchingTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EnableBatchingTests.swift; sourceTree = "<group>"; };
 		E7A2AE0AEF5ED6B68B1852E8A9E96CBE /* Result.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Result.modulemap; sourceTree = "<group>"; };
 		E8793FCE625FECACB54CD17D881B5292 /* Pods-SwiftyRedux_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftyRedux_Example-umbrella.h"; sourceTree = "<group>"; };
-		EA3834C049F48575405CA9575B0C8CE6 /* SideEffectsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SideEffectsTests.swift; sourceTree = "<group>"; };
 		EAA122B6C34AD687CB285C3521CCF1C9 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Result/Result.swift; sourceTree = "<group>"; };
-		ECD09657F0F2590EF437894BBE229B79 /* ObservableTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ObservableTests.swift; sourceTree = "<group>"; };
 		ED2E7B4064A8771465AA996FE37F0614 /* ReactiveSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ReactiveSwift-umbrella.h"; sourceTree = "<group>"; };
 		F078B20C71BA5E612141043476941B74 /* CompositeDisposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = CompositeDisposable.swift; sourceTree = "<group>"; };
 		F2CC20610B45AB3AB473DC1A61743FE2 /* Pods-SwiftyRedux_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftyRedux_Tests-dummy.m"; sourceTree = "<group>"; };
 		F600229F8B845481AE6AEAEB26B3E6B5 /* Bag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Bag.swift; path = Sources/Bag.swift; sourceTree = "<group>"; };
 		F6AD33678459722B8E79AAB7C608F951 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		F851A8A1448E1ED1A7F62495FC6C85F3 /* Pods-SwiftyRedux_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyRedux_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		FACC7A9ECC7BA9E9FCE181E6895BB715 /* Observable+SteroidsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Observable+SteroidsTests.swift"; sourceTree = "<group>"; };
 		FBF209F1BD86FA4EBD5EC5F5F114D510 /* Result.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Result.xcconfig; sourceTree = "<group>"; };
+		FDA4A9CC44DFBD4398FA9705F7806F53 /* PerformanceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = PerformanceTests.swift; sourceTree = "<group>"; };
+		FE8C1E308420977CBAE6F8D7CFC59572 /* ReducerTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReducerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		32B2EB82F125E4487B908F78098346C0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				830F70E38439AB143EDDE974693107F1 /* Foundation.framework in Frameworks */,
+				8444AB94943D6D6C17421C1395C46698 /* ReactiveSwift.framework in Frameworks */,
+				D4A133A08419758D90D82D319FCDA66F /* Result.framework in Frameworks */,
+				4635A80A5937064A514526EED343B77C /* SwiftyRedux.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		46DDEE84B1A676B62BB5E501AD379940 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -312,17 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF18A954DB7E62BDBE58A73D47861986 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D4A500DDE045326DE9B472A9EFDC2529 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D138C23FB627CEC70AB3B53854C8C550 /* Foundation.framework in Frameworks */,
-				5B597C49AFD4AF96FF702CEB8C6E9F90 /* ReactiveSwift.framework in Frameworks */,
-				C4BD2E97FABE60BA27F58CAAC5146844 /* Result.framework in Frameworks */,
-				C07D1035F21B064978933D5979ED9FB0 /* SwiftyRedux.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,23 +379,18 @@
 			name = Steroids;
 			sourceTree = "<group>";
 		};
-		30EE304688E2A7BC3F76B8B96CFD0A58 /* Command */ = {
+		21FA2269E55A4FB99CF81E0358E352BD /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6F3021BF3F445F3756749DD3D9C349F4 /* CommandTests.swift */,
-				3B0738CC966F72C1CA85578E805A2830 /* Redux+CommandTests.swift */,
+				4E1353DCA18BA3FB6B5A4004B3A2FC14 /* DisposableTests.swift */,
+				0531CECF4803E584000933154920CF1D /* MiddlewareTests.swift */,
+				3F19EE3F7971A18ADC6F9770A0237749 /* ObservableTests.swift */,
+				FDA4A9CC44DFBD4398FA9705F7806F53 /* PerformanceTests.swift */,
+				FE8C1E308420977CBAE6F8D7CFC59572 /* ReducerTests.swift */,
+				C283E97122234C0C343F939D2026EA2E /* StoreTests.swift */,
 			);
-			name = Command;
-			path = SwiftyRedux/Tests/Command;
-			sourceTree = "<group>";
-		};
-		327B1CC1DE30FA8EBAF814C769C92A3A /* SideEffects */ = {
-			isa = PBXGroup;
-			children = (
-				EA3834C049F48575405CA9575B0C8CE6 /* SideEffectsTests.swift */,
-			);
-			name = SideEffects;
-			path = SwiftyRedux/Tests/SideEffects;
+			name = Core;
+			path = SwiftyRedux/Tests/Core;
 			sourceTree = "<group>";
 		};
 		379C7496ADF1C0077F246565A6EB4696 /* SideEffects */ = {
@@ -402,6 +399,15 @@
 				46A190384BA5ABEC5A494817BD123B2D /* SideEffects.swift */,
 			);
 			name = SideEffects;
+			sourceTree = "<group>";
+		};
+		3963421C9F9D20544C77D80AD61BA7CC /* Epics */ = {
+			isa = PBXGroup;
+			children = (
+				5F2636289783384AD13B7A35ED69C93B /* EpicsTests.swift */,
+			);
+			name = Epics;
+			path = SwiftyRedux/Tests/Epics;
 			sourceTree = "<group>";
 		};
 		3A199ADF01F0E92F85936CCF183A9E8E /* Pods-SwiftyRedux_Tests */ = {
@@ -432,6 +438,16 @@
 			path = SwiftyRedux/Sources/Core/Observing;
 			sourceTree = "<group>";
 		};
+		416DF930BC36D7DA8203FCBD5DACA839 /* BatchedActions */ = {
+			isa = PBXGroup;
+			children = (
+				B4BA9E6A0D4604951A0485ACBC612DAF /* BatchDispatchMiddlewareTests.swift */,
+				E358ECAC65E82BA7BAE5113DD7188836 /* EnableBatchingTests.swift */,
+			);
+			name = BatchedActions;
+			path = SwiftyRedux/Tests/BatchedActions;
+			sourceTree = "<group>";
+		};
 		4599A6DB89B8F64068E635F0A67BF16C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -449,19 +465,9 @@
 		492678BDD7057DF71AD78D6FFB2C5206 /* All */ = {
 			isa = PBXGroup;
 			children = (
-				70C1CD84FDAAB618078B05B25283E076 /* Tests */,
+				AFDBEC416CF11A3D1AC5ADD22F639C14 /* Tests */,
 			);
 			name = All;
-			sourceTree = "<group>";
-		};
-		49C254B12B9EAD2F9C31C1FB352CFE5B /* BatchedActions */ = {
-			isa = PBXGroup;
-			children = (
-				8CDDF34F22B5E73E9CD4659B9E69DD60 /* BatchDispatchMiddlewareTests.swift */,
-				9B08D4FECCB699C5950056DA7FBBB310 /* EnableBatchingTests.swift */,
-			);
-			name = BatchedActions;
-			path = SwiftyRedux/Tests/BatchedActions;
 			sourceTree = "<group>";
 		};
 		4FAAC0E8D6A35037A5233CF4D56483B5 /* Support Files */ = {
@@ -519,19 +525,6 @@
 			name = Core;
 			sourceTree = "<group>";
 		};
-		70C1CD84FDAAB618078B05B25283E076 /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				49C254B12B9EAD2F9C31C1FB352CFE5B /* BatchedActions */,
-				30EE304688E2A7BC3F76B8B96CFD0A58 /* Command */,
-				93C4F4B977B8D36F754AA38B877AB4F3 /* Core */,
-				7ABD0403D9FA00A021560C51A2F127C1 /* Epics */,
-				327B1CC1DE30FA8EBAF814C769C92A3A /* SideEffects */,
-				D4083642FC7AAA8EEE29DCBD9DAD03C6 /* Steroids */,
-			);
-			name = Tests;
-			sourceTree = "<group>";
-		};
 		767CA2EDC9484432800CE877FD007A0E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -541,15 +534,6 @@
 				ECD5C96D210BA0157DD3C4FBC0CA4539 /* iOS */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7ABD0403D9FA00A021560C51A2F127C1 /* Epics */ = {
-			isa = PBXGroup;
-			children = (
-				688A930EEEA3DFAE9E9E0C8F84475139 /* EpicsTests.swift */,
-			);
-			name = Epics;
-			path = SwiftyRedux/Tests/Epics;
 			sourceTree = "<group>";
 		};
 		7B047B803076C0DCDB4D9606014F006E /* Development Pods */ = {
@@ -570,6 +554,17 @@
 				8CF5C1DCCD0E3A6E6D2ACFC1223314AC /* Products */,
 				C1F8C0CE58F19F0CA98ACC21D796FA48 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		8990AE083C8071B1FAFD31139F658ECE /* Steroids */ = {
+			isa = PBXGroup;
+			children = (
+				FACC7A9ECC7BA9E9FCE181E6895BB715 /* Observable+SteroidsTests.swift */,
+				3DFF7A666D43D012016296DA70C96621 /* ObservableProducerTests.swift */,
+				DEC976296118CA76AC148EDCC181D398 /* Store+SteroidsTests.swift */,
+			);
+			name = Steroids;
+			path = SwiftyRedux/Tests/Steroids;
 			sourceTree = "<group>";
 		};
 		8AC8A20DC5D9AEC2D717BDB11AC529E2 /* Concurrency */ = {
@@ -595,20 +590,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		93C4F4B977B8D36F754AA38B877AB4F3 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				17911825EE9E8F1C8A89AACB08AA86B5 /* DisposableTests.swift */,
-				967B730F50424B687FA53555DDF2956B /* MiddlewareTests.swift */,
-				ECD09657F0F2590EF437894BBE229B79 /* ObservableTests.swift */,
-				80263B0EA1886613EB901C1B390694AB /* PerformanceTests.swift */,
-				A83B3462C0C22D60F0FA0082A340F9CB /* ReducerTests.swift */,
-				E213011596F1DB06FDE43ED15521EBCE /* StoreTests.swift */,
-			);
-			name = Core;
-			path = SwiftyRedux/Tests/Core;
-			sourceTree = "<group>";
-		};
 		94EDB60BCA93BF249B70EE562AC27B6D /* Command */ = {
 			isa = PBXGroup;
 			children = (
@@ -618,12 +599,34 @@
 			name = Command;
 			sourceTree = "<group>";
 		};
+		994566C1EFB541F58A95FAE06AE30797 /* SideEffects */ = {
+			isa = PBXGroup;
+			children = (
+				58D82CEF2247E73694D99F95A9982DC4 /* SideEffectsTests.swift */,
+			);
+			name = SideEffects;
+			path = SwiftyRedux/Tests/SideEffects;
+			sourceTree = "<group>";
+		};
 		A43D0E89BB2D0B9523191776F172BB23 /* BatchedActions */ = {
 			isa = PBXGroup;
 			children = (
 				A2D97C148A82D9DEB3F044C729AA23F6 /* BatchedActions.swift */,
 			);
 			name = BatchedActions;
+			sourceTree = "<group>";
+		};
+		AFDBEC416CF11A3D1AC5ADD22F639C14 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				416DF930BC36D7DA8203FCBD5DACA839 /* BatchedActions */,
+				BD2A5EB2210C50108AD8A7EE98533A57 /* Command */,
+				21FA2269E55A4FB99CF81E0358E352BD /* Core */,
+				3963421C9F9D20544C77D80AD61BA7CC /* Epics */,
+				994566C1EFB541F58A95FAE06AE30797 /* SideEffects */,
+				8990AE083C8071B1FAFD31139F658ECE /* Steroids */,
+			);
+			name = Tests;
 			sourceTree = "<group>";
 		};
 		B13A542A06C62DEB0766ACF8B44D0CD3 /* SwiftyRedux */ = {
@@ -642,6 +645,16 @@
 			);
 			name = SwiftyRedux;
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		BD2A5EB2210C50108AD8A7EE98533A57 /* Command */ = {
+			isa = PBXGroup;
+			children = (
+				AEF27F383B389A8E3EB20EF95A572C01 /* CommandTests.swift */,
+				80F6AFE09BD1A139FA9E10251ED63367 /* Redux+CommandTests.swift */,
+			);
+			name = Command;
+			path = SwiftyRedux/Tests/Command;
 			sourceTree = "<group>";
 		};
 		C1F8C0CE58F19F0CA98ACC21D796FA48 /* Targets Support Files */ = {
@@ -664,16 +677,6 @@
 			);
 			name = Result;
 			path = Result;
-			sourceTree = "<group>";
-		};
-		D4083642FC7AAA8EEE29DCBD9DAD03C6 /* Steroids */ = {
-			isa = PBXGroup;
-			children = (
-				A1AA87BF8876FEC636E9B161EA9FC1BC /* Observable+SteroidsTests.swift */,
-				102F0B5E2FFC3F26547F145B3BD2C504 /* Store+SteroidsTests.swift */,
-			);
-			name = Steroids;
-			path = SwiftyRedux/Tests/Steroids;
 			sourceTree = "<group>";
 		};
 		DAD1561ECCB908B8EFA79BC1A52EEE0E /* Epics */ = {
@@ -786,22 +789,22 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		3285DD713094A1B89CC9CB37AE8C38B6 /* SwiftyRedux-Unit-Tests */ = {
+		17250F1533FD155C16FD6B495FFA4BA8 /* SwiftyRedux-Unit-Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5647363951E5869CBD189E1A0F04DE72 /* Build configuration list for PBXNativeTarget "SwiftyRedux-Unit-Tests" */;
+			buildConfigurationList = 07E69BDA16ED40C7FC02AC9EED681883 /* Build configuration list for PBXNativeTarget "SwiftyRedux-Unit-Tests" */;
 			buildPhases = (
-				F4E5034BAD0039DCD75A4F74FB8B875A /* Sources */,
-				D4A500DDE045326DE9B472A9EFDC2529 /* Frameworks */,
-				D14EBD897AAC4FCEA886F13113D4A921 /* Resources */,
-				79E1C2D3732ECB499FBFB781CA960CFD /* [CP] Embed Pods Frameworks */,
-				B8A4BD89B54C3594EF386E00C8C69952 /* [CP] Copy Pods Resources */,
+				58D42685E6E6FB0812A90034AA227A0A /* Sources */,
+				32B2EB82F125E4487B908F78098346C0 /* Frameworks */,
+				1F7FC7C6A6A3AF62397E00690A20047D /* Resources */,
+				43F26F6BD932B4A2B5CC2E3B3818C863 /* [CP] Embed Pods Frameworks */,
+				04A87360B51394590CCBE0D3D415D845 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D3982B00BC8FC2AFB50D63C821DAD744 /* PBXTargetDependency */,
-				40A2AC73C2464B70CADF1A8B95197157 /* PBXTargetDependency */,
-				2E6316C08D6C25DFD4BCF64408242D1C /* PBXTargetDependency */,
+				20E40C6A31D8F7D316442EC6E8FFBEDD /* PBXTargetDependency */,
+				9590E33C1E230024C5145935B8944028 /* PBXTargetDependency */,
+				8D75A19F1B4B9F1279A772D8467688BC /* PBXTargetDependency */,
 			);
 			name = "SwiftyRedux-Unit-Tests";
 			productName = "SwiftyRedux-Unit-Tests";
@@ -931,13 +934,20 @@
 				6FEEFD5062967DD80B245F48254A7BFD /* ReactiveSwift */,
 				8E7BFB9E0514AAFDD72849C041839E0C /* Result */,
 				7B4EEFF692F050D206C33189C457E1E6 /* SwiftyRedux */,
-				3285DD713094A1B89CC9CB37AE8C38B6 /* SwiftyRedux-Unit-Tests */,
+				17250F1533FD155C16FD6B495FFA4BA8 /* SwiftyRedux-Unit-Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		0A53CE9ACCAFD34851E9EEB48997E7BE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1F7FC7C6A6A3AF62397E00690A20047D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -972,17 +982,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D14EBD897AAC4FCEA886F13113D4A921 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		79E1C2D3732ECB499FBFB781CA960CFD /* [CP] Embed Pods Frameworks */ = {
+		04A87360B51394590CCBE0D3D415D845 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		43F26F6BD932B4A2B5CC2E3B3818C863 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1008,25 +1030,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B8A4BD89B54C3594EF386E00C8C69952 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1035,6 +1038,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				7ECD6A86CBD698A666016DA52645F682 /* Pods-SwiftyRedux_Tests-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		58D42685E6E6FB0812A90034AA227A0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529E4FF08F399D03C1770F3428E7DF0F /* BatchDispatchMiddlewareTests.swift in Sources */,
+				42E7B2E8FC1D53C6E001DA8857DD1284 /* CommandTests.swift in Sources */,
+				9557854F05C34E0A0C8700E8E5232B67 /* DisposableTests.swift in Sources */,
+				8E6D2E0561DCEF1C0C4669AABD6359BF /* EnableBatchingTests.swift in Sources */,
+				50BB1C114E6DB7D7939C7F8AD3E30D2E /* EpicsTests.swift in Sources */,
+				7CB366184F74EBA1A96472F4687216AA /* MiddlewareTests.swift in Sources */,
+				D9C131E4AD1822BF38DB25ECBD559656 /* Observable+SteroidsTests.swift in Sources */,
+				3D1E0D9FA1767121A699CE1B72FCAA94 /* ObservableProducerTests.swift in Sources */,
+				8FC67D204E29A95E9B2DAEC8FCB0A290 /* ObservableTests.swift in Sources */,
+				2EEFE1A18A08BFC368CCBBCD265CCD8D /* PerformanceTests.swift in Sources */,
+				760769CDC1AE41713611A22EC549E16F /* ReducerTests.swift in Sources */,
+				50335D66C8B6603D068331BFDF7BA67A /* Redux+CommandTests.swift in Sources */,
+				60875C202B8126327E7443D9D03D45F5 /* SideEffectsTests.swift in Sources */,
+				9214B1E821157F1976B7F62AA48908EF /* Store+SteroidsTests.swift in Sources */,
+				BDE5C22B7C4E95E9A139B23ADC5EF154 /* StoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1114,41 +1139,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F4E5034BAD0039DCD75A4F74FB8B875A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				82849556FB415DAF8EC58710BC99EEBA /* BatchDispatchMiddlewareTests.swift in Sources */,
-				5AF9386B385171FADFD2DBDADE87F373 /* CommandTests.swift in Sources */,
-				2FD2D39BBAB4940FF885DAECD0BA3F4D /* DisposableTests.swift in Sources */,
-				42E459248A831A42A600E5F58DF86A35 /* EnableBatchingTests.swift in Sources */,
-				CACE0CA38B3F1EA96AD1604D8EF74940 /* EpicsTests.swift in Sources */,
-				A2B459D0F3D65AD16197F79511294FAF /* MiddlewareTests.swift in Sources */,
-				36B199598C629CAC9916BE712AFD3502 /* Observable+SteroidsTests.swift in Sources */,
-				4D3A73F33EF9E40C9D562C03F504C172 /* ObservableTests.swift in Sources */,
-				9FBFB0D0A14002CCDD75087B0D946E35 /* PerformanceTests.swift in Sources */,
-				C4133745012492E50D936C72E9DFA97C /* ReducerTests.swift in Sources */,
-				5B611FFB04CBE6B2CC7E5898EF4DA25E /* Redux+CommandTests.swift in Sources */,
-				D49085583A8E75A6F530E7669FFC63E6 /* SideEffectsTests.swift in Sources */,
-				C38FC2324353B4474B738C22B3BDB1D3 /* Store+SteroidsTests.swift in Sources */,
-				67C45E47CA31EE677C5F300ECC1D4ADC /* StoreTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2E6316C08D6C25DFD4BCF64408242D1C /* PBXTargetDependency */ = {
+		20E40C6A31D8F7D316442EC6E8FFBEDD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = SwiftyRedux;
-			target = 7B4EEFF692F050D206C33189C457E1E6 /* SwiftyRedux */;
-			targetProxy = 32F20C6771FE6618D8712C9A1FC3D8BF /* PBXContainerItemProxy */;
-		};
-		40A2AC73C2464B70CADF1A8B95197157 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Result;
-			target = 8E7BFB9E0514AAFDD72849C041839E0C /* Result */;
-			targetProxy = 818092BCBF40B80F36B153AD3AE1C221 /* PBXContainerItemProxy */;
+			name = ReactiveSwift;
+			target = 6FEEFD5062967DD80B245F48254A7BFD /* ReactiveSwift */;
+			targetProxy = 5E1927E596E58F3A35FC0C6B173C66F2 /* PBXContainerItemProxy */;
 		};
 		4C83C3F060F4F2536BEE7B0ED241361E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1180,17 +1178,23 @@
 			target = 8E7BFB9E0514AAFDD72849C041839E0C /* Result */;
 			targetProxy = 1DF5D9ACB3AA0A09DC4F7648246AA6CF /* PBXContainerItemProxy */;
 		};
+		8D75A19F1B4B9F1279A772D8467688BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SwiftyRedux;
+			target = 7B4EEFF692F050D206C33189C457E1E6 /* SwiftyRedux */;
+			targetProxy = 08B0BA8E611CA3E8E686165AB4A54A17 /* PBXContainerItemProxy */;
+		};
+		9590E33C1E230024C5145935B8944028 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Result;
+			target = 8E7BFB9E0514AAFDD72849C041839E0C /* Result */;
+			targetProxy = D0734F1C0F0E5C841951DF4A96CE95CF /* PBXContainerItemProxy */;
+		};
 		98B8F68E5929CF0D414FA04AE9E1B0B6 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyRedux;
 			target = 7B4EEFF692F050D206C33189C457E1E6 /* SwiftyRedux */;
 			targetProxy = 3663267403E4A9EF59B4B3B28F784110 /* PBXContainerItemProxy */;
-		};
-		D3982B00BC8FC2AFB50D63C821DAD744 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = ReactiveSwift;
-			target = 6FEEFD5062967DD80B245F48254A7BFD /* ReactiveSwift */;
-			targetProxy = A9169D7B12EB8984B6A3B50CE212363C /* PBXContainerItemProxy */;
 		};
 		DA9831F9B4C499F9E24DA2D01EC804B9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1266,6 +1270,28 @@
 			};
 			name = Debug;
 		};
+		4CA734330364CF07682E3BE9378151AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 601A5CF837B308D4AB693B05F64E9D93 /* SwiftyRedux.unit.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				PRODUCT_NAME = "SwiftyRedux-Unit-Tests";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 		6C8C5B04206DFBB3C19C73DEA3D58CB1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 79504CBFB64E663B15C5902337884BC3 /* Pods-SwiftyRedux_Tests.release.xcconfig */;
@@ -1300,31 +1326,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
-		};
-		70B4BB7C6BB993F3C3196E54DB56BD16 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 601A5CF837B308D4AB693B05F64E9D93 /* SwiftyRedux.unit.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				CODE_SIGNING_ALLOWED = YES;
-				CODE_SIGNING_REQUIRED = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-lswiftSwiftOnoneSupport",
-				);
-				PRODUCT_NAME = "SwiftyRedux-Unit-Tests";
-				SDKROOT = iphoneos;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-			};
-			name = Debug;
 		};
 		8DDFA5FA8D4131BFD96E5E26F3672644 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -1683,7 +1684,7 @@
 			};
 			name = Release;
 		};
-		E734647267AE58089B95BD161334292A /* Release */ = {
+		DC0D7CE0D6340AFD48C1A09CA6427F2D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 601A5CF837B308D4AB693B05F64E9D93 /* SwiftyRedux.unit.xcconfig */;
 			buildSettings = {
@@ -1697,17 +1698,29 @@
 				GCC_PREFIX_HEADER = "Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/SwiftyRedux/SwiftyRedux-Unit-Tests-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lswiftSwiftOnoneSupport",
+				);
 				PRODUCT_NAME = "SwiftyRedux-Unit-Tests";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.2;
-				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		07E69BDA16ED40C7FC02AC9EED681883 /* Build configuration list for PBXNativeTarget "SwiftyRedux-Unit-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC0D7CE0D6340AFD48C1A09CA6427F2D /* Debug */,
+				4CA734330364CF07682E3BE9378151AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		1AFC21CD5CC8EBB11F9154F01E60B978 /* Build configuration list for PBXNativeTarget "Pods-SwiftyRedux_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1740,15 +1753,6 @@
 			buildConfigurations = (
 				9AC7F7D5BEFF492B6897270A7E45FD29 /* Debug */,
 				D11907FAA82F719BC2261ECD2ABB57B3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5647363951E5869CBD189E1A0F04DE72 /* Build configuration list for PBXNativeTarget "SwiftyRedux-Unit-Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				70B4BB7C6BB993F3C3196E54DB56BD16 /* Debug */,
-				E734647267AE58089B95BD161334292A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

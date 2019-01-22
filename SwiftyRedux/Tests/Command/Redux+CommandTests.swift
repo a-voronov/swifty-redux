@@ -19,6 +19,22 @@ class ReduxCommandTests: XCTestCase {
     }
 
     // TODO: test subscribe includingCurrentState: true
+    func testStore_whenSubscribingWithCommand_andIncludingCurrentState_shouldRedirectToOriginalMethod_byCallingCommandForCurrentStateAndEveryNextActionDispatched() {
+        var result = [State]()
+        let queue = DispatchQueue(label: "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched")
+        let store = Store<State>(state: initialState, reducer: { a, s in s + 1 }, middleware: [nopMiddleware])
+
+        store.subscribe(on: queue, includingCurrentState: true, Command { value in result.append(value) })
+
+        store.dispatch(AnyAction())
+        store.dispatch(AnyAction())
+        store.dispatchAndWait(AnyAction())
+
+        // wait for serial queue to finish executing previous async tasks
+        queue.sync {}
+
+        XCTAssertEqual(result, [0, 1, 2, 3])
+    }
 
     func testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandOnSpecifiedQueueForActionDispatched() {
         let id = "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandOnSpecifiedQueueForActionDispatched"
@@ -38,11 +54,11 @@ class ReduxCommandTests: XCTestCase {
     }
 
     func testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched() {
-        var result = 0
+        var result = [State]()
         let queue = DispatchQueue(label: "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched")
-        let store = Store<State>(state: initialState, reducer: nopReducer, middleware: [nopMiddleware])
+        let store = Store<State>(state: initialState, reducer: { a, s in s + 1 }, middleware: [nopMiddleware])
 
-        store.subscribe(on: queue, includingCurrentState: false, Command { value in result += 1 })
+        store.subscribe(on: queue, includingCurrentState: false, Command { value in result.append(value) })
 
         store.dispatch(AnyAction())
         store.dispatch(AnyAction())
@@ -51,7 +67,7 @@ class ReduxCommandTests: XCTestCase {
         // wait for serial queue to finish executing previous async tasks
         queue.sync {}
 
-        XCTAssertEqual(result, 3)
+        XCTAssertEqual(result, [1, 2, 3])
     }
 
     func testObservable_whenSubscribingWithCommand_shouldRedirectToOriginalMethod() {

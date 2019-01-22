@@ -53,8 +53,6 @@ class StoreTests: XCTestCase {
         nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
-    // TODO: test subscribe includingCurrentState: true
-
     func testMiddlewareIsExecutedOnlyOnceBeforeActionReceived() {
         let mock = MockMiddleware()
         let store = Store(state: initialState, reducer: nopReducer, middleware: [mock.middleware])
@@ -127,7 +125,7 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, 42)
     }
 
-    func testStore_afterSubscribeAndDispatchFlow_deinits_andAllDisposablesDispose() {
+    func testStore_afterSubscribeAndDispatchFlow_andItDeinits_allDisposablesShouldDispose() {
         weak var store: Store<State>?
         var disposable: Disposable!
 
@@ -142,7 +140,7 @@ class StoreTests: XCTestCase {
         XCTAssertNil(store)
     }
 
-    func testMiddleware_whenRunOnDefaultQueue_isExecutedSequentiallyWithReducer() {
+    func testMiddleware_whenRunOnDefaultQueue_shouldBeExecutedSequentiallyWithReducer() {
         var result = [String]()
         let middleware: Middleware<State> = createMiddleware { getState, dispatch, next in
             return { action in
@@ -164,7 +162,7 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, ["m-one", "r-one", "m-two", "r-two", "m-three", "r-three", "m-four", "r-four"])
     }
 
-    func testMiddleware_evenIfRunOnDifferentQueues_isExecutedSequentially() {
+    func testMiddleware_evenIfRunOnDifferentQueues_shouldBeExecutedSequentially() {
         func asyncMiddleware(id: String, qos: DispatchQoS.QoSClass) -> Middleware<State> {
             let asyncExpectation = expectation(description: "\(id) async middleware expectation")
             return createMiddleware { getState, dispatch, next in
@@ -196,7 +194,7 @@ class StoreTests: XCTestCase {
         }
     }
 
-    func testStore_whenSubscribing_startReceivingStateUpdates() {
+    func testStore_whenSubscribingNotIncludingCurrentState_shouldOnlyReceiveNextStateUpdates() {
         let reducer: Reducer<State> = { action, state in
             switch action {
             case let action as OpAction where action == OpAction.mul: return state * 2
@@ -216,36 +214,24 @@ class StoreTests: XCTestCase {
         XCTAssertEqual(result, [6, 9])
     }
 
-    func testSubscribeToStore_whenSkippingRepeats_receiveUniqueStateUpdates() {
-        let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
+    func testStore_whenSubscribingIncludingCurrentState_shouldImmediatelyReceiveCurrentStateAndKeepReceivingNextStateUpdates() {
         let reducer: Reducer<State> = { action, state in
-            (action as! AnyAction).rawValue
+            switch action {
+            case let action as OpAction where action == OpAction.mul: return state * 2
+            case let action as OpAction where action == OpAction.inc: return state + 3
+            default: return state
+            }
         }
-        let store = Store<State>(state: initialState, reducer: reducer)
+        let store = Store<State>(state: 3, reducer: reducer)
 
         var result: [State] = []
-        store.subscribeUnique(includingCurrentState: false) { state in
+        store.subscribe(includingCurrentState: true) { state in
             result.append(state)
         }
-        actions.forEach(store.dispatchAndWait)
+        store.dispatch(OpAction.mul)
+        store.dispatchAndWait(OpAction.inc)
 
-        XCTAssertEqual(result, [1, 2, 1, 3, 5, 2])
-    }
-
-    func testSubscribeToStore_whenNotSkippingRepeats_receiveDuplicatedStateUpdates() {
-        let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
-        let reducer: Reducer<State> = { action, state in
-            (action as! AnyAction).rawValue
-        }
-        let store = Store<State>(state: initialState, reducer: reducer)
-
-        var result: [State] = []
-        store.subscribe(includingCurrentState: false) { state in
-            result.append(state)
-        }
-        actions.forEach(store.dispatchAndWait)
-
-        XCTAssertEqual(result, [1, 2, 1, 1, 3, 3, 5, 2])
+        XCTAssertEqual(result, [3, 6, 9])
     }
 
     func testStore_whenSubscribing_ReceiveStateUpdatesOnSelectedQueue() {

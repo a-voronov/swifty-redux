@@ -19,27 +19,27 @@ public final class ObservableProducer<Value> {
         }
     }
 
+    @discardableResult
     public func start(on observingQueue: DispatchQueue? = nil, observer: @escaping (Value) -> Void) -> Disposable {
         var disposable: Disposable!
-        startWithObservable { observable, innerDisposable in
-            observable.subscribe(on: observingQueue, observer: observer)
-            disposable = innerDisposable
+        startWithObservable { observable, innerDisposables in
+            innerDisposables += observable.subscribe(on: observingQueue, observer: observer)
+            disposable = Disposable(action: innerDisposables.dispose)
         }
         return disposable
     }
 
-    public func startWithObservable(_ setup: (Observable<Value>, Disposable) -> Void) {
+    public func startWithObservable(_ setup: (Observable<Value>, CompositeDisposable) -> Void) {
         let disposables = CompositeDisposable()
-        let disposable = Disposable(action: disposables.dispose)
-        let (observable, observer) = Observable<Value>.pipe(disposable: disposable)
-        setup(observable, disposable)
+        let (observable, observer) = Observable<Value>.pipe(disposable: Disposable(action: disposables.dispose))
+        setup(observable, disposables)
         startHandler(observer, disposables)
     }
 
     public func lift<T>(_ transform: @escaping (Observable<Value>) -> Observable<T>) -> ObservableProducer<T> {
         return ObservableProducer<T> { observer, outerDisposables in
-            self.startWithObservable { observable, innerDisposable in
-                outerDisposables += innerDisposable
+            self.startWithObservable { observable, innerDisposables in
+                outerDisposables += innerDisposables
                 transform(observable).subscribe(observer: observer.update)
             }
         }
