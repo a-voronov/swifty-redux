@@ -25,7 +25,7 @@ Swifty implementation of Redux with optional add-ons.
   s.homepage         = 'https://github.com/a-voronov/swifty-redux'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Alexander Voronov' => 'voronovaleksandr91@gmail.com' }
-  s.source           = { :git => 'git@github.com:a-voronov/swifty-redux.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/a-voronov/swifty-redux.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/aleks_voronov'
 
   s.ios.deployment_target = '10.0'

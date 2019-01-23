@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		34CDC97B6A5AE2533DEE7BD2 /* Pods-SwiftyRedux_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftyRedux_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftyRedux_Example/Pods-SwiftyRedux_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		5969ADD70835EBBA59DCF386 /* SwiftyRedux.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftyRedux.podspec; path = ../SwiftyRedux.podspec; sourceTree = "<group>"; };
+		5969ADD70835EBBA59DCF386 /* SwiftyRedux.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftyRedux.podspec; path = ../SwiftyRedux.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		607FACD01AFB9204008FA782 /* SwiftyRedux_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftyRedux_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
