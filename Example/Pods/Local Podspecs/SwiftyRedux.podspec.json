@@ -22,6 +22,7 @@
   },
   "default_subspecs": [
     "Core",
+    "Steroids",
     "Command",
     "BatchedActions",
     "SideEffects"
@@ -44,16 +45,22 @@
         "SwiftyRedux/Core": [
 
         ],
+        "SwiftyRedux/Steroids": [
+
+        ],
         "SwiftyRedux/Command": [
 
         ],
         "SwiftyRedux/BatchedActions": [
 
         ],
+        "SwiftyRedux/SideEffects": [
+
+        ],
         "SwiftyRedux/Epics": [
 
         ],
-        "SwiftyRedux/SideEffects": [
+        "SwiftyRedux/ReactiveExtensions": [
 
         ]
       },
@@ -62,6 +69,22 @@
           "name": "Tests",
           "test_type": "unit",
           "source_files": "SwiftyRedux/Tests/**/*.{swift}"
+        }
+      ]
+    },
+    {
+      "name": "Steroids",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ]
+      },
+      "source_files": "SwiftyRedux/Sources/Steroids/**/*.{swift}",
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/Steroids/**/*.{swift}"
         }
       ]
     },
@@ -98,6 +121,22 @@
       ]
     },
     {
+      "name": "SideEffects",
+      "dependencies": {
+        "SwiftyRedux/Core": [
+
+        ]
+      },
+      "source_files": "SwiftyRedux/Sources/SideEffects/**/*.{swift}",
+      "testspecs": [
+        {
+          "name": "Tests",
+          "test_type": "unit",
+          "source_files": "SwiftyRedux/Tests/SideEffects/**/*.{swift}"
+        }
+      ]
+    },
+    {
       "name": "Epics",
       "dependencies": {
         "SwiftyRedux/Core": [
@@ -117,18 +156,24 @@
       ]
     },
     {
-      "name": "SideEffects",
+      "name": "ReactiveExtensions",
       "dependencies": {
         "SwiftyRedux/Core": [
 
+        ],
+        "SwiftyRedux/Steroids": [
+
+        ],
+        "ReactiveSwift": [
+          "~> 4.0"
         ]
       },
-      "source_files": "SwiftyRedux/Sources/SideEffects/**/*.{swift}",
+      "source_files": "SwiftyRedux/Sources/ReactiveExtensions/**/*.{swift}",
       "testspecs": [
         {
           "name": "Tests",
           "test_type": "unit",
-          "source_files": "SwiftyRedux/Tests/SideEffects/**/*.{swift}"
+          "source_files": "SwiftyRedux/Tests/ReactiveExtensions/**/*.{swift}"
         }
       ]
     }
