@@ -16,11 +16,11 @@ public struct BatchAction: BatchedActions {
 /// Handling bundled actions in reducer
 
 public func enableBatching<State>(_ reducer: @escaping Reducer<State>) -> Reducer<State> {
-    func batchingReducer(_ action: Action, _ state: State) -> State {
+    func batchingReducer(_ state: State, _ action: Action) -> State {
         guard let batchAction = action as? BatchedActions else {
-            return reducer(action, state)
+            return reducer(state, action)
         }
-        return batchAction.actions.reduce(state) { batchingReducer($1, $0) }
+        return batchAction.actions.reduce(state, batchingReducer)
     }
     return batchingReducer
 }

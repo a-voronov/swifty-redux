@@ -14,7 +14,7 @@ class ReduxCommandTests: XCTestCase {
         super.setUp()
 
         initialState = 0
-        nopReducer = { action, state in state }
+        nopReducer = { state, action in state }
         nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
@@ -22,7 +22,7 @@ class ReduxCommandTests: XCTestCase {
     func testStore_whenSubscribingWithCommand_andIncludingCurrentState_shouldRedirectToOriginalMethod_byCallingCommandForCurrentStateAndEveryNextActionDispatched() {
         var result = [State]()
         let queue = DispatchQueue(label: "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched")
-        let store = Store<State>(state: initialState, reducer: { a, s in s + 1 }, middleware: [nopMiddleware])
+        let store = Store<State>(state: initialState, reducer: { s, a in s + 1 }, middleware: [nopMiddleware])
 
         store.subscribe(on: queue, includingCurrentState: true, Command { value in result.append(value) })
 
@@ -56,7 +56,7 @@ class ReduxCommandTests: XCTestCase {
     func testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched() {
         var result = [State]()
         let queue = DispatchQueue(label: "testStore_whenSubscribingWithCommand_shouldRedirectToOriginalMethod_byCallingCommandForEveryActionDispatched")
-        let store = Store<State>(state: initialState, reducer: { a, s in s + 1 }, middleware: [nopMiddleware])
+        let store = Store<State>(state: initialState, reducer: { s, a in s + 1 }, middleware: [nopMiddleware])
 
         store.subscribe(on: queue, includingCurrentState: false, Command { value in result.append(value) })
 

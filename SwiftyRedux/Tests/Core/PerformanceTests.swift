@@ -13,7 +13,7 @@ class PerformanceTests: XCTestCase {
         super.setUp()
 
         observers = (0..<3000).map { _ in { _ in } }
-        store = Store<State>(state: 0, reducer: { action, state in state })
+        store = Store<State>(state: 0, reducer: { state, action in state })
     }
 
     func testNotify() {
