@@ -111,4 +111,36 @@ class ObservableTests: XCTestCase {
             XCTAssertEqual(result, subscribersQueue.label)
         }
     }
+
+    func testObservable_whenInitializedWithAnotherObservable_shouldSubscribeToItsUpdates() {
+        var result = [Int]()
+        let (sourceObservable, sourceObserver) = Observable<Int>.pipe()
+        let observable = Observable<Int>(observable: sourceObservable)
+
+        observable.subscribe { value in
+            result.append(value)
+        }
+
+        sourceObserver.update(1)
+        sourceObserver.update(2)
+        sourceObserver.update(3)
+
+        XCTAssertEqual(result, [1, 2, 3])
+    }
+
+    func testObservable_whenInitializedWithAnotherObservable_shouldStopReceivingUpdatesAfterDisposing() {
+        var result = [Int]()
+        let (sourceObservable, sourceObserver) = Observable<Int>.pipe()
+        let observable = Observable(observable: sourceObservable)
+        let disposable = observable.subscribe { value in
+            result.append(value)
+        }
+
+        sourceObserver.update(1)
+        sourceObserver.update(2)
+        disposable.dispose()
+        sourceObserver.update(3)
+
+        XCTAssertEqual(result, [1, 2])
+    }
 }
