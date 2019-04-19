@@ -20,10 +20,10 @@ public final class Observer<Value> {
 }
 
 extension Observer: Hashable {
-    public var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(ObjectIdentifier(self))
     }
-
+    
     public static func == (lhs: Observer, rhs: Observer) -> Bool {
         return lhs === rhs
     }

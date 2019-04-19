@@ -2,7 +2,7 @@ import ReactiveSwift
 import Result
 
 public extension Signal where Value == Action, Error == NoError {
-    public func ofType<T: Action>(_ type: T.Type) -> Signal<T, NoError> {
+    func ofType<T: Action>(_ type: T.Type) -> Signal<T, NoError> {
         return filterMap { value in
             value as? T
         }

@@ -54,8 +54,8 @@ public final class Disposable {
 }
 
 extension Disposable: Hashable {
-    public var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(ObjectIdentifier(self))
     }
 
     public static func == (lhs: Disposable, rhs: Disposable) -> Bool {

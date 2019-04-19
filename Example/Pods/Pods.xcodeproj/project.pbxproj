@@ -177,7 +177,7 @@
 		0E77EC1F99EAA6A19014306EAA2A8040 /* Store+SteroidsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Store+SteroidsTests.swift"; sourceTree = "<group>"; };
 		100D9AEEE75B14C841D60DAD9BEB8FC6 /* ReactiveExtensionsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = ReactiveExtensionsTests.swift; sourceTree = "<group>"; };
 		118277CAE01EBDF499AC81231DED0ED5 /* UninhabitedTypeGuards.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UninhabitedTypeGuards.swift; path = Sources/UninhabitedTypeGuards.swift; sourceTree = "<group>"; };
-		12049F6B02B14C4D36136BA9BBB73BA2 /* SwiftyRedux-Unit-Tests */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = "SwiftyRedux-Unit-Tests"; path = "SwiftyRedux-Unit-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		12049F6B02B14C4D36136BA9BBB73BA2 /* SwiftyRedux-Unit-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SwiftyRedux-Unit-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1638026ECE1E95948A08961F670653D5 /* SwiftyRedux.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyRedux.modulemap; sourceTree = "<group>"; };
 		1867FD397B34A68C37837E33BD53BAF4 /* NoError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NoError.swift; path = Result/NoError.swift; sourceTree = "<group>"; };
 		18FF8BD11C49908F5E1202237978524D /* Lifetime.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Lifetime.swift; path = Sources/Lifetime.swift; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 		2C7832AA7E31A9C40EE1C69C609B6803 /* Pods-SwiftyRedux_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyRedux_Example-frameworks.sh"; sourceTree = "<group>"; };
 		2C9D6EEBC69D59AA3A3FBF87FC14F933 /* Disposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Disposable.swift; path = Sources/Disposable.swift; sourceTree = "<group>"; };
 		31C0C59BFF258507EA4EA90FEBD43076 /* DisposableTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = DisposableTests.swift; sourceTree = "<group>"; };
-		3691BD2099D0074856D7BC8F155456E7 /* Pods_SwiftyRedux_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwiftyRedux_Example.framework; path = "Pods-SwiftyRedux_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3691BD2099D0074856D7BC8F155456E7 /* Pods_SwiftyRedux_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyRedux_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E33C8817B8DE115894D4174175A628 /* Middleware.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Middleware.swift; path = SwiftyRedux/Sources/Core/Middleware.swift; sourceTree = "<group>"; };
 		3F5A61FB85FB8530E9737611399A43F8 /* Pods-SwiftyRedux_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyRedux_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		457D05CB17E04619F25B663E7AE357C3 /* EventLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = EventLogger.swift; path = Sources/EventLogger.swift; sourceTree = "<group>"; };
@@ -214,12 +214,12 @@
 		694DF8EEF0A4A853503CEC5F40B939E5 /* SwiftyRedux-Unit-Tests-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyRedux-Unit-Tests-prefix.pch"; sourceTree = "<group>"; };
 		6AD64E8DF6AA2D28606B337B6E18F54F /* Epics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Epics.swift; path = SwiftyRedux/Sources/Epics/Epics.swift; sourceTree = "<group>"; };
 		6D098FBA05C8F73C8EE1BD2D052C8570 /* Observer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Observer.swift; path = Sources/Observer.swift; sourceTree = "<group>"; };
-		6E579C4143F9766F80005F3FE8107A58 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Result.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E579C4143F9766F80005F3FE8107A58 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7098107A6E9A27A2D41B32CA5C1DFC73 /* FoundationExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationExtensions.swift; path = Sources/FoundationExtensions.swift; sourceTree = "<group>"; };
 		70A9454D922B5E17940E2C69929E4EBD /* Atomic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Atomic.swift; sourceTree = "<group>"; };
 		712398BD6A058572D60DF0BD77F853F2 /* Pods-SwiftyRedux_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwiftyRedux_Example.modulemap"; sourceTree = "<group>"; };
 		7510210E99066CA815A05E7211BE8471 /* Signal.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Signal.swift; path = Sources/Signal.swift; sourceTree = "<group>"; };
-		75A967F3A81A1A044FEDB8B4DA3718E8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		75A967F3A81A1A044FEDB8B4DA3718E8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		79504CBFB64E663B15C5902337884BC3 /* Pods-SwiftyRedux_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyRedux_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		795A29BC8DF5BBDCA79357448B9D09FF /* ReactiveSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = ReactiveSwift.modulemap; sourceTree = "<group>"; };
 		79FE939E8AA44D3BC3EC5912D775F828 /* SwiftyRedux-Unit-Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyRedux-Unit-Tests-Info.plist"; sourceTree = "<group>"; };
@@ -232,12 +232,12 @@
 		88AED73DBF3EA5EFEFE5D16445D6BAB3 /* Flatten.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Flatten.swift; path = Sources/Flatten.swift; sourceTree = "<group>"; };
 		89F191AA115D592E7656B174F59CA38D /* Pods-SwiftyRedux_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SwiftyRedux_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		8B5D81074706DAED3E3A101F15C5140B /* Pods-SwiftyRedux_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftyRedux_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		8BF873859AC3EAA00852AACF7A5B5F10 /* ReactiveSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = ReactiveSwift.framework; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BF873859AC3EAA00852AACF7A5B5F10 /* ReactiveSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ReactiveSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90E3BC87E720C646E1BD127BB71F9A6F /* Deprecations+Removals.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Deprecations+Removals.swift"; path = "Sources/Deprecations+Removals.swift"; sourceTree = "<group>"; };
 		9231387B79C4625860CDB43060124BD1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		96E16D5F1F8AED62ECAF325BD438F283 /* Observable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		96FA63664711F542417251AC45E874F9 /* SwiftyRedux.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = SwiftyRedux.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		96FA63664711F542417251AC45E874F9 /* SwiftyRedux.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = SwiftyRedux.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9913A9D060135780689D89E2193C7E5F /* SwiftyRedux-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyRedux-dummy.m"; sourceTree = "<group>"; };
 		99B3F0762B39DCDC4E3D84D71651778C /* Atomic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Atomic.swift; path = Sources/Atomic.swift; sourceTree = "<group>"; };
 		99CB577949CD8324F51B38EAF2271038 /* Pods-SwiftyRedux_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SwiftyRedux_Tests.modulemap"; sourceTree = "<group>"; };
@@ -254,7 +254,7 @@
 		B0F7F8B5E32173C25BCE796FBDB7B7AD /* EpicsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = EpicsTests.swift; sourceTree = "<group>"; };
 		B1E7B5E72D03482D66D1B39F1C88E076 /* Disposable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Disposable.swift; sourceTree = "<group>"; };
 		B5C328FBE107006CCF0FE40A413BE072 /* SignalProducer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SignalProducer.swift; path = Sources/SignalProducer.swift; sourceTree = "<group>"; };
-		B785F41E20592D8BA4E11686B2C9443B /* Pods_SwiftyRedux_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwiftyRedux_Tests.framework; path = "Pods-SwiftyRedux_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B785F41E20592D8BA4E11686B2C9443B /* Pods_SwiftyRedux_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftyRedux_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB371817B2B6CE728543CAC3B1A56E3A /* Result-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Result-prefix.pch"; sourceTree = "<group>"; };
 		BFDE38F1C2B750254FCEC7C5834074D6 /* StoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StoreTests.swift; sourceTree = "<group>"; };
 		C247C6402FB2C8090A11372A49A3895A /* SwiftyRedux.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyRedux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,7 +264,7 @@
 		C88351CDF7AAD7353D33EE21A4707040 /* ResultExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultExtensions.swift; path = Sources/ResultExtensions.swift; sourceTree = "<group>"; };
 		C99560384F96C02668AA4E1B7ED103DE /* Command.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Command.swift; path = SwiftyRedux/Sources/Command/Command.swift; sourceTree = "<group>"; };
 		CBA8540C35093B283EFAD44139C3E04E /* Pods-SwiftyRedux_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftyRedux_Example-dummy.m"; sourceTree = "<group>"; };
-		CC42E57095E011263C560DF89D4BCA8B /* SwiftyRedux.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyRedux.framework; path = SwiftyRedux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CC42E57095E011263C560DF89D4BCA8B /* SwiftyRedux.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyRedux.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CFCAC8264C40DF503FC7B527FF45F459 /* Pods-SwiftyRedux_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyRedux_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		D89DCF324834520A5AD12CEC6201F897 /* SwiftyRedux.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyRedux.xcconfig; sourceTree = "<group>"; };
 		DB305D1341BA2EE27262C6B0E302456D /* Pods-SwiftyRedux_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SwiftyRedux_Example-resources.sh"; sourceTree = "<group>"; };
@@ -279,7 +279,7 @@
 		F112115C88E80E30191D5776C8016F68 /* Redux+CommandTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "Redux+CommandTests.swift"; sourceTree = "<group>"; };
 		F2CC20610B45AB3AB473DC1A61743FE2 /* Pods-SwiftyRedux_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftyRedux_Tests-dummy.m"; sourceTree = "<group>"; };
 		F600229F8B845481AE6AEAEB26B3E6B5 /* Bag.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Bag.swift; path = Sources/Bag.swift; sourceTree = "<group>"; };
-		F6AD33678459722B8E79AAB7C608F951 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		F6AD33678459722B8E79AAB7C608F951 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F851A8A1448E1ED1A7F62495FC6C85F3 /* Pods-SwiftyRedux_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftyRedux_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		FBF209F1BD86FA4EBD5EC5F5F114D510 /* Result.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Result.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -600,7 +600,7 @@
 				8BF873859AC3EAA00852AACF7A5B5F10 /* ReactiveSwift.framework */,
 				6E579C4143F9766F80005F3FE8107A58 /* Result.framework */,
 				CC42E57095E011263C560DF89D4BCA8B /* SwiftyRedux.framework */,
-				12049F6B02B14C4D36136BA9BBB73BA2 /* SwiftyRedux-Unit-Tests */,
+				12049F6B02B14C4D36136BA9BBB73BA2 /* SwiftyRedux-Unit-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -686,7 +686,6 @@
 				2B38246B2057835643F4B26C19992753 /* ResultProtocol.swift */,
 				4599A6DB89B8F64068E635F0A67BF16C /* Support Files */,
 			);
-			name = Result;
 			path = Result;
 			sourceTree = "<group>";
 		};
@@ -724,7 +723,6 @@
 				0D103409E394796406E0C106A06AFF6C /* ValidatingProperty.swift */,
 				4FAAC0E8D6A35037A5233CF4D56483B5 /* Support Files */,
 			);
-			name = ReactiveSwift;
 			path = ReactiveSwift;
 			sourceTree = "<group>";
 		};
@@ -917,7 +915,7 @@
 			);
 			name = "SwiftyRedux-Unit-Tests";
 			productName = "SwiftyRedux-Unit-Tests";
-			productReference = 12049F6B02B14C4D36136BA9BBB73BA2 /* SwiftyRedux-Unit-Tests */;
+			productReference = 12049F6B02B14C4D36136BA9BBB73BA2 /* SwiftyRedux-Unit-Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -928,12 +926,27 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
+				TargetAttributes = {
+					6FEEFD5062967DD80B245F48254A7BFD = {
+						LastSwiftMigration = 1020;
+					};
+					7B4EEFF692F050D206C33189C457E1E6 = {
+						LastSwiftMigration = 1020;
+					};
+					8E7BFB9E0514AAFDD72849C041839E0C = {
+						LastSwiftMigration = 1020;
+					};
+					B2FE07A87CB2B7A2BBD6CC6A54D8A90B = {
+						LastSwiftMigration = 1020;
+					};
+				};
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
@@ -1243,7 +1256,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1278,8 +1291,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1311,9 +1323,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.1.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1345,9 +1356,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1372,9 +1382,8 @@
 				PRODUCT_NAME = "SwiftyRedux-Unit-Tests";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1404,7 +1413,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.1.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1471,9 +1480,8 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1537,7 +1545,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -1726,7 +1734,7 @@
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

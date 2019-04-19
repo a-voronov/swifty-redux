@@ -51,8 +51,8 @@ extension Command {
 }
 
 extension Command: Hashable {
-    public var hashValue: Int {
-        return ObjectIdentifier(self).hashValue
+    public func hash(into hasher: inout Hasher) {
+        return hasher.combine(ObjectIdentifier(self))
     }
 
     public static func == (lhs: Command, rhs: Command) -> Bool {
