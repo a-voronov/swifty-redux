@@ -92,7 +92,7 @@ Swifty implementation of Redux with optional add-ons.
 
   s.subspec 'Epics' do |ss|
     ss.dependency 'SwiftyRedux/Core'
-    ss.dependency 'ReactiveSwift', '~> 4.0'
+    ss.dependency 'ReactiveSwift', '~> 6.0'
     ss.source_files = 'SwiftyRedux/Sources/Epics/**/*.{swift}'
 
     ss.test_spec 'Tests' do |ts|
@@ -103,7 +103,7 @@ Swifty implementation of Redux with optional add-ons.
   s.subspec 'ReactiveExtensions' do |ss|
     ss.dependency 'SwiftyRedux/Core'
     ss.dependency 'SwiftyRedux/Steroids'
-    ss.dependency 'ReactiveSwift', '~> 4.0'
+    ss.dependency 'ReactiveSwift', '~> 6.0'
     ss.source_files = 'SwiftyRedux/Sources/ReactiveExtensions/**/*.{swift}'
 
     ss.test_spec 'Tests' do |ts|
