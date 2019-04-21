@@ -23,7 +23,7 @@ extension Observer: Hashable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(ObjectIdentifier(self))
     }
-    
+
     public static func == (lhs: Observer, rhs: Observer) -> Bool {
         return lhs === rhs
     }
