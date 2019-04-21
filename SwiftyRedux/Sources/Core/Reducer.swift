@@ -7,12 +7,12 @@
 /// They can be nested and combined together.
 /// And it's better if they are split into smaller reducers that are focused on a small domain state.
 
-public typealias Reducer<State> = (_ action: Action, _ state: State) -> State
+public typealias Reducer<State> = (_ state: State, _ action: Action) -> State
 
 public func combineReducers<State>(_ first: @escaping Reducer<State>, _ rest: Reducer<State>...) -> Reducer<State> {
-    return { action, state in
-        rest.reduce(first(action, state)) { state, reducer in
-            reducer(action, state)
+    return { state, action in
+        rest.reduce(first(state, action)) { state, reducer in
+            reducer(state, action)
         }
     }
 }

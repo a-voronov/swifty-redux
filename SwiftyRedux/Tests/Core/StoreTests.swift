@@ -49,7 +49,7 @@ class StoreTests: XCTestCase {
         super.setUp()
 
         initialState = 0
-        nopReducer = { action, state in state }
+        nopReducer = { state, action in state }
         nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
@@ -148,7 +148,7 @@ class StoreTests: XCTestCase {
                 next(action)
             }
         }
-        let reducer: Reducer<State> = { action, state in
+        let reducer: Reducer<State> = { state, action in
             result.append("r-\(action)")
             return state
         }
@@ -177,7 +177,7 @@ class StoreTests: XCTestCase {
         }
 
         var result = ""
-        let reducer: Reducer<State> = { action, state in
+        let reducer: Reducer<State> = { state, action in
             let action = (action as! StringAction).value
             result += action
             return state
@@ -195,7 +195,7 @@ class StoreTests: XCTestCase {
     }
 
     func testStore_whenSubscribingNotIncludingCurrentState_shouldOnlyReceiveNextStateUpdates() {
-        let reducer: Reducer<State> = { action, state in
+        let reducer: Reducer<State> = { state, action in
             switch action {
             case let action as OpAction where action == OpAction.mul: return state * 2
             case let action as OpAction where action == OpAction.inc: return state + 3
@@ -215,7 +215,7 @@ class StoreTests: XCTestCase {
     }
 
     func testStore_whenSubscribingIncludingCurrentState_shouldImmediatelyReceiveCurrentStateAndKeepReceivingNextStateUpdates() {
-        let reducer: Reducer<State> = { action, state in
+        let reducer: Reducer<State> = { state, action in
             switch action {
             case let action as OpAction where action == OpAction.mul: return state * 2
             case let action as OpAction where action == OpAction.inc: return state + 3
@@ -283,7 +283,7 @@ class StoreTests: XCTestCase {
     }
 
     func testStore_whenUnsubscribing_stopReceivingStateUpdates() {
-        let reducer: Reducer<State> = { action, state in
+        let reducer: Reducer<State> = { state, action in
             (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: initialState, reducer: reducer)
