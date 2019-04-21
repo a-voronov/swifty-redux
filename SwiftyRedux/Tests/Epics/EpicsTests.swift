@@ -1,6 +1,6 @@
 import XCTest
 import ReactiveSwift
-import Result
+
 @testable import SwiftyRedux
 
 private typealias State = Int

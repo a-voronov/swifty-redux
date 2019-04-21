@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.name             = 'SwiftyRedux'
   s.version          = '0.1.0'
   s.summary          = 'Swifty implementation of Redux'
-  s.swift_version    = '4.2'
+  s.swift_version    = '5.0'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -92,7 +92,7 @@ Swifty implementation of Redux with optional add-ons.
 
   s.subspec 'Epics' do |ss|
     ss.dependency 'SwiftyRedux/Core'
-    ss.dependency 'ReactiveSwift', '~> 4.0'
+    ss.dependency 'ReactiveSwift', '~> 6.0'
     ss.source_files = 'SwiftyRedux/Sources/Epics/**/*.{swift}'
 
     ss.test_spec 'Tests' do |ts|
@@ -103,7 +103,7 @@ Swifty implementation of Redux with optional add-ons.
   s.subspec 'ReactiveExtensions' do |ss|
     ss.dependency 'SwiftyRedux/Core'
     ss.dependency 'SwiftyRedux/Steroids'
-    ss.dependency 'ReactiveSwift', '~> 4.0'
+    ss.dependency 'ReactiveSwift', '~> 6.0'
     ss.source_files = 'SwiftyRedux/Sources/ReactiveExtensions/**/*.{swift}'
 
     ss.test_spec 'Tests' do |ts|

@@ -2,7 +2,7 @@
   "name": "SwiftyRedux",
   "version": "0.1.0",
   "summary": "Swifty implementation of Redux",
-  "swift_version": "4.2",
+  "swift_version": "5.0",
   "description": "Swifty implementation of Redux with optional add-ons.",
   "homepage": "https://github.com/a-voronov/swifty-redux",
   "license": {
@@ -13,7 +13,7 @@
     "Alexander Voronov": "voronovaleksandr91@gmail.com"
   },
   "source": {
-    "git": "git@github.com:a-voronov/swifty-redux.git",
+    "git": "https://github.com/a-voronov/swifty-redux.git",
     "tag": "0.1.0"
   },
   "social_media_url": "https://twitter.com/aleks_voronov",
@@ -143,7 +143,7 @@
 
         ],
         "ReactiveSwift": [
-          "~> 4.0"
+          "~> 6.0"
         ]
       },
       "source_files": "SwiftyRedux/Sources/Epics/**/*.{swift}",
@@ -165,7 +165,7 @@
 
         ],
         "ReactiveSwift": [
-          "~> 4.0"
+          "~> 6.0"
         ]
       },
       "source_files": "SwiftyRedux/Sources/ReactiveExtensions/**/*.{swift}",

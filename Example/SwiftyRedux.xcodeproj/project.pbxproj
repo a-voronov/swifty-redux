@@ -269,9 +269,8 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyRedux_Example/Pods-SwiftyRedux_Example-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-SwiftyRedux_Example/Pods-SwiftyRedux_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ReactiveSwift/ReactiveSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyRedux/SwiftyRedux.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -279,12 +278,11 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactiveSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyRedux.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SwiftyRedux_Example/Pods-SwiftyRedux_Example-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SwiftyRedux_Example/Pods-SwiftyRedux_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D6FF55EF478F9FBFB02088DA /* [CP] Check Pods Manifest.lock */ = {

@@ -6,9 +6,8 @@
 /// Actions always run through your reducers _before_ your Epics even receive them.
 
 import ReactiveSwift
-import Result
 
-public typealias Epic<State> = (Signal<Action, NoError>, Property<State>) -> Signal<Action, NoError>
+public typealias Epic<State> = (Signal<Action, Never>, Property<State>) -> Signal<Action, Never>
 
 public func createEpicMiddleware<State>(_ epic: @escaping Epic<State>) -> Middleware<State> {
     return { getState, dispatch, next in
@@ -16,7 +15,7 @@ public func createEpicMiddleware<State>(_ epic: @escaping Epic<State>) -> Middle
 
         let queueScheduler = QueueScheduler(qos: .default, name: "redux.epic.queue-scheduler")
         let state = MutableProperty<State>(initialState)
-        let (actionsSignal, actionsObserver) = Signal<Action, NoError>.pipe()
+        let (actionsSignal, actionsObserver) = Signal<Action, Never>.pipe()
 
         epic(actionsSignal, Property(state))
             .observe(on: queueScheduler)
