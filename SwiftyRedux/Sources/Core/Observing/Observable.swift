@@ -16,7 +16,7 @@ public final class Observable<Value> {
     private let observers: Atomic<Set<Observer<Value>>>
 
     public init(id: String? = nil, observable: (@escaping (Value) -> Void) -> Disposable?) {
-        self.id = id ?? "redux.observable"
+        self.id = id ?? "swifty-redux.observable"
         self.observers = Atomic(id: self.id, value: Set())
         self.disposables = CompositeDisposable(id: "\(self.id).composite-disposable")
         self.disposables += observable { value in

@@ -13,7 +13,7 @@ public func createEpicMiddleware<State>(_ epic: @escaping Epic<State>) -> Middle
     return { getState, dispatch, next in
         guard let initialState = getState() else { return next }
 
-        let queueScheduler = QueueScheduler(qos: .default, name: "redux.epic.queue-scheduler")
+        let queueScheduler = QueueScheduler(qos: .default, name: "swifty-redux.epic.queue-scheduler")
         let state = MutableProperty<State>(initialState)
         let (actionsSignal, actionsObserver) = Signal<Action, Never>.pipe()
 

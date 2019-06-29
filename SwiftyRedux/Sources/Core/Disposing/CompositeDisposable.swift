@@ -12,7 +12,7 @@ public final class CompositeDisposable {
     }
 
     internal init(id: String? = nil, disposables: Set<Disposable>) {
-        self.queue = DispatchQueue(label: (id ?? "redux.composite-disposable") + ".queue", attributes: .concurrent)
+        self.queue = DispatchQueue(label: (id ?? "swifty-redux.composite-disposable") + ".queue", attributes: .concurrent)
         self.disposables = disposables
     }
 

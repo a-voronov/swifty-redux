@@ -7,7 +7,7 @@ import Dispatch
 
 public final class Disposable {
     private static func queue(id: String?) -> DispatchQueue {
-        return DispatchQueue(label: (id ?? "redux.disposable") + ".queue", attributes: .concurrent)
+        return DispatchQueue(label: (id ?? "swifty-redux.disposable") + ".queue", attributes: .concurrent)
     }
 
     private let queue: DispatchQueue
@@ -47,7 +47,7 @@ public final class Disposable {
     }
 
     private init() {
-        self.queue = DispatchQueue(label: "redux.nop-disposable.queue", attributes: .concurrent)
+        self.queue = DispatchQueue(label: "swifty-redux.nop-disposable.queue", attributes: .concurrent)
         self.action = nil
         self._isDisposed = true
     }

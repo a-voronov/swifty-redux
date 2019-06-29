@@ -11,7 +11,7 @@ public final class Command<T> {
     private let closure: (T) -> Void
 
     public init(
-        id: String = "redux.command",
+        id: String = "swifty-redux.command",
         file: StaticString = #file,
         function: StaticString = #function,
         line: UInt = #line,
@@ -29,7 +29,7 @@ public final class Command<T> {
     }
 
     public static func nop() -> Command {
-        return Command(id: "redux.command.nop", closure: { _ in })
+        return Command(id: "swifty-redux.command.nop", closure: { _ in })
     }
 
     @objc

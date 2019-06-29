@@ -11,7 +11,7 @@ internal final class Atomic<T> {
         return queue.sync { _value }
     }
 
-    internal init(id: String = "redux.atomic", value: T) {
+    internal init(id: String = "swifty-redux.atomic", value: T) {
         _value = value
         queue = DispatchQueue(label: id + ".queue", attributes: .concurrent)
     }
