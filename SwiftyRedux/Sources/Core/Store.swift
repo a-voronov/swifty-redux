@@ -120,7 +120,6 @@ public final class Store<State> {
     ///         If `false`, observer will only receive further updates as they appear. Defaults to `true`.
     ///     - observer: Observer callback that will receive new state after each update until it's manually disposed or store's dead.
     ///     - state: Current state right after it's changed.
-    ///
     /// - Returns: Disposable to stop listening to updates.
     ///     Its `isDisposed` property will be `true` when store dies and cancels all subscriptions by itself.
     @discardableResult

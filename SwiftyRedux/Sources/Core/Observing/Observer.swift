@@ -1,12 +1,19 @@
 import Dispatch
 
-/// Simple observer implementation.
-/// Initialize it with update function and optional queue if you want to receive updates on it.
-
+/// An Observer is a simple wrapper around a function which can receive Values on a given queue.
 public final class Observer<Value> {
-    public let update: (Value) -> Void
 
-    public init(queue: DispatchQueue? = nil, update: @escaping (Value) -> Void) {
+    /// A handler to send values to the listener.
+    public let update: (_ value: Value) -> Void
+
+    /// Initializes observer with a `queue` to receive updates on, and `update` callback to receive values.
+    ///
+    /// - Parameters:
+    ///     - queue: A queue on which to asynchronously receive updates.
+    ///         If `nil`, updates will be received on a caller queue. Defaults to `nil`.
+    ///     - update: Callback that will receive new values.
+    ///     - value: New value.
+    public init(queue: DispatchQueue? = nil, update: @escaping (_ value: Value) -> Void) {
         guard let queue = queue else {
             self.update = update
             return

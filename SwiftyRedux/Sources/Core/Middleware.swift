@@ -18,7 +18,6 @@ public typealias Dispatch = (Action) -> Void
 ///     - next: Dispatches given action further in the middleware chain. Performs synchronously when used in store.
 ///         Middleware can decide not to propagate action further by not calling `next` function,
 ///         however it's better if action travels the whole way back to the store.
-///
 /// - Returns: Dispatch function for the next middleware. Here you can sniff all actions that come from the store to the reducer.
 ///     And dispatch new ones based on what you receive.
 ///     The very last participant of this chain is store's reducer. Store takes care of handling all of this.
@@ -40,7 +39,6 @@ public typealias Middleware<State> = (
 /// Chains array of middlewares into single middleware. Each middleware will be processed in the same order as it's stored in the array.
 ///
 /// - Parameter middleware: Array of middleware to chain into single one.
-///
 /// - Returns: Resulting middleware
 public func applyMiddleware<State>(_ middleware: [Middleware<State>]) -> Middleware<State> {
     return { getState, dispatch, next in
@@ -61,7 +59,6 @@ public func applyMiddleware<State>(_ middleware: [Middleware<State>]) -> Middlew
 ///     - getState: Returns current state if store is alive, otherwise - nil.
 ///     - dispatch: Dispatches given action to the store. Performs asynchronously when used in store.
 ///         The action will actually travel the whole middleware chain again, including the current middleware.
-///
 /// - Returns: Resulting middleware
 public func createFallThroughMiddleware<State>(
     _ middleware: @escaping (_ getState: @escaping GetState<State>, _ dispatch: @escaping Dispatch) -> Dispatch
@@ -79,7 +76,6 @@ public func createFallThroughMiddleware<State>(
 /// Can be used to keep code consistent when creating different kinds of middleware.
 ///
 /// - Parameter middleware: Any middleware.
-///
 /// - Returns: Same middleware without any changes made to it.
 public func createMiddleware<State>(_ middleware: @escaping Middleware<State>) -> Middleware<State> {
     return middleware
