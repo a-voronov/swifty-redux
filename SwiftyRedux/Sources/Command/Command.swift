@@ -2,7 +2,6 @@ import Foundation
 
 /// Command is a developer friendly wrapper around a closure.
 /// It helps to ease debugging by providing callee information.
-
 public final class Command<T> {
     private let id: String
     private let file: StaticString
