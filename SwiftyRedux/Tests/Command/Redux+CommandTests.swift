@@ -102,20 +102,4 @@ class ReduxCommandTests: XCTestCase {
 
         observer.update(initialState)
     }
-
-    func testDisposable_whenInitializedWithCommand_shouldRedirectToDesignatedInitializer() {
-        let disposable1 = Disposable(Command {
-            XCTAssertTrue(true)
-        })
-        disposable1.dispose()
-
-        var weakDisposable2: Disposable?
-        let disposable2 = Disposable(Command { (d: Disposable?) in
-            weakDisposable2 = d
-            XCTAssertTrue(true)
-        })
-        disposable2.dispose()
-
-        XCTAssertEqual(disposable2, weakDisposable2)
-    }
 }

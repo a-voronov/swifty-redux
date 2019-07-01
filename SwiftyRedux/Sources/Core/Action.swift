@@ -1,10 +1,9 @@
-/// from https://redux.js.org/basics/actions
-/// Actions are payloads of information that send data from your application to your store.
+/// [Actions](https://redux.js.org/basics/actions) are payloads of information that send data from your application to your store.
 /// They are the only source of information for the store.
-/// You send them to the store using store.dispatch().
-
-/// All actions that should be dispatched to a store need to conform to this protocol (currentrly without any requirements)
-/// Actions should not contain functions. It can be a struct or enum used to express intended state change.
-/// You might conform them to `Equatable` or `Codable` protocols for your needs.
-
+///
+/// An action is a plain object that represents an intention to change the state.
+/// Actions are the only way to get data into the store.
+/// Any data, whether from UI events, network callbacks, or other sources such as WebSockets needs to eventually be dispatched as actions.
+///
+/// You send them to the store using `store.dispatch(action)`.
 public protocol Action {}

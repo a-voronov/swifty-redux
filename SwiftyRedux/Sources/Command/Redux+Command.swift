@@ -32,8 +32,4 @@ extension Disposable {
     public convenience init(id: String? = nil, _ command: Command<Void>) {
         self.init(id: id, action: { command.execute() })
     }
-
-    public convenience init(id: String? = nil, _ command: Command<Disposable?>) {
-        self.init(id: id, action: command.execute)
-    }
 }
