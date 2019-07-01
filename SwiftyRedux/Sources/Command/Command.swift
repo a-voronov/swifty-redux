@@ -23,14 +23,19 @@ public final class Command<T> {
         self.closure = closure
     }
 
+    /// Executes command with provided value.
+    ///
+    /// - Parameter value: Value to execute command with.
     public func execute(with value: T) {
         closure(value)
     }
 
+    /// - Returns: No-op command with empty closure.
     public static func nop() -> Command {
         return Command(id: "swifty-redux.command.nop", closure: { _ in })
     }
 
+    /// Xcode quick look support.
     @objc
     func debugQuickLookObject() -> AnyObject? {
         return debugDescription as NSString
@@ -38,12 +43,18 @@ public final class Command<T> {
 }
 
 extension Command where T == Void {
+
+    /// Shortcut to execute command with `Void` value.
     public func execute() {
         execute(with: ())
     }
 }
 
 extension Command {
+
+    /// Bakes `value` into command by producing a new command that will be always executing with provided value.
+    ///
+    /// - Returns: `Void` command with `value` baked inside.
     public func with(value: T) -> Command<Void> {
         return Command<Void> { self.execute(with: value) }
     }
