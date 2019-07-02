@@ -11,21 +11,11 @@ branches:
   only:
   - master
 
+# travis ill create as many jobs for a single build as there combintations in matrix
+# would be cool to randomly choose one of those to trigger only one job 🤔 
 matrix:
   include:
-  - xcode_sdk: iphonesimulator10.0
-  - xcode_sdk: iphonesimulator10.1
-  - xcode_sdk: iphonesimulator10.2
-  - xcode_sdk: iphonesimulator10.3
-  - xcode_sdk: iphonesimulator11.0
-  - xcode_sdk: iphonesimulator11.1
-  - xcode_sdk: iphonesimulator11.2
-  - xcode_sdk: iphonesimulator11.3
-  - xcode_sdk: iphonesimulator11.4
-  - xcode_sdk: iphonesimulator12.0
-  - xcode_sdk: iphonesimulator12.1
   - xcode_sdk: iphonesimulator12.2
-
 
 script:
 - pod lib lint --allow-warnings
