@@ -59,10 +59,10 @@ TBD
 
 There's also a Playground, so you can play around with SwiftyRedux. In order to start using it:
 
- 1. Open `SwiftyRedux.xcworkspace`
- 1. Build `SwiftyRedux-Example` scheme
- 1. Finally open the `SwiftyRedux.playground`
- 1. Choose `View > Show Debug Area`
+ 1. Open `Example/SwiftyRedux.xcworkspace`.
+ 1. Build `SwiftyRedux-Example` scheme.
+ 1. Finally open the `Example/SwiftyRedux.playground`.
+ 1. Choose `View > Show Debug Area`.
 
 # Project Structure
 
