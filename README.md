@@ -27,14 +27,15 @@ Please refer to https://redux.js.org/introduction/getting-started for more info 
 ![redux](redux.jpg)
 
 Usually your flow will match current diagram:
-1. You dispatch an Action via the Store.
-2. Action travels to the Middleware.
-3. Middlewares might dispatch a new Action (which will travel all they way from the very beginning) or propagates it further.
-4. Reducers receives the Action and the current State.
-5. They might apply the Action to the State to return a New State, or return a Current State if no changes required.
-6. After the state was changed, any Observers will receive it.
-7. In case of UI observers, Presenters can transform state or its parts into Props and give it to their Views to render.
-8. Any user action or program events can be turned into Actions and will be dispatched to the Store to start this cycle from the beginning.
+
+ 1. You dispatch an Action via the Store.
+ 1. Action travels to the Middleware.
+ 1. Middlewares might dispatch a new Action (which will travel all they way from the very beginning) or propagates it further.
+ 1. Reducers receives the Action and the current State.
+ 1. They might apply the Action to the State to return a New State, or return a Current State if no changes required.
+ 1. After the state was changed, any Observers will receive it.
+ 1. In case of UI observers, Presenters can transform state or its parts into Props and give it to their Views to render.
+ 1. Any user action or program events can be turned into Actions and will be dispatched to the Store to start this cycle from the beginning.
 
 # Installation
 
@@ -53,6 +54,15 @@ TBD
 ## Swift Package Manager
 
 TBD
+
+## Playground
+
+There's also a Playground, so you can play around with SwiftyRedux. In order to start using it:
+
+ 1. Open `SwiftyRedux.xcworkspace`
+ 1. Build `SwiftyRedux-Example` scheme
+ 1. Finally open the `SwiftyRedux.playground`
+ 1. Choose `View > Show Debug Area`
 
 # Project Structure
 
