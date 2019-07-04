@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/alexandervoronov/Projects/personal/swifty-redux/Example/SwiftyRedux.playground">
+      location = "group:SwiftyRedux.playground">
    </FileRef>
    <FileRef
       location = "group:SwiftyRedux.xcodeproj">
