@@ -20,6 +20,15 @@ public struct BatchAction: BatchedActions {
     public init(_ first: Action, _ rest: Action...) {
         self.actions = [first] + rest
     }
+
+    /// Initializes batch action with one or more actions.
+    ///
+    /// - Parameters:
+    ///     - first: First action.
+    ///     - rest: Rest of the actions array.
+    public init(_ first: Action, _ rest: [Action]) {
+        self.actions = [first] + rest
+    }
 }
 
 /// Upgrades reducer to handle batched actions by splitting them into single actions no matter how deeply nested they are.
