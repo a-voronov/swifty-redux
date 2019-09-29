@@ -104,7 +104,7 @@ public final class Store<State> {
     /// - Remark: Performs synchronously.
     private func defaultDispatch(from action: Action) {
         queue.writeAndWait {
-            self.currentState = self.reducer(self.currentState, action)
+            self.reducer(&self.currentState, action)
             self.observer.update(self.currentState)
         }
     }

@@ -49,7 +49,7 @@ class StoreTests: XCTestCase {
         super.setUp()
 
         initialState = 0
-        nopReducer = { state, action in state }
+        nopReducer = { state, action in }
         nopMiddleware = createFallThroughMiddleware { getState, dispatch in return { action in } }
     }
 
@@ -150,7 +150,6 @@ class StoreTests: XCTestCase {
         }
         let reducer: Reducer<State> = { state, action in
             result.append("r-\(action)")
-            return state
         }
         let store = Store<State>(state: initialState, reducer: reducer, middleware: [middleware])
 
@@ -180,7 +179,6 @@ class StoreTests: XCTestCase {
         let reducer: Reducer<State> = { state, action in
             let action = (action as! StringAction).value
             result += action
-            return state
         }
         let middleware1 = asyncMiddleware(id: "first", qos: .default)
         let middleware2 = asyncMiddleware(id: "second", qos: .userInteractive)
@@ -197,9 +195,9 @@ class StoreTests: XCTestCase {
     func testStore_whenSubscribingNotIncludingCurrentState_shouldOnlyReceiveNextStateUpdates() {
         let reducer: Reducer<State> = { state, action in
             switch action {
-            case let action as OpAction where action == OpAction.mul: return state * 2
-            case let action as OpAction where action == OpAction.inc: return state + 3
-            default: return state
+            case let action as OpAction where action == OpAction.mul: state *= 2
+            case let action as OpAction where action == OpAction.inc: state += 3
+            default: break
             }
         }
         let store = Store<State>(state: 3, reducer: reducer)
@@ -217,9 +215,9 @@ class StoreTests: XCTestCase {
     func testStore_whenSubscribingIncludingCurrentState_shouldImmediatelyReceiveCurrentStateAndKeepReceivingNextStateUpdates() {
         let reducer: Reducer<State> = { state, action in
             switch action {
-            case let action as OpAction where action == OpAction.mul: return state * 2
-            case let action as OpAction where action == OpAction.inc: return state + 3
-            default: return state
+            case let action as OpAction where action == OpAction.mul: state *= 2
+            case let action as OpAction where action == OpAction.inc: state += 3
+            default: break
             }
         }
         let store = Store<State>(state: 3, reducer: reducer)
@@ -284,7 +282,7 @@ class StoreTests: XCTestCase {
 
     func testStore_whenUnsubscribing_stopReceivingStateUpdates() {
         let reducer: Reducer<State> = { state, action in
-            (action as! AnyAction).rawValue
+            state = (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: initialState, reducer: reducer)
 

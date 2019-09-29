@@ -7,7 +7,6 @@
 /// And it's better if they are split into smaller reducers that are focused on a small domain state.
 ///
 /// - Parameters:
-///     - state: Current state.
+///     - state: Current state as `inout` argument. Will be modified after applying action to it.
 ///     - action: Incoming action.
-/// - Returns: New state as a result of applying action to the current state.
-public typealias Reducer<State> = (_ state: State, _ action: Action) -> State
+public typealias Reducer<State> = (_ state: inout State, _ action: Action) -> Void
