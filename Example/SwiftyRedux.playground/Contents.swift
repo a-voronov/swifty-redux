@@ -33,11 +33,11 @@ enum Operations {
 let mainReducer: Reducer<MainState> = { state, action in
     switch action {
     case is Operations.Increment:
-        return updating(state) { $0.counter += 1 }
+        state.counter += 1
     case is Operations.Decrement:
-        return updating(state) { $0.counter -= 1 }
+        state.counter -= 1
     default:
-        return state
+        break
     }
 }
 
@@ -105,5 +105,5 @@ store.dispatch(BatchAction(
 store.dispatch(Operations.Decrement())
 
 // counter: 2
-// now we receive 2 again, as previous was counter value was 4, even though we've already had 2 few steps before
+// now we receive 2 again, as previous counter value was 4, even though we've already had 2 few steps before
 store.dispatch(Operations.Decrement())

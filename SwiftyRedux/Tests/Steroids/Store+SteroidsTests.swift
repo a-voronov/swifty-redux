@@ -10,7 +10,7 @@ class StoreSteroidsTests: XCTestCase {
     func testSubscribeToStore_whenSkippingRepeats_shouldReceiveUniqueStateUpdates() {
         let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
         let reducer: Reducer<State> = { state, action in
-            (action as! AnyAction).rawValue
+            state = (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: 0, reducer: reducer)
 
@@ -26,7 +26,7 @@ class StoreSteroidsTests: XCTestCase {
     func testSubscribeToStore_whenSkippingRepeats_andIncludingCurrentState_shouldReceiveCurrentStateAndFurtherUniqueStateUpdatesWithoutFirstUpdate() {
         let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
         let reducer: Reducer<State> = { state, action in
-            (action as! AnyAction).rawValue
+            state = (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: 0, reducer: reducer)
 
@@ -42,7 +42,7 @@ class StoreSteroidsTests: XCTestCase {
     func testSubscribeToStore_whenSkippingRepeats_andIncludingCurrentState_andFirstUpdateEqualsToCurrentState_shouldReceiveCurrentStateAndFurtherUniqueStateUpdatesWithoutFirstUpdate() {
         let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
         let reducer: Reducer<State> = { state, action in
-            (action as! AnyAction).rawValue
+            state = (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: 1, reducer: reducer)
 
@@ -58,7 +58,7 @@ class StoreSteroidsTests: XCTestCase {
     func testSubscribeToStore_whenNotSkippingRepeats_shouldReceiveDuplicatedStateUpdates() {
         let actions: [AnyAction] = [.one, .two, .one, .one, .three, .three, .five, .two]
         let reducer: Reducer<State> = { state, action in
-            (action as! AnyAction).rawValue
+            state = (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: 0, reducer: reducer)
 
@@ -73,7 +73,7 @@ class StoreSteroidsTests: XCTestCase {
 
     func testStore_whenUnsubscribing_shouldStopReceivingStateUpdates() {
         let reducer: Reducer<State> = { state, action in
-            (action as! AnyAction).rawValue
+            state = (action as! AnyAction).rawValue
         }
         let store = Store<State>(state: 0, reducer: reducer)
 
@@ -95,9 +95,9 @@ class StoreSteroidsTests: XCTestCase {
     func testStore_whenObserving_andSubscribingToObserver_shouldStartReceivingStateUpdates() {
         let reducer: Reducer<State> = { state, action in
             switch action {
-            case let action as OpAction where action == .mul: return state * 2
-            case let action as OpAction where action == .inc: return state + 3
-            default: return state
+            case let action as OpAction where action == .mul: state *= 2
+            case let action as OpAction where action == .inc: state += 3
+            default: break
             }
         }
         let store = Store<State>(state: 3, reducer: reducer)

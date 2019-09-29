@@ -20,7 +20,7 @@ class MiddlewareTests: XCTestCase {
 
         initialState = 0
         nopAction = StringAction("action")
-        nopReducer = { state, action in state }
+        nopReducer = { state, action in }
     }
 
     func testAppliedMiddlewareIsChainedInCorrectOrder() {
@@ -117,7 +117,7 @@ class MiddlewareTests: XCTestCase {
 
     func testChangesStateAfterPropagatingToTheNextMiddleware() {
         let reducer: Reducer<State> = { state, action in
-            state + Int((action as! StringAction).value)!
+            state += Int((action as! StringAction).value)!
         }
         let store = Store<State>(state: initialState, reducer: reducer, middleware: [
             createMiddleware { getState, dispatch, next in

@@ -57,11 +57,11 @@ public struct BatchAction: BatchedActions {
 /// - Important: Note that `batchDispatchMiddleware` and `enableBatching` should not be used together
 ///     as `batchDispatchMiddleware` calls next on the action it receives, whilst also dispatching each of the bundled actions.
 public func enableBatching<State>(_ reducer: @escaping Reducer<State>) -> Reducer<State> {
-    func batchingReducer(_ state: State, _ action: Action) -> State {
+    func batchingReducer(_ state: inout State, _ action: Action) {
         guard let batchAction = action as? BatchedActions else {
-            return reducer(state, action)
+            return reducer(&state, action)
         }
-        return batchAction.actions.reduce(state, batchingReducer)
+        state = batchAction.actions.reduce(into: state, batchingReducer)
     }
     return batchingReducer
 }
