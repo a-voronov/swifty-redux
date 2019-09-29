@@ -14,7 +14,7 @@ SwiftyRedux has few core components:
 
 * **Store** is a place that contains state. It also allows subscribing to the state changes and dispatching actions to change its state. There's only single store in the whole Redux application.
 
-* **Action** is a plain object that represents an intention to change the state. Actions should not contain any behavior. All actions should conform to the empty `Action` protocol. The only way to change state is through action that will be 
+* **Action** is a plain object that represents an intention to change the state. Actions should not contain any behavior. All actions should conform to the empty `Action` protocol. The only way to change state is through action that will be handled in reducers.
 
 * **Reducer** is the only place that can change the state based on the current state and an acion. Reducers must be pure functions - functions that return the exact same output for given inputs, thus not performing any side effects. It makes them easy to test and reason about the logic that affects global application state. Store is responsible for delivering actions to the reducers and updating state with their results.
 
@@ -31,8 +31,8 @@ Usually your flow will match current diagram:
  1. You dispatch an Action via the Store.
  1. Action travels to the Middleware.
  1. Middlewares might dispatch a new Action (which will travel all they way from the very beginning) or propagates it further.
- 1. Reducers receives the Action and the current State.
- 1. They might apply the Action to the State to return a New State, or return a Current State if no changes required.
+ 1. Reducers receive the Action and the current State.
+ 1. They might apply the Action to the State to return a New State, or ignore it if no changes required.
  1. After the state was changed, any Observers will receive it.
  1. In case of UI observers, Presenters can transform state or its parts into Props and give it to their Views to render.
  1. Any user action or program events can be turned into Actions and will be dispatched to the Store to start this cycle from the beginning.
@@ -70,14 +70,14 @@ SwiftyRedux is trying to be as minimalistic at its Core as possible, yet still o
 Here are components included in this repo:
 
 ## ⚙️ Core 
-Core is the basic component and contains minimal needed functionality to enjoy SwiftyRedux :)    
+Core is a basic component and contains minimal needed functionality to enjoy SwiftyRedux :)    
 Such as `Action`, `Reducer`, `Middlerware`, `Store` and `Disposable`.
 ```
 pod 'SwiftyRedux/Core'
 ```
 
 ## 💊 Steroids 
-Steroids is the extension that provides declarative API to transform state updates coming from the store. Its `Observable` and `ObservableProducer` abstractions look and behave similar to [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift) `Signal` and `SignalProducer`.    
+Steroids is an extension that provides declarative API to transform state updates coming from the store. Its `Observable` and `ObservableProducer` abstractions look and behave similar to [ReactiveSwift](https://github.com/ReactiveCocoa/ReactiveSwift) `Signal` and `SignalProducer`.    
 ```
 pod 'SwiftyRedux/Steroids'
 ```
@@ -101,7 +101,7 @@ pod 'SwiftyRedux/Command'
 ```
 
 ## 🚀 Epics
-Actually epics implementation close to [redux-observable](https://redux-observable.js.org).[Epics](https://redux-observable.js.org/docs/basics/Epics.html) but without fancy functionality like adding epics asynchronously/lazily.
+Actually epics' implementation is close to [redux-observable](https://redux-observable.js.org).[Epics](https://redux-observable.js.org/docs/basics/Epics.html) but without fancy functionality like adding epics asynchronously/lazily yet.
 It is powered by ReactiveSwift to provide full reactive experience while transforming actions.
 ```
 pod 'SwiftyRedux/Epics'
@@ -110,6 +110,9 @@ pod 'SwiftyRedux/Epics'
 ## 🌉 ReactiveExtensions
 Bridge between ReactiveSwift and SwiftyRedux: `Observable` <> `Signal`, `ObservableProducer` <> `SignalProducer`.
 This one depends on ReactiveSwift and Steroids.
+```
+pod 'SwiftyRedux/ReactiveExtensions'
+```
 
 ## 🎨 Mix them together!
 
