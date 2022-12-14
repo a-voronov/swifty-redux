@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyRedux
 
 class ViewController: UIViewController {
 

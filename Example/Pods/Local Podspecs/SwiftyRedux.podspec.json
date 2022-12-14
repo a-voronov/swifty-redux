@@ -2,7 +2,7 @@
   "name": "SwiftyRedux",
   "version": "0.3.0",
   "summary": "Swifty implementation of Redux",
-  "swift_version": "5.0",
+  "swift_versions": "5.0",
   "description": "Swifty implementation of Redux with optional add-ons.",
   "homepage": "https://github.com/a-voronov/swifty-redux",
   "license": {
@@ -10,7 +10,7 @@
     "file": "LICENSE"
   },
   "authors": {
-    "Alexander Voronov": "voronovaleksandr91@gmail.com"
+    "Oleksandr Voronov": "voronovaleksandr91@gmail.com"
   },
   "source": {
     "git": "https://github.com/a-voronov/swifty-redux.git",
@@ -177,5 +177,6 @@
         }
       ]
     }
-  ]
+  ],
+  "swift_version": "5.0"
 }

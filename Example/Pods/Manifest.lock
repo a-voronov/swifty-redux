@@ -1,5 +1,5 @@
 PODS:
-  - ReactiveSwift (6.0.0)
+  - ReactiveSwift (6.7.0)
   - SwiftyRedux/All (0.3.0):
     - SwiftyRedux/BatchedActions
     - SwiftyRedux/Command
@@ -38,7 +38,7 @@ DEPENDENCIES:
   - SwiftyRedux/All/Tests (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - ReactiveSwift
 
 EXTERNAL SOURCES:
@@ -46,9 +46,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ReactiveSwift: 24b7ed245617bbfd30ee0c87779b6c64ac1b4518
-  SwiftyRedux: 139404e6f214348762ac9e76c5ea9da349374da4
+  ReactiveSwift: 208201d6ecc9734196d147aa76bc1f24b1b821fe
+  SwiftyRedux: 4ffed698c99e013aed5660441f570c75be54fad9
 
 PODFILE CHECKSUM: 42ab572b81ab792ef19223496af8c7353f01d3f3
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.10.1
