@@ -1,6 +1,6 @@
 {
   "name": "SwiftyRedux",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "summary": "Swifty implementation of Redux",
   "swift_versions": "5.0",
   "description": "Swifty implementation of Redux with optional add-ons.",
@@ -14,7 +14,7 @@
   },
   "source": {
     "git": "https://github.com/a-voronov/swifty-redux.git",
-    "tag": "0.3.0"
+    "tag": "0.4.0"
   },
   "social_media_url": "https://twitter.com/aleks_voronov",
   "platforms": {

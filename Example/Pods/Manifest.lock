@@ -1,6 +1,6 @@
 PODS:
   - ReactiveSwift (6.7.0)
-  - SwiftyRedux/All (0.3.0):
+  - SwiftyRedux/All (0.4.0):
     - SwiftyRedux/BatchedActions
     - SwiftyRedux/Command
     - SwiftyRedux/Core
@@ -8,7 +8,7 @@ PODS:
     - SwiftyRedux/ReactiveExtensions
     - SwiftyRedux/SideEffects
     - SwiftyRedux/Steroids
-  - SwiftyRedux/All/Tests (0.3.0):
+  - SwiftyRedux/All/Tests (0.4.0):
     - SwiftyRedux/BatchedActions
     - SwiftyRedux/Command
     - SwiftyRedux/Core
@@ -16,21 +16,21 @@ PODS:
     - SwiftyRedux/ReactiveExtensions
     - SwiftyRedux/SideEffects
     - SwiftyRedux/Steroids
-  - SwiftyRedux/BatchedActions (0.3.0):
+  - SwiftyRedux/BatchedActions (0.4.0):
     - SwiftyRedux/Core
-  - SwiftyRedux/Command (0.3.0):
+  - SwiftyRedux/Command (0.4.0):
     - SwiftyRedux/Core
-  - SwiftyRedux/Core (0.3.0)
-  - SwiftyRedux/Epics (0.3.0):
+  - SwiftyRedux/Core (0.4.0)
+  - SwiftyRedux/Epics (0.4.0):
     - ReactiveSwift (~> 6.0)
     - SwiftyRedux/Core
-  - SwiftyRedux/ReactiveExtensions (0.3.0):
+  - SwiftyRedux/ReactiveExtensions (0.4.0):
     - ReactiveSwift (~> 6.0)
     - SwiftyRedux/Core
     - SwiftyRedux/Steroids
-  - SwiftyRedux/SideEffects (0.3.0):
+  - SwiftyRedux/SideEffects (0.4.0):
     - SwiftyRedux/Core
-  - SwiftyRedux/Steroids (0.3.0):
+  - SwiftyRedux/Steroids (0.4.0):
     - SwiftyRedux/Core
 
 DEPENDENCIES:
@@ -47,7 +47,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   ReactiveSwift: 208201d6ecc9734196d147aa76bc1f24b1b821fe
-  SwiftyRedux: 4ffed698c99e013aed5660441f570c75be54fad9
+  SwiftyRedux: 43ff6fbefd50ebff1a262878fdea4d5011b5a351
 
 PODFILE CHECKSUM: 42ab572b81ab792ef19223496af8c7353f01d3f3
 
