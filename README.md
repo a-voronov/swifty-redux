@@ -125,6 +125,8 @@ You can also mix any of them together and install many at once, i.e.:
 pod 'SwiftyRedux', :subspecs => ['Core', 'Steroids', 'SideEffects', 'BatchedActions']
 ```
 
+Note: since SPM doesn't support anything close to subspecs, there're only 3 main products available - `SwiftyRedux, SwiftyReduxEpics, SwiftyReduxReactiveExtensions`.
+
 # License
 
 SwiftyRedux is available under the MIT license. See the [LICENSE](LICENSE) file for more info.
