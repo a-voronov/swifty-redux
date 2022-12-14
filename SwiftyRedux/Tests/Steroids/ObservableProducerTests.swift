@@ -69,7 +69,7 @@ class ObservableProducerTests: XCTestCase {
             }
         }
 
-        var disposable: Disposable!
+        var disposable: SwiftyRedux.Disposable!
         disposable = producer.start { value in
             result.append(value)
             if result.count == 3 {

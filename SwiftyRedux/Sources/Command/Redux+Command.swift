@@ -1,3 +1,5 @@
+import Dispatch
+
 /// Redux components extensions to receive Command instead of plain function for easier debugging.
 
 // MARK: - Store

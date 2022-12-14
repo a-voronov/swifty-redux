@@ -3,8 +3,8 @@ import XCTest
 
 private typealias State = Int
 
-private enum AnyAction: Int, Action { case one = 1, two, three, four, five }
-private enum OpAction: Action, Equatable { case inc, mul }
+private enum AnyAction: Int, SwiftyRedux.Action { case one = 1, two, three, four, five }
+private enum OpAction: SwiftyRedux.Action, Equatable { case inc, mul }
 
 class StoreSteroidsTests: XCTestCase {
     func testSubscribeToStore_whenSkippingRepeats_shouldReceiveUniqueStateUpdates() {

@@ -2,7 +2,7 @@ import XCTest
 @testable import SwiftyRedux
 
 private typealias State = Int
-private enum AnyAction: Action, Equatable {
+private enum AnyAction: SwiftyRedux.Action, Equatable {
     case one, two, three
 }
 
