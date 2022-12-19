@@ -1,8 +1,9 @@
+import SwiftyRedux
 import ReactiveSwift
 
-public extension Signal where Value == Action, Error == Never {
-    func ofType<T: Action>(_ type: T.Type) -> Signal<T, Never> {
-        return filterMap { value in
+public extension Signal where Value == SwiftyRedux.Action, Error == Never {
+    func ofType<T: SwiftyRedux.Action>(_ type: T.Type) -> Signal<T, Never> {
+        return compactMap { value in
             value as? T
         }
     }
@@ -50,7 +51,7 @@ public extension SignalProducer where Error == Never {
     }
 }
 
-public extension Disposable {
+public extension SwiftyRedux.Disposable {
 
     /// Initializes a Disposable with ReactiveSwift.Disposable, that will be disposed when passed `disposable` is.
     /// If `disposable` is already disposed, it will be disposed as well.

@@ -1,3 +1,5 @@
+import Dispatch
+
 extension Store {
 
     /// Creates observable to receive state changing updates.

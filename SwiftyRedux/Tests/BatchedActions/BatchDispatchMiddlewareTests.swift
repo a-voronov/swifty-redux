@@ -2,13 +2,13 @@ import XCTest
 @testable import SwiftyRedux
 
 private typealias State = Int
-private enum AnyAction: Action, Equatable {
+private enum AnyAction: SwiftyRedux.Action, Equatable {
     case one, two, three, four
 }
 
 class BatchDispatchMiddlewareTests: XCTestCase {
-    var nextCalledWithAction: [Action]!
-    var dispatchCalledWithAction: [Action]!
+    var nextCalledWithAction: [SwiftyRedux.Action]!
+    var dispatchCalledWithAction: [SwiftyRedux.Action]!
     var dispatchMiddleware: Dispatch!
 
     override func setUp() {

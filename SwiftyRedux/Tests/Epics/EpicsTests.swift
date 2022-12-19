@@ -2,6 +2,7 @@ import XCTest
 import ReactiveSwift
 
 @testable import SwiftyRedux
+@testable import SwiftyReduxEpics
 
 private typealias State = Int
 private enum AnyAction: SwiftyRedux.Action, Equatable {

@@ -53,16 +53,19 @@ TBD
 
 ## Swift Package Manager
 
-TBD
+```swift
+.package(url: "https://github.com/a-voronov/swifty-redux.git", from: "0.4.0")
+```
 
-## Playground
+## Example
 
-There's also a Playground, so you can play around with SwiftyRedux. In order to start using it:
+There's also an Example app, so you can play around with SwiftyRedux. In order to start using it:
 
- 1. Open `Example/SwiftyRedux.xcworkspace`.
- 1. Build `SwiftyRedux-Example` scheme.
- 1. Finally open the `Example/SwiftyRedux.playground`.
- 1. Choose `View > Show Debug Area`.
+ 1. Open `Example/Example.xcworkspace`.
+ 1. Run `Example` scheme.
+ 1. Check `Debug Area`.
+
+You can find sample code in the `ExampleApp.swift` file.
 
 # Project Structure
 
@@ -122,9 +125,7 @@ You can also mix any of them together and install many at once, i.e.:
 pod 'SwiftyRedux', :subspecs => ['Core', 'Steroids', 'SideEffects', 'BatchedActions']
 ```
 
-# Example project
-
-TBD
+Note: since SPM doesn't support anything close to subspecs, there're only 3 main products available - `SwiftyRedux, SwiftyReduxEpics, SwiftyReduxReactiveExtensions`.
 
 # License
 

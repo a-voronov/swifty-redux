@@ -1,7 +1,7 @@
 import XCTest
 import ReactiveSwift
 
-@testable import SwiftyRedux
+@testable import SwiftyReduxReactiveExtensions
 
 class ReactiveExtensionsTests: XCTestCase {
     

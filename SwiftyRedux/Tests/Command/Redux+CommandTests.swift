@@ -1,9 +1,8 @@
 import XCTest
-import Dispatch
 @testable import SwiftyRedux
 
 private typealias State = Int
-private struct AnyAction: Action, Equatable {}
+private struct AnyAction: SwiftyRedux.Action, Equatable {}
 
 class ReduxCommandTests: XCTestCase {
     private var initialState: State!

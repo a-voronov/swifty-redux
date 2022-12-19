@@ -1,3 +1,4 @@
+import SwiftyRedux
 import ReactiveSwift
 
 /// [Epic](https://redux-observable.js.org/docs/basics/Epics.html) is a function which takes a stream of actions
@@ -33,7 +34,7 @@ import ReactiveSwift
 ///     ```
 ///     One(), Two(), Three(), Four(), Five()
 ///     ```
-public typealias Epic<State> = (_ actions: Signal<Action, Never>, _ state: Property<State>) -> Signal<Action, Never>
+public typealias Epic<State> = (_ actions: Signal<SwiftyRedux.Action, Never>, _ state: Property<State>) -> Signal<SwiftyRedux.Action, Never>
 
 /// Creates middleware with a single epic.
 /// Epic will receive action only after it has travelled through other middlewares and reducers,
@@ -49,7 +50,7 @@ public func createEpicMiddleware<State>(_ epic: @escaping Epic<State>) -> Middle
 
         let queueScheduler = QueueScheduler(qos: .default, name: "swifty-redux.epic.queue-scheduler")
         let state = MutableProperty<State>(initialState)
-        let (actionsSignal, actionsObserver) = Signal<Action, Never>.pipe()
+        let (actionsSignal, actionsObserver) = Signal<SwiftyRedux.Action, Never>.pipe()
 
         epic(actionsSignal, Property(state))
             .observe(on: queueScheduler)

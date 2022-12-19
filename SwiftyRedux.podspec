@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftyRedux'
-  s.version          = '0.3.0'
+  s.version          = '0.4.0'
   s.summary          = 'Swifty implementation of Redux'
   s.swift_version    = '5.0'
 
@@ -10,7 +10,7 @@ Swifty implementation of Redux with optional add-ons.
 
   s.homepage         = 'https://github.com/a-voronov/swifty-redux'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'Alexander Voronov' => 'voronovaleksandr91@gmail.com' }
+  s.author           = { 'Oleksandr Voronov' => 'voronovaleksandr91@gmail.com' }
   s.source           = { :git => 'https://github.com/a-voronov/swifty-redux.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/aleks_voronov'
 
